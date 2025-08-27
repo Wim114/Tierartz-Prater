@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Tierambulanz Prater</title>
+
+    <!-- Netlify Identity Widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #00ace2, #005d83);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .login-button {
+            background: #00ace2;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .login-button:hover {
+            background: #005d83;
+            transform: translateY(-2px);
+        }
+
+        .error-message {
+            color: #ff4444;
+            margin-top: 1rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h2>Admin Bereich</h2>
+        <p>Bitte melden Sie sich an</p>
+        <button class="login-button" onclick="handleLogin()">Anmelden</button>
+        <div class="error-message" id="errorMessage"></div>
+    </div>
+
+    <script>
+        // Initialize Netlify Identity
+        netlifyIdentity.init();
+
+        function handleLogin() {
+            netlifyIdentity.open('login');
+        }
+
+        // Handle successful login
+        netlifyIdentity.on('login', user => {
+            console.log('Login successful', user);
+            // Check if user has admin role
+            const roles = user.app_metadata?.roles || [];
+            if (roles.includes('admin')) {
+                window.location.href = '/admin/dashboard.html';
+            } else {
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('errorMessage').textContent = 'Sie haben keine Admin-Berechtigung.';
+                netlifyIdentity.logout();
+            }
+        });
+
+        // If already logged in with admin role, redirect
+        const user = netlifyIdentity.currentUser();
+        if (user) {
+            const roles = user.app_metadata?.roles || [];
+            if (roles.includes('admin')) {
+                window.location.href = '/admin/dashboard.html';
+            }
+        }
+    </script>
+</body>
+</html>
