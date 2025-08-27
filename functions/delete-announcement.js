@@ -1,5 +1,4 @@
-const faunadb = require('faunadb');
-const q = faunadb.query;
+const { neon } = require('@neondatabase/serverless');
 
 exports.handler = async (event, context) => {
     const headers = {
@@ -22,16 +21,14 @@ exports.handler = async (event, context) => {
         };
     }
 
-    const client = new faunadb.Client({
-        secret: process.env.FAUNA_SECRET_KEY
-    });
-
     try {
         const id = event.queryStringParameters.id;
+        const sql = neon(process.env.DATABASE_URL);
 
-        await client.query(
-            q.Delete(q.Ref(q.Collection('announcements'), id))
-        );
+        await sql`
+            DELETE FROM announcements
+            WHERE id = ${id}
+        `;
 
         return {
             statusCode: 200,
@@ -39,6 +36,7 @@ exports.handler = async (event, context) => {
             body: JSON.stringify({ success: true })
         };
     } catch (error) {
+        console.error('Database error:', error);
         return {
             statusCode: 500,
             headers,
