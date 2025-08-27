@@ -1,8 +1,6 @@
-const faunadb = require('faunadb');
-const q = faunadb.query;
+const { neon } = require('@neondatabase/serverless');
 
 exports.handler = async (event, context) => {
-    // Allow CORS
     const headers = {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'Content-Type',
@@ -13,37 +11,25 @@ exports.handler = async (event, context) => {
         return { statusCode: 405, headers, body: 'Method Not Allowed' };
     }
 
-    const client = new faunadb.Client({
-        secret: process.env.FAUNA_SECRET_KEY
-    });
-
     try {
-        const result = await client.query(
-            q.Map(
-                q.Paginate(q.Documents(q.Collection('announcements'))),
-                q.Lambda('X', q.Get(q.Var('X')))
-            )
-        );
+        const sql = neon(process.env.DATABASE_URL);
 
-        const announcements = result.data.map(item => ({
-            id: item.ref.id,
-            ...item.data
-        }));
-
-        // Filter active announcements
-        const now = new Date();
-        const activeAnnouncements = announcements.filter(ann => {
-            const start = new Date(ann.startDate);
-            const end = new Date(ann.endDate);
-            return now >= start && now <= end && ann.isActive;
-        });
+        // Get all announcements
+        const announcements = await sql`
+            SELECT * FROM announcements
+            WHERE start_date <= NOW()
+            AND end_date >= NOW()
+            AND is_active = true
+            ORDER BY created_at DESC
+        `;
 
         return {
             statusCode: 200,
             headers,
-            body: JSON.stringify(activeAnnouncements)
+            body: JSON.stringify(announcements)
         };
     } catch (error) {
+        console.error('Database error:', error);
         return {
             statusCode: 500,
             headers,
