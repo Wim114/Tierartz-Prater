@@ -1,19 +1,26 @@
+// functions/create-announcement.js
 const { neon } = require('@neondatabase/serverless');
 
-exports.handler = async (event, context) => {
+exports.handler = async (event) => {
     const headers = {
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        'Access-Control-Allow-Headers': 'Content-Type, X-Admin-Auth',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
         'Content-Type': 'application/json'
     };
 
-    if (event.httpMethod !== 'POST') {
-        return { statusCode: 405, headers, body: 'Method Not Allowed' };
+    // Handle OPTIONS request for CORS
+    if (event.httpMethod === 'OPTIONS') {
+        return { statusCode: 200, headers, body: '' };
     }
 
-    // Check authentication
-    const { user } = context.clientContext;
-    if (!user || !user.app_metadata?.roles?.includes('admin')) {
+    if (event.httpMethod !== 'POST') {
+        return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method Not Allowed' }) };
+    }
+
+    // Simple authentication check
+    const adminAuth = event.headers['x-admin-auth'] || event.headers['X-Admin-Auth'];
+    if (adminAuth !== 'true') {
         return {
             statusCode: 401,
             headers,
@@ -23,6 +30,16 @@ exports.handler = async (event, context) => {
 
     try {
         const data = JSON.parse(event.body);
+        
+        // Validate required fields
+        if (!data.type || !data.title || !data.message || !data.startDate || !data.endDate) {
+            return {
+                statusCode: 400,
+                headers,
+                body: JSON.stringify({ error: 'Missing required fields' })
+            };
+        }
+
         const sql = neon(process.env.DATABASE_URL);
 
         const result = await sql`
@@ -34,7 +51,8 @@ exports.handler = async (event, context) => {
                 start_date,
                 end_date,
                 created_by,
-                is_active
+                is_active,
+                created_at
             ) VALUES (
                 ${data.type},
                 ${data.title},
@@ -42,8 +60,9 @@ exports.handler = async (event, context) => {
                 ${data.substitute || null},
                 ${data.startDate},
                 ${data.endDate},
-                ${user.email},
-                true
+                'admin',
+                true,
+                NOW()
             ) RETURNING *
         `;
 
@@ -57,7 +76,10 @@ exports.handler = async (event, context) => {
         return {
             statusCode: 500,
             headers,
-            body: JSON.stringify({ error: 'Failed to create announcement' })
+            body: JSON.stringify({ 
+                error: 'Failed to create announcement',
+                details: error.message 
+            })
         };
     }
 };
