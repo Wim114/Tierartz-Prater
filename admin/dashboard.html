@@ -388,7 +388,7 @@
 
         // API Configuration
         const API_BASE = '/.netlify/functions';
-        const IS_PRODUCTION = window.location.hostname.includes('netlify') || 
+        const IS_PRODUCTION = window.location.hostname.includes('netlify') ||
                              window.location.hostname.includes('tierambulanz');
 
         // API Functions
@@ -410,7 +410,7 @@
                 }
             } catch (error) {
                 console.error('Failed to load announcements:', error);
-                document.getElementById('announcementsList').innerHTML = 
+                document.getElementById('announcementsList').innerHTML =
                     '<p class="text-muted">Fehler beim Laden der Ankündigungen.</p>';
             }
         }
@@ -521,3 +521,164 @@
                     statusBadge = '<span class="status-badge status-scheduled">Geplant</span>';
                 } else if (isExpired) {
                     statusBadge = '<span class="status-badge status-expired">Abgelaufen</span>';
+                } else if (isExpired) {
+                      statusBadge = '<span class="status-badge status-expired">Abgelaufen</span>';
+                    }
+
+                    const icons = {
+                        'holiday': '🏖️',
+                        'emergency': '🚨',
+                        'news': '📰',
+                        'special': '⭐',
+                        'warning': '⚠️'
+                    };
+
+                    return `
+                        <div class="announcement-item">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h5>${icons[ann.type] || '📢'} ${ann.title}</h5>
+                                    <p class="mb-1">${ann.message}</p>
+                                    ${ann.substitute ? `<small class="text-muted">Vertretung: ${ann.substitute}</small><br>` : ''}
+                                    <small class="text-muted">
+                                        ${startDate.toLocaleDateString('de-AT')} - ${endDate.toLocaleDateString('de-AT')}
+                                    </small>
+                                    <br>
+                                    ${statusBadge}
+                                </div>
+                                <div class="col-md-4 text-end">
+                                    <button class="delete-btn" onclick="deleteAnnouncement('${ann.id}')">
+                                        <i class="fas fa-trash"></i> Löschen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                // Update preview with active announcements
+                const activeAnnouncements = announcements.filter(ann => {
+                    const start = new Date(ann.startDate || ann.start_date);
+                    const end = new Date(ann.endDate || ann.end_date);
+                    return now >= start && now <= end;
+                });
+                updatePreview(activeAnnouncements);
+            }
+
+            // Update preview
+            function updatePreview(activeAnnouncements) {
+                const previewContent = document.getElementById('previewContent');
+
+                if (activeAnnouncements && activeAnnouncements.length > 0) {
+                    const banners = activeAnnouncements.map(ann => {
+                        const icons = {
+                            'holiday': '🏖️',
+                            'emergency': '🚨',
+                            'news': '📰',
+                            'special': '⭐',
+                            'warning': '⚠️'
+                        };
+
+                        return `
+                            <div class="announcement-banner">
+                                <strong>${icons[ann.type] || ''} ${ann.title}:</strong> ${ann.message}
+                                ${ann.substitute ? `<br>Vertretung: ${ann.substitute}` : ''}
+                            </div>
+                        `;
+                    }).join('');
+
+                    previewContent.innerHTML = banners + `
+                        <div style="padding: 20px;">
+                            <h2>Tierambulanz Prater</h2>
+                            <p>Ihre Ankündigungen werden prominent auf der Startseite angezeigt.</p>
+                        </div>
+                    `;
+                } else {
+                    previewContent.innerHTML = `
+                        <div style="padding: 20px;">
+                            <h2>Tierambulanz Prater</h2>
+                            <p>Keine aktiven Ankündigungen. Erstellen Sie eine neue Ankündigung, um sie hier zu sehen.</p>
+                        </div>
+                    `;
+                }
+            }
+
+            // Form submission handler
+            document.getElementById('announcementForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                const submitBtn = document.getElementById('submitBtn');
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Speichert...';
+
+                const announcement = {
+                    type: document.getElementById('announcementType').value,
+                    startDate: document.getElementById('startDate').value,
+                    endDate: document.getElementById('endDate').value,
+                    title: document.getElementById('announcementTitle').value,
+                    message: document.getElementById('announcementMessage').value,
+                    substitute: document.getElementById('substituteInfo').value
+                };
+
+                await createAnnouncement(announcement);
+                this.reset();
+
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-save"></i> Ankündigung Speichern';
+            });
+
+            // Show notification
+            function showNotification(message, type) {
+                const notification = document.createElement('div');
+                notification.className = `alert alert-${type} position-fixed top-0 end-0 m-3`;
+                notification.style.zIndex = '9999';
+                notification.innerHTML = message;
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }
+
+            // Quick Actions
+            function quickHolidayMode() {
+                document.getElementById('announcementType').value = 'holiday';
+                document.getElementById('announcementTitle').value = 'Wir sind im Urlaub';
+                document.getElementById('announcementTitle').focus();
+            }
+
+            function quickEmergency() {
+                document.getElementById('announcementType').value = 'emergency';
+                document.getElementById('announcementTitle').value = 'Wichtige Information';
+                document.getElementById('announcementTitle').focus();
+            }
+
+            function quickSpecialHours() {
+                document.querySelector('a[href="#hours"]').click();
+            }
+
+            function refreshData() {
+                loadAnnouncements();
+                showNotification('Daten aktualisiert', 'info');
+            }
+
+            // View website
+            function viewWebsite() {
+                window.open('/', '_blank');
+            }
+
+            // Logout
+            function logout() {
+                if (confirm('Möchten Sie sich wirklich abmelden?')) {
+                    sessionStorage.clear();
+                    window.location.href = '/admin/';
+                }
+            }
+
+            // Initialize on page load
+            document.addEventListener('DOMContentLoaded', function() {
+                loadAnnouncements();
+            });
+        </script>
+</body>
+</html>
