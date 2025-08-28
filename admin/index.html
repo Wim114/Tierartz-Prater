@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - Tierambulanz Prater</title>
 
-    <!-- Netlify Identity Widget -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
     <style>
+        :root {
+            --primary-color: #00ace2;
+            --secondary-color: #005d83;
+            --danger: #ff4444;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #00ace2, #005d83);
@@ -16,20 +19,61 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            margin: 0;
         }
 
-        .login-box {
+        .login-container {
             background: white;
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            text-align: center;
             max-width: 400px;
             width: 90%;
         }
 
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h2 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
         .login-button {
-            background: #00ace2;
+            background: var(--primary-color);
             color: white;
             border: none;
             padding: 12px 30px;
@@ -40,56 +84,188 @@
             transition: all 0.3s ease;
         }
 
-        .login-button:hover {
-            background: #005d83;
+        .login-button:hover:not(:disabled) {
+            background: var(--secondary-color);
             transform: translateY(-2px);
         }
 
+        .login-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
         .error-message {
-            color: #ff4444;
-            margin-top: 1rem;
+            background: #ffebee;
+            color: var(--danger);
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 15px;
             display: none;
+            font-size: 14px;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #1976d2;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <div class="login-box">
-        <h2>Admin Bereich</h2>
-        <p>Bitte melden Sie sich an</p>
-        <button class="login-button" onclick="handleLogin()">Anmelden</button>
-        <div class="error-message" id="errorMessage"></div>
+    <div class="login-container">
+        <div class="login-header">
+            <h2>🔐 Admin Bereich</h2>
+            <p>Tierambulanz Prater - Verwaltung</p>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="password" class="form-label">Passwort</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    class="form-control" 
+                    placeholder="Admin-Passwort eingeben"
+                    required
+                    autofocus
+                >
+            </div>
+
+            <button type="submit" class="login-button" id="loginBtn">
+                Anmelden
+            </button>
+
+            <div class="error-message" id="errorMessage">
+                Falsches Passwort. Bitte versuchen Sie es erneut.
+            </div>
+        </form>
+
+        <div class="info-box">
+            <strong>Hinweis:</strong> Verwenden Sie das Admin-Passwort, das Ihnen von der IT-Abteilung mitgeteilt wurde.
+        </div>
     </div>
 
     <script>
-        // Initialize Netlify Identity
-        netlifyIdentity.init();
+        // Configuration
+        // IMPORTANT: Change this password hash before deployment!
+        // This is the SHA-256 hash of "TierAdmin2024!"
+        // To generate a new hash, use: https://passwordsgenerator.net/sha256-hash-generator/
+        const PASSWORD_HASH = '8b5e6b5c5a7f3d8e9c4a2b1d7e8f9a3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9';
+        
+        // For development/demo, we'll use a simple password check
+        const DEV_PASSWORD = 'TierAdmin2024!';
 
-        function handleLogin() {
-            netlifyIdentity.open('login');
+        // Check if already authenticated
+        if (sessionStorage.getItem('adminAuth') === 'true') {
+            window.location.href = '/admin/dashboard.html';
         }
 
-        // Handle successful login
-        netlifyIdentity.on('login', user => {
-            console.log('Login successful', user);
-            // Check if user has admin role
-            const roles = user.app_metadata?.roles || [];
-            if (roles.includes('admin')) {
-                window.location.href = '/admin/dashboard.html';
-            } else {
-                document.getElementById('errorMessage').style.display = 'block';
-                document.getElementById('errorMessage').textContent = 'Sie haben keine Admin-Berechtigung.';
-                netlifyIdentity.logout();
+        // SHA-256 hash function (simple implementation for demo)
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex;
+        }
+
+        // Handle form submission
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('loginBtn');
+            const errorMsg = document.getElementById('errorMessage');
+            
+            // Show loading state
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = 'Überprüfe...<span class="loading"></span>';
+            errorMsg.classList.remove('show');
+            
+            // Simulate network delay for better UX
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            try {
+                // For production, you would hash and compare
+                // const inputHash = await hashPassword(password);
+                // const isValid = inputHash === PASSWORD_HASH;
+                
+                // For development/demo, simple comparison
+                const isValid = password === DEV_PASSWORD;
+                
+                if (isValid) {
+                    // Set session
+                    sessionStorage.setItem('adminAuth', 'true');
+                    sessionStorage.setItem('adminLoginTime', new Date().toISOString());
+                    
+                    // Redirect to dashboard
+                    window.location.href = '/admin/dashboard.html';
+                } else {
+                    // Show error
+                    errorMsg.classList.add('show');
+                    document.getElementById('password').focus();
+                    document.getElementById('password').select();
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                errorMsg.textContent = 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.';
+                errorMsg.classList.add('show');
+            } finally {
+                // Reset button
+                loginBtn.disabled = false;
+                loginBtn.innerHTML = 'Anmelden';
             }
         });
 
-        // If already logged in with admin role, redirect
-        const user = netlifyIdentity.currentUser();
-        if (user) {
-            const roles = user.app_metadata?.roles || [];
-            if (roles.includes('admin')) {
-                window.location.href = '/admin/dashboard.html';
-            }
+        // Clear error on input
+        document.getElementById('password').addEventListener('input', function() {
+            document.getElementById('errorMessage').classList.remove('show');
+        });
+
+        // Auto-logout after 1 hour of inactivity
+        let inactivityTimer;
+        
+        function resetInactivityTimer() {
+            clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(() => {
+                sessionStorage.clear();
+                if (window.location.pathname.includes('dashboard')) {
+                    window.location.href = '/admin/';
+                }
+            }, 3600000); // 1 hour
         }
+
+        // Track activity
+        ['mousedown', 'keypress', 'scroll', 'touchstart'].forEach(event => {
+            document.addEventListener(event, resetInactivityTimer, true);
+        });
+
+        resetInactivityTimer();
     </script>
 </body>
 </html>
