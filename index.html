@@ -752,6 +752,19 @@
             }
         }
     </style>
+
+    <script>
+        // Redirect identity tokens to admin
+        (function() {
+            if (window.location.hash.includes("invite_token") ||
+                window.location.hash.includes("recovery_token") ||
+                window.location.hash.includes("confirmation_token")) {
+                window.location.replace('/admin/' + window.location.hash);
+            }
+        })();
+    </script>
+    
+    
 </head>
 <body>
 
@@ -1454,4 +1467,5 @@
         console.log('%cWir kümmern uns um Ihre Lieblinge mit Herz und Kompetenz.', 'color: #005d83; font-size: 14px;');
     </script>
 </body>
+
 </html>
