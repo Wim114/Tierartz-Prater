@@ -145,10 +145,10 @@
         <form id="loginForm">
             <div class="form-group">
                 <label for="password" class="form-label">Passwort</label>
-                <input 
-                    type="password" 
-                    id="password" 
-                    class="form-control" 
+                <input
+                    type="password"
+                    id="password"
+                    class="form-control"
                     placeholder="Admin-Passwort eingeben"
                     required
                     autofocus
@@ -170,59 +170,42 @@
     </div>
 
     <script>
-        // Configuration
-        // IMPORTANT: Change this password hash before deployment!
-        // This is the SHA-256 hash of "TierAdmin2024!"
-        // To generate a new hash, use: https://passwordsgenerator.net/sha256-hash-generator/
-        const PASSWORD_HASH = '8b5e6b5c5a7f3d8e9c4a2b1d7e8f9a3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9';
-        
-        // For development/demo, we'll use a simple password check
-        const DEV_PASSWORD = 'TierAdmin2024!';
-
         // Check if already authenticated
         if (sessionStorage.getItem('adminAuth') === 'true') {
             window.location.href = '/admin/dashboard.html';
         }
 
-        // SHA-256 hash function (simple implementation for demo)
-        async function hashPassword(password) {
-            const encoder = new TextEncoder();
-            const data = encoder.encode(password);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-            return hashHex;
-        }
-
         // Handle form submission
         document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
+
             const password = document.getElementById('password').value;
             const loginBtn = document.getElementById('loginBtn');
             const errorMsg = document.getElementById('errorMessage');
-            
+
             // Show loading state
             loginBtn.disabled = true;
             loginBtn.innerHTML = 'Überprüfe...<span class="loading"></span>';
             errorMsg.classList.remove('show');
-            
+
             // Simulate network delay for better UX
             await new Promise(resolve => setTimeout(resolve, 500));
-            
+
             try {
-                // For production, you would hash and compare
-                // const inputHash = await hashPassword(password);
-                // const isValid = inputHash === PASSWORD_HASH;
-                
-                // For development/demo, simple comparison
-                const isValid = password === DEV_PASSWORD;
-                
-                if (isValid) {
+                // Call the secure auth-check function
+                const response = await fetch('/.netlify/functions/auth-check', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password })
+                });
+
+                const result = await response.json();
+
+                if (result.valid) {
                     // Set session
                     sessionStorage.setItem('adminAuth', 'true');
                     sessionStorage.setItem('adminLoginTime', new Date().toISOString());
-                    
+
                     // Redirect to dashboard
                     window.location.href = '/admin/dashboard.html';
                 } else {
@@ -249,7 +232,7 @@
 
         // Auto-logout after 1 hour of inactivity
         let inactivityTimer;
-        
+
         function resetInactivityTimer() {
             clearTimeout(inactivityTimer);
             inactivityTimer = setTimeout(() => {
