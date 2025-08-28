@@ -1,19 +1,26 @@
+// functions/delete-announcement.js
 const { neon } = require('@neondatabase/serverless');
 
-exports.handler = async (event, context) => {
+exports.handler = async (event) => {
     const headers = {
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        'Access-Control-Allow-Headers': 'Content-Type, X-Admin-Auth',
+        'Access-Control-Allow-Methods': 'DELETE, OPTIONS',
         'Content-Type': 'application/json'
     };
 
-    if (event.httpMethod !== 'DELETE') {
-        return { statusCode: 405, headers, body: 'Method Not Allowed' };
+    // Handle OPTIONS request for CORS
+    if (event.httpMethod === 'OPTIONS') {
+        return { statusCode: 200, headers, body: '' };
     }
 
-    // Check authentication
-    const { user } = context.clientContext;
-    if (!user || !user.app_metadata?.roles?.includes('admin')) {
+    if (event.httpMethod !== 'DELETE') {
+        return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method Not Allowed' }) };
+    }
+
+    // Simple authentication check
+    const adminAuth = event.headers['x-admin-auth'] || event.headers['X-Admin-Auth'];
+    if (adminAuth !== 'true') {
         return {
             statusCode: 401,
             headers,
@@ -22,7 +29,16 @@ exports.handler = async (event, context) => {
     }
 
     try {
-        const id = event.queryStringParameters.id;
+        const id = event.queryStringParameters?.id;
+        
+        if (!id) {
+            return {
+                statusCode: 400,
+                headers,
+                body: JSON.stringify({ error: 'Missing announcement ID' })
+            };
+        }
+
         const sql = neon(process.env.DATABASE_URL);
 
         await sql`
@@ -33,14 +49,17 @@ exports.handler = async (event, context) => {
         return {
             statusCode: 200,
             headers,
-            body: JSON.stringify({ success: true })
+            body: JSON.stringify({ success: true, id: id })
         };
     } catch (error) {
         console.error('Database error:', error);
         return {
             statusCode: 500,
             headers,
-            body: JSON.stringify({ error: 'Failed to delete announcement' })
+            body: JSON.stringify({ 
+                error: 'Failed to delete announcement',
+                details: error.message 
+            })
         };
     }
 };
