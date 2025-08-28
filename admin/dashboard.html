@@ -407,10 +407,10 @@
         netlifyIdentity.init();
 
         // Check authentication
-       // const user = netlifyIdentity.currentUser();
-       // if (!user) {
-       //     window.location.href = '/admin/';
-       // }
+        const user = netlifyIdentity.currentUser();
+        if (!user) {
+            window.location.href = '/admin/';
+        }
 
         // Display user email
         if (user) {
@@ -714,5 +714,4 @@
         });
     </script>
 </body>
-
 </html>
