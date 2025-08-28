@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tierambulanz Prater - Admin Panel</title>
 
-    <!-- Netlify Identity Widget -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -104,54 +101,6 @@
             color: #721c24;
         }
 
-        /* Website Preview */
-        .website-preview {
-            border: 2px solid #dee2e6;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-top: 30px;
-        }
-
-        .preview-header {
-            background: var(--primary-color);
-            color: white;
-            padding: 15px;
-            font-weight: bold;
-        }
-
-        .preview-content {
-            padding: 20px;
-            background: white;
-            min-height: 400px;
-        }
-
-        /* Announcement Banner on Website */
-        .announcement-banner {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 15px;
-            text-align: center;
-            position: relative;
-            display: none;
-        }
-
-        .announcement-banner.active {
-            display: block;
-        }
-
-        .announcement-banner .close-btn {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.2);
-            border: none;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
         /* Form Styles */
         .form-label {
             font-weight: 600;
@@ -217,6 +166,36 @@
             height: 1rem;
             border-width: 0.2em;
         }
+
+        /* Website Preview */
+        .website-preview {
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 30px;
+        }
+
+        .preview-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+        }
+
+        .preview-content {
+            padding: 20px;
+            background: white;
+            min-height: 300px;
+        }
+
+        .announcement-banner {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -229,7 +208,9 @@
                     <p class="mb-0 text-muted">Verwalten Sie Ihre Website-Inhalte einfach und schnell</p>
                 </div>
                 <div class="col-md-6 text-end">
-                    <span class="text-muted me-3" id="userEmail"></span>
+                    <span class="text-muted me-3">
+                        <i class="fas fa-user-shield"></i> Admin
+                    </span>
                     <button class="edit-btn" onclick="viewWebsite()">
                         <i class="fas fa-eye"></i> Website Ansehen
                     </button>
@@ -327,8 +308,7 @@
                 </div>
             </div>
 
-            <!-- Other tabs remain the same -->
-            <!-- Opening Hours Tab -->
+            <!-- Other tabs -->
             <div class="tab-pane fade" id="hours">
                 <div class="admin-card">
                     <h3><i class="fas fa-clock"></i> Öffnungszeiten bearbeiten</h3>
@@ -336,7 +316,6 @@
                 </div>
             </div>
 
-            <!-- Team Tab -->
             <div class="tab-pane fade" id="team">
                 <div class="admin-card">
                     <h3><i class="fas fa-users"></i> Team verwalten</h3>
@@ -344,7 +323,6 @@
                 </div>
             </div>
 
-            <!-- Services Tab -->
             <div class="tab-pane fade" id="services">
                 <div class="admin-card">
                     <h3><i class="fas fa-heartbeat"></i> Leistungen verwalten</h3>
@@ -403,34 +381,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // Initialize Netlify Identity
-        netlifyIdentity.init();
-
         // Check authentication
-        const user = netlifyIdentity.currentUser();
-        if (!user) {
+        if (sessionStorage.getItem('adminAuth') !== 'true') {
             window.location.href = '/admin/';
-        }
-
-        // Display user email
-        if (user) {
-            document.getElementById('userEmail').textContent = user.email;
         }
 
         // API Configuration
         const API_BASE = '/.netlify/functions';
+        const IS_PRODUCTION = window.location.hostname.includes('netlify') || 
+                             window.location.hostname.includes('tierambulanz');
 
-        // For development/testing without Netlify Functions, use localStorage fallback
-        const USE_LOCAL_STORAGE = !window.location.hostname.includes('netlify');
-
-        // API Functions with fallback to localStorage for testing
+        // API Functions
         async function loadAnnouncements() {
             try {
-                if (USE_LOCAL_STORAGE) {
-                    // Fallback to localStorage for testing
-                    const announcements = JSON.parse(localStorage.getItem('announcements') || '[]');
-                    displayAnnouncements(announcements);
-                } else {
+                if (IS_PRODUCTION) {
                     // Production: Use Netlify Functions
                     const response = await fetch(`${API_BASE}/get-announcements`);
                     if (response.ok) {
@@ -439,40 +403,27 @@
                     } else {
                         throw new Error('Failed to load announcements');
                     }
+                } else {
+                    // Development: Use localStorage
+                    const announcements = JSON.parse(localStorage.getItem('announcements') || '[]');
+                    displayAnnouncements(announcements);
                 }
             } catch (error) {
                 console.error('Failed to load announcements:', error);
-                showNotification('Fehler beim Laden der Ankündigungen', 'danger');
-                // Show empty state
-                document.getElementById('announcementsList').innerHTML = '<p class="text-muted">Keine Ankündigungen vorhanden.</p>';
+                document.getElementById('announcementsList').innerHTML = 
+                    '<p class="text-muted">Fehler beim Laden der Ankündigungen.</p>';
             }
         }
 
         async function createAnnouncement(data) {
             try {
-                if (USE_LOCAL_STORAGE) {
-                    // Fallback to localStorage for testing
-                    const announcements = JSON.parse(localStorage.getItem('announcements') || '[]');
-                    const newAnnouncement = {
-                        ...data,
-                        id: Date.now().toString(),
-                        createdAt: new Date().toISOString(),
-                        createdBy: user?.email || 'admin',
-                        isActive: true
-                    };
-                    announcements.push(newAnnouncement);
-                    localStorage.setItem('announcements', JSON.stringify(announcements));
-                    showNotification('Ankündigung erstellt!', 'success');
-                    loadAnnouncements();
-                    return newAnnouncement;
-                } else {
+                if (IS_PRODUCTION) {
                     // Production: Use Netlify Functions
-                    const token = await user.jwt();
                     const response = await fetch(`${API_BASE}/create-announcement`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
+                            'X-Admin-Auth': sessionStorage.getItem('adminAuth')
                         },
                         body: JSON.stringify(data)
                     });
@@ -485,6 +436,20 @@
                     } else {
                         throw new Error('Failed to create announcement');
                     }
+                } else {
+                    // Development: Use localStorage
+                    const announcements = JSON.parse(localStorage.getItem('announcements') || '[]');
+                    const newAnnouncement = {
+                        ...data,
+                        id: Date.now().toString(),
+                        createdAt: new Date().toISOString(),
+                        isActive: true
+                    };
+                    announcements.push(newAnnouncement);
+                    localStorage.setItem('announcements', JSON.stringify(announcements));
+                    showNotification('Ankündigung erstellt!', 'success');
+                    loadAnnouncements();
+                    return newAnnouncement;
                 }
             } catch (error) {
                 console.error('Failed to create announcement:', error);
@@ -498,20 +463,12 @@
             }
 
             try {
-                if (USE_LOCAL_STORAGE) {
-                    // Fallback to localStorage for testing
-                    let announcements = JSON.parse(localStorage.getItem('announcements') || '[]');
-                    announcements = announcements.filter(a => a.id !== id);
-                    localStorage.setItem('announcements', JSON.stringify(announcements));
-                    showNotification('Ankündigung gelöscht!', 'success');
-                    loadAnnouncements();
-                } else {
+                if (IS_PRODUCTION) {
                     // Production: Use Netlify Functions
-                    const token = await user.jwt();
                     const response = await fetch(`${API_BASE}/delete-announcement?id=${id}`, {
                         method: 'DELETE',
                         headers: {
-                            'Authorization': `Bearer ${token}`
+                            'X-Admin-Auth': sessionStorage.getItem('adminAuth')
                         }
                     });
 
@@ -521,6 +478,13 @@
                     } else {
                         throw new Error('Failed to delete announcement');
                     }
+                } else {
+                    // Development: Use localStorage
+                    let announcements = JSON.parse(localStorage.getItem('announcements') || '[]');
+                    announcements = announcements.filter(a => a.id !== id);
+                    localStorage.setItem('announcements', JSON.stringify(announcements));
+                    showNotification('Ankündigung gelöscht!', 'success');
+                    loadAnnouncements();
                 }
             } catch (error) {
                 console.error('Failed to delete announcement:', error);
@@ -528,23 +492,24 @@
             }
         }
 
-        // Display announcements in the list
+        // Display announcements
         function displayAnnouncements(announcements) {
             const container = document.getElementById('announcementsList');
 
             if (!announcements || announcements.length === 0) {
                 container.innerHTML = '<p class="text-muted text-center py-4">Keine Ankündigungen vorhanden. Erstellen Sie Ihre erste Ankündigung oben.</p>';
+                updatePreview([]);
                 return;
             }
 
             const now = new Date();
             const sortedAnnouncements = announcements.sort((a, b) =>
-                new Date(b.createdAt || b.created) - new Date(a.createdAt || a.created)
+                new Date(b.createdAt || b.created_at) - new Date(a.createdAt || a.created_at)
             );
 
             container.innerHTML = sortedAnnouncements.map(ann => {
-                const startDate = new Date(ann.startDate);
-                const endDate = new Date(ann.endDate);
+                const startDate = new Date(ann.startDate || ann.start_date);
+                const endDate = new Date(ann.endDate || ann.end_date);
                 const isActive = now >= startDate && now <= endDate;
                 const isScheduled = now < startDate;
                 const isExpired = now > endDate;
@@ -556,162 +521,3 @@
                     statusBadge = '<span class="status-badge status-scheduled">Geplant</span>';
                 } else if (isExpired) {
                     statusBadge = '<span class="status-badge status-expired">Abgelaufen</span>';
-                }
-
-                const icons = {
-                    'holiday': '🏖️',
-                    'emergency': '🚨',
-                    'news': '📰',
-                    'special': '⭐',
-                    'warning': '⚠️'
-                };
-
-                return `
-                    <div class="announcement-item">
-                        <div class="row align-items-center">
-                            <div class="col-md-8">
-                                <h5>${icons[ann.type] || '📢'} ${ann.title}</h5>
-                                <p class="mb-1">${ann.message}</p>
-                                ${ann.substitute ? `<small class="text-muted">Vertretung: ${ann.substitute}</small><br>` : ''}
-                                <small class="text-muted">
-                                    ${startDate.toLocaleDateString('de-AT')} - ${endDate.toLocaleDateString('de-AT')}
-                                </small>
-                                <br>
-                                ${statusBadge}
-                            </div>
-                            <div class="col-md-4 text-end">
-                                <button class="delete-btn" onclick="deleteAnnouncement('${ann.id}')">
-                                    <i class="fas fa-trash"></i> Löschen
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-
-            // Update preview
-            updatePreview(announcements.filter(ann => {
-                const start = new Date(ann.startDate);
-                const end = new Date(ann.endDate);
-                return now >= start && now <= end;
-            }));
-        }
-
-        // Update preview
-        function updatePreview(activeAnnouncements) {
-            const previewContent = document.getElementById('previewContent');
-
-            if (activeAnnouncements && activeAnnouncements.length > 0) {
-                const banners = activeAnnouncements.map(ann => {
-                    const icons = {
-                        'holiday': '🏖️',
-                        'emergency': '🚨',
-                        'news': '📰',
-                        'special': '⭐',
-                        'warning': '⚠️'
-                    };
-
-                    return `
-                        <div class="announcement-banner active">
-                            <strong>${icons[ann.type] || ''} ${ann.title}:</strong> ${ann.message}
-                            ${ann.substitute ? `<br>Vertretung: ${ann.substitute}` : ''}
-                            <button class="close-btn">×</button>
-                        </div>
-                    `;
-                }).join('');
-
-                previewContent.innerHTML = banners + `
-                    <div style="padding: 20px;">
-                        <h2>Tierambulanz Prater</h2>
-                        <p>Ihre Ankündigungen werden prominent auf der Startseite angezeigt.</p>
-                    </div>
-                `;
-            } else {
-                previewContent.innerHTML = `
-                    <div style="padding: 20px;">
-                        <h2>Tierambulanz Prater</h2>
-                        <p>Keine aktiven Ankündigungen. Erstellen Sie eine neue Ankündigung, um sie hier zu sehen.</p>
-                    </div>
-                `;
-            }
-        }
-
-        // Form submission handler
-        document.getElementById('announcementForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Speichert...';
-
-            const announcement = {
-                type: document.getElementById('announcementType').value,
-                startDate: document.getElementById('startDate').value,
-                endDate: document.getElementById('endDate').value,
-                title: document.getElementById('announcementTitle').value,
-                message: document.getElementById('announcementMessage').value,
-                substitute: document.getElementById('substituteInfo').value
-            };
-
-            await createAnnouncement(announcement);
-            this.reset();
-
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = '<i class="fas fa-save"></i> Ankündigung Speichern';
-        });
-
-        // Show notification
-        function showNotification(message, type) {
-            const notification = document.createElement('div');
-            notification.className = `alert alert-${type} position-fixed top-0 end-0 m-3`;
-            notification.style.zIndex = '9999';
-            notification.innerHTML = message;
-            document.body.appendChild(notification);
-
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-        }
-
-        // Quick Actions
-        function quickHolidayMode() {
-            document.getElementById('announcementType').value = 'holiday';
-            document.getElementById('announcementTitle').value = 'Wir sind im Urlaub';
-            document.getElementById('announcementTitle').focus();
-        }
-
-        function quickEmergency() {
-            document.getElementById('announcementType').value = 'emergency';
-            document.getElementById('announcementTitle').value = 'Wichtige Information';
-            document.getElementById('announcementTitle').focus();
-        }
-
-        function quickSpecialHours() {
-            document.querySelector('a[href="#hours"]').click();
-        }
-
-        function refreshData() {
-            loadAnnouncements();
-            showNotification('Daten aktualisiert', 'info');
-        }
-
-        // View website
-        function viewWebsite() {
-            window.open('/', '_blank');
-        }
-
-        // Logout
-        function logout() {
-            if (confirm('Möchten Sie sich wirklich abmelden?')) {
-                netlifyIdentity.logout();
-                window.location.href = '/admin/';
-            }
-        }
-
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            loadAnnouncements();
-        });
-    </script>
-</body>
-</html>
