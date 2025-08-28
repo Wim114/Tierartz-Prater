@@ -61,32 +61,35 @@
     </div>
 
     <script>
+        // Initialize Netlify Identity
         netlifyIdentity.init();
 
-        if (window.location.hash) {
-            setTimeout(() => {
-                netlifyIdentity.open();
-            }, 100);
-        }
         function handleLogin() {
             netlifyIdentity.open('login');
         }
-    
+
+        // Handle successful login
         netlifyIdentity.on('login', user => {
             console.log('Login successful', user);
-            window.location.href = '/admin/dashboard.html';
+            // Check if user has admin role
+            const roles = user.app_metadata?.roles || [];
+            if (roles.includes('admin')) {
+                window.location.href = '/admin/dashboard.html';
+            } else {
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('errorMessage').textContent = 'Sie haben keine Admin-Berechtigung.';
+                netlifyIdentity.logout();
+            }
         });
-    
-        netlifyIdentity.on('signup', user => {
-            console.log('Signup successful', user);
-            window.location.href = '/admin/dashboard.html';
-        });
-    
+
+        // If already logged in with admin role, redirect
         const user = netlifyIdentity.currentUser();
         if (user) {
-            window.location.href = '/admin/dashboard.html';
+            const roles = user.app_metadata?.roles || [];
+            if (roles.includes('admin')) {
+                window.location.href = '/admin/dashboard.html';
+            }
         }
-</script>
+    </script>
 </body>
-
 </html>
