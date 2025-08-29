@@ -78,13 +78,19 @@ exports.handler = async (event) => {
         };
     } catch (error) {
         console.error('Database error:', error.message);
+        console.error('Full error:', error);
         
-        // Return empty array on error so the site doesn't break
-        // Don't expose internal error details to clients
+        // In production, be more informative about errors for debugging
+        // while still being secure
+        const isDev = process.env.NODE_ENV !== 'production';
+        
         return {
-            statusCode: 200,
+            statusCode: 500,
             headers,
-            body: JSON.stringify([])
+            body: JSON.stringify({ 
+                error: 'Failed to load announcements',
+                details: isDev ? error.message : 'Database connection issue'
+            })
         };
     }
 };

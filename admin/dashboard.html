@@ -214,6 +214,9 @@
                     <button class="edit-btn" onclick="viewWebsite()">
                         <i class="fas fa-eye"></i> Website Ansehen
                     </button>
+                    <button class="btn btn-outline-info btn-sm me-2" onclick="testConnection()">
+                        <i class="fas fa-database"></i> DB Test
+                    </button>
                     <button class="btn btn-outline-secondary" onclick="logout()">
                         <i class="fas fa-sign-out-alt"></i> Abmelden
                     </button>
@@ -384,9 +387,22 @@
                     const response = await fetch(`${API_BASE}/get-announcements`);
                     if (response.ok) {
                         const announcements = await response.json();
+                        console.log('Loaded announcements:', announcements);
                         displayAnnouncements(announcements);
                     } else {
-                        throw new Error('Failed to load announcements');
+                        // Get detailed error information
+                        let errorMessage = `Failed to load announcements (Status: ${response.status})`;
+                        try {
+                            const errorData = await response.json();
+                            errorMessage = errorData.error || errorMessage;
+                            if (errorData.details) {
+                                console.error('Server error details:', errorData.details);
+                                errorMessage += ` - ${errorData.details}`;
+                            }
+                        } catch (e) {
+                            console.error('Could not parse error response');
+                        }
+                        throw new Error(errorMessage);
                     }
                 } else {
                     // Development: Use localStorage
@@ -396,7 +412,11 @@
             } catch (error) {
                 console.error('Failed to load announcements:', error);
                 document.getElementById('announcementsList').innerHTML =
-                    '<p class="text-muted">Fehler beim Laden der Ankündigungen.</p>';
+                    `<div class="alert alert-danger">
+                        <strong>Fehler beim Laden der Ankündigungen:</strong><br>
+                        ${error.message}
+                        <br><small class="text-muted">Überprüfen Sie die Browser-Konsole für weitere Details.</small>
+                    </div>`;
             }
         }
 
@@ -658,6 +678,27 @@
             function refreshData() {
                 loadAnnouncements();
                 showNotification('Daten aktualisiert', 'info');
+            }
+
+            // Test database connection
+            async function testConnection() {
+                try {
+                    showNotification('Testing database connection...', 'info');
+                    const response = await fetch(`${API_BASE}/get-announcements`);
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        console.log('Database test result:', data);
+                        showNotification(`Database OK! Found ${data.length} announcements.`, 'success');
+                    } else {
+                        const errorData = await response.json().catch(() => ({}));
+                        console.error('Database test failed:', errorData);
+                        showNotification(`Database Error: ${errorData.error || response.status}`, 'danger');
+                    }
+                } catch (error) {
+                    console.error('Connection test failed:', error);
+                    showNotification(`Connection failed: ${error.message}`, 'danger');
+                }
             }
 
             // View website
