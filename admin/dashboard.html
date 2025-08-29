@@ -419,7 +419,18 @@
                         loadAnnouncements();
                         return result;
                     } else {
-                        throw new Error('Failed to create announcement');
+                        // Get detailed error information
+                        let errorMessage = 'Failed to create announcement';
+                        try {
+                            const errorData = await response.json();
+                            errorMessage = errorData.error || errorMessage;
+                            console.error('Server error details:', errorData);
+                        } catch (e) {
+                            console.error('Could not parse error response');
+                        }
+                        console.error('Response status:', response.status);
+                        console.error('Response headers:', [...response.headers.entries()]);
+                        throw new Error(`${errorMessage} (Status: ${response.status})`);
                     }
                 } else {
                     // Development: Use localStorage
@@ -438,7 +449,9 @@
                 }
             } catch (error) {
                 console.error('Failed to create announcement:', error);
-                showNotification('Fehler beim Erstellen der Ankündigung', 'danger');
+                // Show more detailed error message
+                const detailedError = error.message || 'Unbekannter Fehler';
+                showNotification(`Fehler beim Erstellen der Ankündigung: ${detailedError}`, 'danger');
             }
         }
 
