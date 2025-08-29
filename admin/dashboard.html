@@ -388,6 +388,19 @@
                     if (response.ok) {
                         const announcements = await response.json();
                         console.log('Loaded announcements:', announcements);
+                        // Log individual announcement details for debugging
+                        announcements.forEach((ann, index) => {
+                            console.log(`Announcement ${index}:`, {
+                                id: ann.id,
+                                type: ann.type,
+                                title: ann.title,
+                                start_date: ann.start_date,
+                                end_date: ann.end_date,
+                                startDate: ann.startDate,
+                                endDate: ann.endDate,
+                                created_at: ann.created_at
+                            });
+                        });
                         displayAnnouncements(announcements);
                     } else {
                         // Get detailed error information
@@ -494,7 +507,18 @@
                         showNotification('Ankündigung gelöscht!', 'success');
                         loadAnnouncements();
                     } else {
-                        throw new Error('Failed to delete announcement');
+                        // Get detailed error information
+                        let errorMessage = `Failed to delete announcement (Status: ${response.status})`;
+                        try {
+                            const errorData = await response.json();
+                            errorMessage = errorData.error || errorMessage;
+                            console.error('Delete error details:', errorData);
+                        } catch (e) {
+                            console.error('Could not parse delete error response');
+                        }
+                        console.error('Delete response status:', response.status);
+                        console.error('Delete response headers:', [...response.headers.entries()]);
+                        throw new Error(errorMessage);
                     }
                 } else {
                     // Development: Use localStorage
@@ -506,7 +530,8 @@
                 }
             } catch (error) {
                 console.error('Failed to delete announcement:', error);
-                showNotification('Fehler beim Löschen der Ankündigung', 'danger');
+                const detailedError = error.message || 'Unbekannter Fehler';
+                showNotification(`Fehler beim Löschen der Ankündigung: ${detailedError}`, 'danger');
             }
         }
 

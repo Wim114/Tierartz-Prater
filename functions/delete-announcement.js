@@ -24,7 +24,9 @@ exports.handler = async (event) => {
 
     // Simple authentication check
     const adminAuth = event.headers['x-admin-auth'] || event.headers['X-Admin-Auth'];
+    console.log('Delete request - Auth header:', adminAuth);
     if (adminAuth !== 'true') {
+        console.log('Delete request unauthorized');
         return {
             statusCode: 401,
             headers,
@@ -33,9 +35,17 @@ exports.handler = async (event) => {
     }
 
     try {
+        console.log('Delete request received:', {
+            method: event.httpMethod,
+            path: event.path,
+            queryParams: event.queryStringParameters
+        });
+        
         const id = event.queryStringParameters?.id;
+        console.log('Attempting to delete announcement ID:', id);
         
         if (!id) {
+            console.log('No ID provided in query parameters');
             return {
                 statusCode: 400,
                 headers,
