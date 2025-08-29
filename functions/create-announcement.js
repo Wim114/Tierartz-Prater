@@ -94,10 +94,18 @@ exports.handler = async (event) => {
         }
 
         // Validate dates
+        console.log('Received date strings:', { startDate: data.startDate, endDate: data.endDate });
         const startDate = new Date(data.startDate);
         const endDate = new Date(data.endDate);
+        console.log('Parsed dates:', { startDate, endDate });
         
         if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
+            console.error('Date parsing failed:', { 
+                startDateInput: data.startDate, 
+                endDateInput: data.endDate,
+                parsedStart: startDate,
+                parsedEnd: endDate
+            });
             return {
                 statusCode: 400,
                 headers,
@@ -106,6 +114,7 @@ exports.handler = async (event) => {
         }
 
         if (endDate <= startDate) {
+            console.error('Date validation failed: end date not after start date');
             return {
                 statusCode: 400,
                 headers,
@@ -151,6 +160,13 @@ exports.handler = async (event) => {
 
         // Log successful creation (without sensitive data)
         console.log(`Announcement created: ${result[0].id} - ${result[0].type}`);
+        console.log('Created announcement data:', {
+            id: result[0].id,
+            type: result[0].type,
+            title: result[0].title,
+            startDate: result[0].start_date,
+            endDate: result[0].end_date
+        });
 
         return {
             statusCode: 201,
@@ -159,12 +175,23 @@ exports.handler = async (event) => {
         };
     } catch (error) {
         console.error('Create announcement error:', error.message);
+        console.error('Full error details:', error);
+        console.error('Error stack:', error.stack);
+        
+        // Log the data that was being inserted for debugging
+        console.error('Data being inserted:', {
+            type: data?.type,
+            title: data?.title?.substring(0, 50),
+            startDate: data?.startDate,
+            endDate: data?.endDate
+        });
+        
         return {
             statusCode: 500,
             headers,
             body: JSON.stringify({ 
-                error: 'Failed to create announcement'
-                // Don't expose internal error details in production
+                error: 'Failed to create announcement',
+                details: process.env.NODE_ENV !== 'production' ? error.message : 'Database error'
             })
         };
     }
