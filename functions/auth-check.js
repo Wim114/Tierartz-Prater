@@ -43,4 +43,6 @@ exports.handler = async (event) => {
             headers,
             body: JSON.stringify({ error: 'Server error' })
         };
+
     }
+};
