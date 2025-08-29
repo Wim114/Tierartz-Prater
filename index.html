@@ -218,6 +218,7 @@
             color: var(--secondary-color);
             padding: 15px 35px;
             border-radius: 50px;
+            border: none;
             font-weight: 600;
             text-decoration: none;
             display: inline-block;
@@ -938,7 +939,9 @@
                         <h1>Moderne Tiermedizin mit Herz in Wien</h1>
                         <p>Kompetente und liebevolle Betreuung für Ihre Haustiere</p>
                         <div class="hero-buttons">
-                            <a href="#appointment" class="btn-primary-custom">Termin vereinbaren</a>
+                            <button onclick="openDirections()" class="btn-primary-custom">
+                                <i class="fas fa-route"></i> Route zur Praxis
+                            </button>
                             <a href="#services" class="btn-secondary-custom">Unsere Leistungen</a>
                         </div>
                     </div>
@@ -1461,10 +1464,70 @@
         // Console welcome message - Fixed version
         console.log('%c🐾 Willkommen bei Tierambulanz Prater! 🐾', 'color: #00ace2; font-size: 20px; font-weight: bold;');
         console.log('%cWir kümmern uns um Ihre Lieblinge mit Herz und Kompetenz.', 'color: #005d83; font-size: 14px;');
+        console.log('%cWir kümmern uns um Ihre Lieblinge mit Herz und Kompetenz.', 'color: #005d83; font-size: 14px;');
+
+        function openDirections() {
+            // Clinic coordinates (Tierambulanz Prater actual location)
+            const clinicLat = 48.217789;
+            const clinicLng = 16.398223;
+            const clinicName = "Tierambulanz Prater";
+            const clinicAddress = "Ausstellungsstraße 49, 1020 Wien"; // Correct address based on map
+            
+            // Check if geolocation is supported
+            if ("geolocation" in navigator) {
+                // Show loading state on button
+                const button = event.target.closest('button');
+                const originalContent = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Standort wird ermittelt...';
+                button.disabled = true;
+                
+                // Try to get user's current location
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        // Success: Open Google Maps with directions from current location
+                        const userLat = position.coords.latitude;
+                        const userLng = position.coords.longitude;
+                        
+                        // Construct Google Maps URL with directions
+                        const mapsUrl = `https://www.google.com/maps/dir/${userLat},${userLng}/${clinicLat},${clinicLng}/@${clinicLat},${clinicLng},15z`;
+                        
+                        // Reset button
+                        button.innerHTML = originalContent;
+                        button.disabled = false;
+                        
+                        // Open in new tab
+                        window.open(mapsUrl, '_blank');
+                    },
+                    function(error) {
+                        // Error or permission denied: Open Google Maps without starting point
+                        console.log('Geolocation error:', error);
+                        
+                        // Reset button
+                        button.innerHTML = originalContent;
+                        button.disabled = false;
+                        
+                        // Open Google Maps centered on clinic (user can enter their location)
+                        const mapsUrl = `https://www.google.com/maps/dir//${clinicLat},${clinicLng}/@${clinicLat},${clinicLng},15z`;
+                        window.open(mapsUrl, '_blank');
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 5000,
+                        maximumAge: 0
+                    }
+                );
+            } else {
+                // Geolocation not supported: Open Google Maps without starting point
+                const mapsUrl = `https://www.google.com/maps/dir//${clinicLat},${clinicLng}/@${clinicLat},${clinicLng},15z`;
+                window.open(mapsUrl, '_blank');
+            }
+        }
+        
     </script>
 </body>
 
 </html>
+
 
 
 
