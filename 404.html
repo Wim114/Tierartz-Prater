@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seite nicht gefunden - Tierambulanz Prater</title>
+    <meta name="description" content="Die angeforderte Seite wurde nicht gefunden. Kehren Sie zur Tierambulanz Prater Startseite zurück.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="images/logo_eps%20(1).jpg">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous">
+    
+    <style>
+        :root {
+            --primary-color: #00ace2;
+            --secondary-color: #005d83;
+            --text-dark: #22242C;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .error-container {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .error-icon {
+            font-size: 8rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+        
+        .error-title {
+            color: var(--secondary-color);
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .error-message {
+            color: var(--text-dark);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn-primary-custom {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            border: none;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+        
+        .btn-primary-custom:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            color: white;
+        }
+        
+        .btn-secondary-custom {
+            background: transparent;
+            color: var(--secondary-color);
+            border: 2px solid var(--secondary-color);
+            padding: 13px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+        
+        .btn-secondary-custom:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .quick-links {
+            margin-top: 3rem;
+        }
+        
+        .quick-links h4 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .quick-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .quick-links li {
+            margin: 0.5rem 0;
+        }
+        
+        .quick-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .quick-links a:hover {
+            color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="error-container">
+                    <div class="error-icon">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <h1 class="error-title">404</h1>
+                    <h2>Seite nicht gefunden</h2>
+                    <p class="error-message">
+                        Entschuldigung, die von Ihnen gesuchte Seite konnte nicht gefunden werden. 
+                        Möglicherweise wurde sie verschoben oder existiert nicht mehr.
+                    </p>
+                    
+                    <div class="mt-4">
+                        <a href="/" class="btn-primary-custom">
+                            <i class="fas fa-home"></i> Zur Startseite
+                        </a>
+                        <a href="/#contact" class="btn-secondary-custom">
+                            <i class="fas fa-phone"></i> Kontakt
+                        </a>
+                    </div>
+                    
+                    <div class="quick-links">
+                        <h4>Schnelle Links</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul>
+                                    <li><a href="/#about"><i class="fas fa-info-circle"></i> Über uns</a></li>
+                                    <li><a href="/#services"><i class="fas fa-heartbeat"></i> Unsere Leistungen</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul>
+                                    <li><a href="/#team"><i class="fas fa-users"></i> Unser Team</a></li>
+                                    <li><a href="tel:+4301726918"><i class="fas fa-phone"></i> Notfall: +43 01 7269181</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Auto-redirect after 10 seconds if no user interaction
+        let redirectTimer = setTimeout(() => {
+            window.location.href = '/';
+        }, 10000);
+        
+        // Cancel auto-redirect on any user interaction
+        document.addEventListener('click', () => clearTimeout(redirectTimer));
+        document.addEventListener('keydown', () => clearTimeout(redirectTimer));
+        document.addEventListener('scroll', () => clearTimeout(redirectTimer));
+    </script>
+</body>
+</html>
