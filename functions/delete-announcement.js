@@ -75,13 +75,35 @@ exports.handler = async (event) => {
         const sql = neon(process.env.DATABASE_URL);
 
         // First check if announcement exists and get its details for logging
+        console.log('Searching for announcement with ID:', id, 'Type:', typeof id);
+        
+        // Also check all announcements to see what IDs exist
+        const allAnnouncements = await sql`SELECT id, type, title FROM announcements ORDER BY id`;
+        console.log('All announcements in database:', allAnnouncements.map(a => ({ id: a.id, type: typeof a.id, title: a.title })));
+        
+        // Try both string and integer versions of the ID
+        const idAsInt = parseInt(id, 10);
+        console.log('ID as integer:', idAsInt, 'Is valid number:', !isNaN(idAsInt));
+        
+        if (isNaN(idAsInt)) {
+            console.log('Invalid ID format - cannot convert to integer');
+            return {
+                statusCode: 400,
+                headers,
+                body: JSON.stringify({ error: 'Invalid ID format - must be a number' })
+            };
+        }
+        
         const existing = await sql`
             SELECT id, type, title FROM announcements
-            WHERE id = ${id}
+            WHERE id = ${idAsInt}
             LIMIT 1
         `;
+        
+        console.log('Found announcements with matching ID:', existing);
 
         if (existing.length === 0) {
+            console.log(`Announcement with ID ${id} not found. Available IDs:`, allAnnouncements.map(a => a.id));
             return {
                 statusCode: 404,
                 headers,
@@ -92,7 +114,7 @@ exports.handler = async (event) => {
         // Delete the announcement
         const result = await sql`
             DELETE FROM announcements
-            WHERE id = ${id}
+            WHERE id = ${idAsInt}
             RETURNING id
         `;
 
