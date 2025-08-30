@@ -1602,7 +1602,6 @@
                         </p>
 
                         <form id="appointmentForm" novalidate>
-                            <input type="hidden" name="access_key" value="WEB3FORMS_ACCESS_KEY">
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="fullName" class="visually-hidden">
@@ -1956,16 +1955,19 @@
             const data = Object.fromEntries(formData.entries());
 
             // Simulate form submission (in production, send to server)
-            setTimeout(() => {
-                try {
+           fetch('/.netlify/functions/submit-form', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
                     // Success state
                     button.innerHTML = '<i class="fas fa-check"></i> Vielen Dank! Wir melden uns bald.';
                     button.style.background = '#28a745';
-
-                    // Show success message
                     showNotification('Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns bald bei Ihnen!', 'success');
-
-                    // Reset form after 3 seconds
+                    
                     setTimeout(() => {
                         form.reset();
                         form.classList.remove('was-validated');
@@ -1973,20 +1975,21 @@
                         button.style.background = '';
                         button.disabled = false;
                     }, 3000);
-                } catch (error) {
-                    // Error state
-                    button.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Fehler beim Senden';
-                    button.style.background = '#dc3545';
-                    showNotification('Fehler beim Senden der Anfrage. Bitte versuchen Sie es erneut oder rufen Sie uns direkt an.', 'error');
-
-                    setTimeout(() => {
-                        button.innerHTML = originalText;
-                        button.style.background = '';
-                        button.disabled = false;
-                    }, 3000);
+                } else {
+                    throw new Error('Submission failed');
                 }
-            }, 1500);
-        });
+            })
+            .catch(error => {
+                button.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Fehler beim Senden';
+                button.style.background = '#dc3545';
+                showNotification('Fehler beim Senden. Bitte versuchen Sie es erneut.', 'error');
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = '';
+                    button.disabled = false;
+                }, 3000);
+            });
 
         // Form validation function
         function validateForm(form) {
@@ -2290,6 +2293,7 @@
 </body>
 
 </html>
+
 
 
 
