@@ -10,6 +10,7 @@
             --primary-color: #00ace2;
             --secondary-color: #005d83;
             --danger: #ff4444;
+            --container-bg: #f1eee7;
         }
 
         body {
@@ -23,7 +24,7 @@
         }
 
         .login-container {
-            background: white;
+            background: var(--container-bg);
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
@@ -65,6 +66,14 @@
             font-size: 16px;
             transition: border-color 0.3s;
             box-sizing: border-box;
+        }
+
+        .login-header img.logo-img {
+            max-width: 150px;
+            margin-bottom: 15px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .form-control:focus {
@@ -138,6 +147,7 @@
 <body>
     <div class="login-container">
         <div class="login-header">
+            <img src="images/NEXTSERVELOGO.jpg" alt="NextServe Logo" class="logo-img">
             <h2>🔐 Admin Bereich</h2>
             <p>Tierambulanz Prater - Verwaltung</p>
         </div>
@@ -165,7 +175,7 @@
         </form>
 
         <div class="info-box">
-            
+
             <strong>Verwenden Sie das sichere Admin-Passwort, das von der IT-Abteilung bereitgestellt wird.</strong>
         </div>
     </div>
@@ -195,20 +205,20 @@
             try {
                 // Check if running locally (for development)
                 const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-                
+
                 if (isLocal) {
                     // Local development: Simple password check
                     const validPasswords = ['admin', 'test123', 'tierambulanz', 'prater123'];
-                    
+
                     if (validPasswords.includes(password.toLowerCase())) {
                         // Set session
                         sessionStorage.setItem('adminAuth', 'true');
                         sessionStorage.setItem('adminLoginTime', new Date().toISOString());
-                        
+
                         // Show success message
                         loginBtn.innerHTML = '<i class="fas fa-check"></i> Erfolgreich!';
                         loginBtn.style.background = '#28a745';
-                        
+
                         // Redirect to dashboard after short delay
                         setTimeout(() => {
                             window.location.href = '/admin/dashboard.html';
@@ -222,7 +232,7 @@
                         return;
                     }
                 }
-                
+
                 // Production: Call the secure auth-check function
                 const response = await fetch('/.netlify/functions/auth-check', {
                     method: 'POST',
@@ -247,7 +257,7 @@
                 }
             } catch (error) {
                 console.error('Login error:', error);
-                
+
                 // For local development, provide helpful message
                 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
                     errorMsg.innerHTML = 'Local Development: Try passwords: <strong>admin</strong>, <strong>test123</strong>, <strong>tierambulanz</strong>, or <strong>prater123</strong>';
@@ -289,4 +299,3 @@
     </script>
 </body>
 </html>
-
