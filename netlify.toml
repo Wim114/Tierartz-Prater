@@ -1,2 +1,8 @@
-/admin /admin/index.html 200
-/admin/* /admin/:splat 200
+  [[redirects]]
+  from = "/admin"
+  to = "/admin/index.html"
+  status = 200
+  [[redirects]]
+  from = "/admin/*"
+  to = "/admin/:splat"
+  status = 200
