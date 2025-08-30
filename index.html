@@ -1967,7 +1967,7 @@
                     button.innerHTML = '<i class="fas fa-check"></i> Vielen Dank! Wir melden uns bald.';
                     button.style.background = '#28a745';
                     showNotification('Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns bald bei Ihnen!', 'success');
-                    
+
                     setTimeout(() => {
                         form.reset();
                         form.classList.remove('was-validated');
@@ -1979,17 +1979,20 @@
                     throw new Error('Submission failed');
                 }
             })
+
+
             .catch(error => {
                 button.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Fehler beim Senden';
                 button.style.background = '#dc3545';
                 showNotification('Fehler beim Senden. Bitte versuchen Sie es erneut.', 'error');
-                
+
                 setTimeout(() => {
                     button.innerHTML = originalText;
                     button.style.background = '';
                     button.disabled = false;
                 }, 3000);
             });
+        });
 
         // Form validation function
         function validateForm(form) {
@@ -2293,7 +2296,6 @@
 </body>
 
 </html>
-
 
 
 
