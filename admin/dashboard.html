@@ -308,7 +308,7 @@
         </div>
 
         <!-- Quick Actions -->
-       
+
 
 
     <!-- Bootstrap Bundle JS -->
@@ -487,7 +487,6 @@
 
             if (!announcements || announcements.length === 0) {
                 container.innerHTML = '<p class="text-muted text-center py-4">Keine Ankündigungen vorhanden. Erstellen Sie Ihre erste Ankündigung oben.</p>';
-                updatePreview([]);
                 return;
             }
 
@@ -545,52 +544,10 @@
                     `;
                 }).join('');
 
-                // Update preview with active announcements
-                const activeAnnouncements = announcements.filter(ann => {
-                    const start = new Date(ann.startDate || ann.start_date);
-                    const end = new Date(ann.endDate || ann.end_date);
-                    return now >= start && now <= end;
-                });
-                updatePreview(activeAnnouncements);
             }
 
             // Update preview
-            function updatePreview(activeAnnouncements) {
-                const previewContent = document.getElementById('previewContent');
-
-                if (activeAnnouncements && activeAnnouncements.length > 0) {
-                    const banners = activeAnnouncements.map(ann => {
-                        const icons = {
-                            'holiday': '🏖️',
-                            'emergency': '🚨',
-                            'news': '📰',
-                            'special': '⭐',
-                            'warning': '⚠️'
-                        };
-
-                        return `
-                            <div class="announcement-banner">
-                                <strong>${icons[ann.type] || ''} ${ann.title}:</strong> ${ann.message}
-                                ${ann.substitute ? `<br>Vertretung: ${ann.substitute}` : ''}
-                            </div>
-                        `;
-                    }).join('');
-
-                    previewContent.innerHTML = banners + `
-                        <div style="padding: 20px;">
-                            <h2>Tierambulanz Prater</h2>
-                            <p>Ihre Ankündigungen werden prominent auf der Startseite angezeigt.</p>
-                        </div>
-                    `;
-                } else {
-                    previewContent.innerHTML = `
-                        <div style="padding: 20px;">
-                            <h2>Tierambulanz Prater</h2>
-                            <p>Keine aktiven Ankündigungen. Erstellen Sie eine neue Ankündigung, um sie hier zu sehen.</p>
-                        </div>
-                    `;
-                }
-            }
+            
 
             // Form submission handler
             document.getElementById('announcementForm').addEventListener('submit', async function(e) {
@@ -656,7 +613,7 @@
                 try {
                     showNotification('Testing database connection...', 'info');
                     const response = await fetch(`${API_BASE}/get-announcements`);
-                    
+
                     if (response.ok) {
                         const data = await response.json();
                         console.log('Database test result:', data);
@@ -693,6 +650,5 @@
     </div>
 </body>
 </html>
-
 
 
