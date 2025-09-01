@@ -122,6 +122,57 @@
         }
 
 
+        @media (max-width: 768px) {
+        .team-member {
+            height: auto; /* Remove fixed height on mobile */
+            margin-bottom: 1.5rem;
+        }
+
+        .team-info {
+            padding: 1.2rem;
+        }
+
+        .team-info h4 {
+            font-size: 1.2rem;
+        }
+
+        .team-info .position {
+            font-size: 0.95rem;
+        }
+
+        .team-info .credentials {
+            font-size: 0.85rem;
+        }
+
+        .team-info .team-description {
+            font-size: 0.9rem;
+            padding: 0.6rem 0.3rem 0;
+        }
+
+        .team-member-image {
+            height: 250px; /* Smaller height on mobile */
+        }
+    }
+
+    /* Tablet view - 2 columns */
+    @media (min-width: 769px) and (max-width: 991px) {
+        .team-section .col-lg-3 {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+    }
+
+    /* Better spacing on very small devices */
+    @media (max-width: 576px) {
+        .team-section {
+            padding: 60px 0;
+        }
+
+        .team-member {
+            margin-bottom: 1rem;
+        }
+    }
+
 
         .navbar-brand {
             display: flex;
@@ -458,6 +509,9 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             margin-bottom: 2rem;
+            height: 100%; /* Add this */
+            display: flex; /* Add this */
+            flex-direction: column; /* Add this */
         }
 
         .team-member:hover {
@@ -477,6 +531,9 @@
         .team-info {
             padding: 1.5rem;
             text-align: center;
+            flex-grow: 1; /* Add this */
+            display: flex; /* Add this */
+            flex-direction: column; /* Add this */
         }
 
         .team-info h4 {
@@ -491,9 +548,28 @@
         }
 
         .team-info .credentials {
-            color: var(--text-light);
-            font-size: 0.9rem;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            font-style: italic;
+            line-height: 1.6;
+            padding: 0.8rem 0.5rem 0;
+            border-top: 1px solid #eee;
+            margin-top: 0.8rem;
         }
+
+        .team-info .team-description {
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            font-style: italic;
+            line-height: 1.6;
+            padding: 0.8rem 0.5rem 0;
+            border-top: 1px solid #eee;
+            margin-top: auto; /* Add this - pushes description to bottom */
+        }
+
+
+
+
 
         /* Appointment Form */
         .appointment-section {
@@ -1113,7 +1189,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="agb.html">AGB</a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <button class="btn btn-outline-primary btn-sm ms-2" id="langToggle" onclick="toggleLanguage()">
                                 <i class="fas fa-globe"></i> <span class="de">EN</span><span class="en" style="display:none;">DE</span>
@@ -1316,38 +1392,29 @@
     <section class="stats-section">
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="stat-box" data-aos="zoom-in">
-                        <div class="stat-number" data-target="10">0</div>
+                        <div class="stat-number" data-target="18">0</div>
                         <div class="stat-label">
                             <span class="de">Jahre Erfahrung</span>
                             <span class="en" style="display:none;">Years Experience</span>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="stat-box" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="stat-number" data-target="+300">0</div>
+                        <div class="stat-number" data-target="30">0</div>
                         <div class="stat-label">
-                            <span class="de">Glückliche Patienten</span>
-                            <span class="en" style="display:none;">Happy Patients</span>
+                            <span class="de">Jahre tierärztliche Erfahrung</span>
+                            <span class="en" style="display:none;">Years of veterinary experience</span>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="stat-box" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="stat-number" data-target="2">0</div>
-                        <div class="stat-label">
-                            <span class="de">Spezialisierte Tierärzte</span>
-                            <span class="en" style="display:none;">Specialized Veterinarians</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="stat-box" data-aos="zoom-in" data-aos-delay="300">
-                        <div class="stat-number">6</div>
+                        <div class="stat-number" data-target="6">0</div>
                         <div class="stat-label">
-                            <span class="de">Tage die Woche</span>
+                            <span class="de">Tage pro Woche für Sie geöffnet</span>
                             <span class="en" style="display:none;">Days a Week</span>
                         </div>
                     </div>
@@ -1365,8 +1432,8 @@
                     <span class="en" style="display:none;">Our Mission</span>
                 </h2>
                 <p>
-                    <span class="de">Als Expats aus dem Balkan wissen wir, wie wichtig Vertrauen und Verständnis sind. Wir setzen uns für das Wohlbefinden Ihrer Tiere und Ihre Seelenruhe ein.</span>
-                    <span class="en" style="display:none;">As expats from the Balkans, we know how important trust and understanding are. We're committed to your pets' wellbeing and your peace of mind.</span>
+                    <span class="de">Wir wissen, wie wichtig Vertrauen und Verständnis sind. Wir setzen uns für das Wohlergehen Ihrer Tiere und Ihre Ruhe ein.</span>
+                    <span class="en" style="display:none;">We know how important trust and understanding are. We are committed to the well-being of your animals and your peace of mind.</span>
                 </p>
             </div>
             <div class="row">
@@ -1391,12 +1458,12 @@
                             <i class="fas fa-globe-europe"></i>
                         </div>
                         <h3>
-                            <span class="de">Kulturelles Verständnis</span>
-                            <span class="en" style="display:none;">Cultural Understanding</span>
+                            <span class="de">Immer zusammen</span>
+                            <span class="en" style="display:none;">Always Together</span>
                         </h3>
                         <p>
-                            <span class="de">Als Expats verstehen wir die Herausforderungen des Lebens in einem neuen Land – wir sind hier, um zu helfen.</span>
-                            <span class="en" style="display:none;">As expats, we understand the challenges of life in a new country – we're here to help.</span>
+                            <span class="de">Ihr verlässlicher Partner während der gesamten Lebensreise Ihres Haustieres.</span>
+                            <span class="en" style="display:none;">Your reliable partner throughout your pet’s life journey..</span>
                         </p>
                     </div>
                 </div>
@@ -1406,12 +1473,12 @@
                             <i class="fas fa-users"></i>
                         </div>
                         <h3>
-                            <span class="de">Gemeinschaft</span>
-                            <span class="en" style="display:none;">Community</span>
+                            <span class="de">Vertrauen</span>
+                            <span class="en" style="display:none;">Trust</span>
                         </h3>
                         <p>
-                            <span class="de">Wir bauen eine Brücke zwischen Kulturen und schaffen einen Ort, wo sich jeder willkommen fühlt.</span>
-                            <span class="en" style="display:none;">We build bridges between cultures and create a place where everyone feels welcome.</span>
+                            <span class="de">Offene und transparente Kommunikation mit Tierbesitzern für bewusste Entscheidungen.</span>
+                            <span class="en" style="display:none;">Open and transparent communication with pet owners for informed decisions.</span>
                         </p>
                     </div>
                 </div>
@@ -1421,12 +1488,12 @@
                             <i class="fas fa-heart"></i>
                         </div>
                         <h3>
-                            <span class="de">Mit Herz & Seele</span>
-                            <span class="en" style="display:none;">Heart & Soul</span>
+                            <span class="de">Solidarität</span>
+                            <span class="en" style="display:none;">Solidarity</span>
                         </h3>
                         <p>
-                            <span class="de">Ihre Haustiere sind Familie – wir behandeln sie mit der Liebe und Fürsorge, die sie verdienen.</span>
-                            <span class="en" style="display:none;">Your pets are family – we treat them with the love and care they deserve.</span>
+                            <span class="de">Förderung der Aufklärung über Tiergesundheit und Respekt gegenüber allen Tieren.</span>
+                            <span class="en" style="display:none;">Promoting awareness of animal health and respect for all animals.</span>
                         </p>
                     </div>
                 </div>
@@ -1469,8 +1536,8 @@
                             <span class="en" style="display:none;">Surgery</span>
                         </h4>
                         <p>
-                            <span class="de">Moderne Operationssäle für Routine- und Spezialeingriffe mit höchsten Sicherheitsstandards.</span>
-                            <span class="en" style="display:none;">Modern operating rooms for routine and specialized procedures with the highest safety standards.</span>
+                            <span class="de">Operative Eingriffe im Rahmen der Kleintiermedizin – von Routineoperationen bis zu Spezialeingriffen.</span>
+                            <span class="en" style="display:none;">Surgical procedures in small animal medicine – from routine operations to specialized surgeries.</span>
                         </p>
                     </div>
                 </div>
@@ -1519,20 +1586,26 @@
                     <span class="en" style="display:none;">Experienced veterinarians with a passion for animal health</span>
                 </p>
             </div>
-            <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-12">                    <div class="team-member" data-aos="flip-left">
+            <div class="row align-items-stretch">
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="team-member" data-aos="flip-left">
                         <div class="team-member-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
                             <i class="fas fa-user-md" style="font-size: 5rem; color: white;"></i>
                         </div>
                         <div class="team-info">
-                            <h4>Dr. Maria Schneider</h4>
+                            <h4>Dr. med. vet. Mirsad Jasarevic</h4>
                             <p class="position">
-                                <span class="de">Klinikleitung</span>
-                                <span class="en" style="display:none;">Clinic Director</span>
+                                <span class="de">Leitung der Ordination & Tierarzt</span>
+                                <span class="en" style="display:none;">Head of Clinic & Veterinarian</span>
                             </p>
                             <p class="credentials">
-                                <span class="de">Fachtierärztin für Kleintiere<br>Chirurgie & Innere Medizin</span>
+                                <span class="de">Chirurgie & Innere Medizin</span>
                                 <span class="en" style="display:none;">Specialist Veterinarian for Small Animals<br>Surgery & Internal Medicine</span>
+                            </p>
+
+                            <p class="team-description">
+                                <span class="de">„Seit Jahrzehnten mit Erfahrung und Leidenschaft für die Tiermedizin tätig."</span>
+                                <span class="en" style="display:none;">"Active in veterinary medicine with decades of experience and passion."</span>
                             </p>
                         </div>
                     </div>
@@ -1543,14 +1616,18 @@
                             <i class="fas fa-user-md" style="font-size: 5rem; color: white;"></i>
                         </div>
                         <div class="team-info">
-                            <h4>Dr. Thomas Weber</h4>
+                            <h4>Mag. med. vet. Emin Jasarevic</h4>
                             <p class="position">
-                                <span class="de">Anästhesie & Notfallmedizin</span>
-                                <span class="en" style="display:none;">Anesthesia & Emergency Medicine</span>
+                                <span class="de">Innere Medizin & bildgebende Diagnostik</span>
+                                <span class="en" style="display:none;">Internal Medicine & Diagnostic Imaging</span>
                             </p>
                             <p class="credentials">
                                 <span class="de">Spezialist für Intensivmedizin</span>
                                 <span class="en" style="display:none;">Specialist in Intensive Care Medicine</span>
+                            </p>
+                            <p class="team-description">
+                                <span class="de">„Besonderes Interesse an internistischen Fragestellungen sowie an der umfassenden Betreuung von Kleintieren."</span>
+                                <span class="en" style="display:none;">"Special interest in internal medicine questions and comprehensive care of small animals."</span>
                             </p>
                         </div>
                     </div>
@@ -1562,14 +1639,18 @@
                             <i class="fas fa-user-md" style="font-size: 5rem; color: white;"></i>
                         </div>
                         <div class="team-info">
-                            <h4>Dr. Thomas Weber</h4>
+                            <h4>Mag. iur. Zerina Jasarevic</h4>
                             <p class="position">
-                                <span class="de">Anästhesie & Notfallmedizin</span>
-                                <span class="en" style="display:none;">Anesthesia & Emergency Medicine</span>
+                                <span class="de">Ordinationsassistenz & Administration</span>
+                                <span class="en" style="display:none;">Clinic Assistant & Administration</span>
                             </p>
                             <p class="credentials">
                                 <span class="de">Spezialist für Intensivmedizin</span>
                                 <span class="en" style="display:none;">Specialist in Intensive Care Medicine</span>
+                            </p>
+                            <p class="team-description">
+                                <span class="de">„Bringt juristische Ausbildung, Organisationstalent und Erfahrung in die Ordination ein – zusätzlich zuständig für die Buchhaltung."</span>
+                                <span class="en" style="display:none;">"Brings legal training, organizational talent and experience to the practice – also responsible for accounting."</span>
                             </p>
                         </div>
                     </div>
@@ -1581,14 +1662,18 @@
                             <i class="fas fa-user-md" style="font-size: 5rem; color: white;"></i>
                         </div>
                         <div class="team-info">
-                            <h4>Dr. Julia Müller</h4>
+                            <h4>BSc Edin Jasarevic</h4>
                             <p class="position">
-                                <span class="de">Zahnmedizin & Dermatologie</span>
-                                <span class="en" style="display:none;">Dental Medicine & Dermatology</span>
+                                <span class="de">Ordinationsassistenz & Hundefriseur</span>
+                                <span class="en" style="display:none;">Clinic Assistant & Dog Groomer</span>
                             </p>
                             <p class="credentials">
                                 <span class="de">Zusatzausbildung Verhaltensmedizin</span>
                                 <span class="en" style="display:none;">Additional Training in Behavioral Medicine</span>
+                            </p>
+                            <p class="team-description">
+                                <span class="de">„Vielseitige Unterstützung im Ordinationsalltag – zudem als Hundefriseur für die Pflege und das Wohlbefinden unserer Patienten verantwortlich."</span>
+                                <span class="en" style="display:none;">"Versatile support in daily clinic operations – also responsible as a dog groomer for the care and wellbeing of our patients."</span>
                             </p>
                         </div>
                     </div>
@@ -1603,8 +1688,8 @@
                 <div class="col-lg-12">
                     <div class="appointment-form" data-aos="zoom-in">
                         <h2 class="text-white text-center mb-4">
-                            <span class="de">Möchten Sie einen Termin vereinbaren?</span>
-                            <span class="en" style="display:none;">Would you like to schedule an appointment?</span>
+                            <span class="de">Möchten Sie eine Frage stellen?</span>
+                            <span class="en" style="display:none;">Would you like to ask a question?</span>
                         </h2>
                         <p class="text-white text-center mb-5">
                             <span class="de">Hinterlassen Sie uns Ihre Kontaktdaten und wir melden uns schnellstmöglich bei Ihnen</span>
@@ -1755,17 +1840,9 @@
                             <span class="de">Unser Team</span>
                             <span class="en" style="display:none;">Our Team</span>
                         </a></li>
-                        <li><i class="fas fa-chevron-right"></i> <a href="#appointment">
-                            <span class="de">Termin vereinbaren</span>
-                            <span class="en" style="display:none;">Book Appointment</span>
-                        </a></li>
-                        <li><i class="fas fa-chevron-right"></i> <a href="#">
-                            <span class="de">Notfallnummern</span>
-                            <span class="en" style="display:none;">Emergency Numbers</span>
-                        </a></li>
-                        <li><i class="fas fa-chevron-right"></i> <a href="#">
-                            <span class="de">Karriere</span>
-                            <span class="en" style="display:none;">Careers</span>
+                        <li><i class="fas fa-chevron-right"></i> <a href="#contact">
+                            <span class="de">Fragen oder Anliegen</span>
+                            <span class="en" style="display:none;">Questions or Concerns</span>
                         </a></li>
                     </ul>
                 </div>
@@ -2300,7 +2377,6 @@
 </body>
 
 </html>
-
 
 
 
