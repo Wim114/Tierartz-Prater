@@ -3,19 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0YTPWVDXEZ"></script>
     <script>
-        if (localStorage.getItem('cookieConsent') === 'accepted') {
-            var script = document.createElement('script');
-            script.async = true;
-            script.src = 'https://www.googletagmanager.com/gtag/js?id=G-0YTPWVDXEZ';
-            document.head.appendChild(script);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
 
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-0YTPWVDXEZ', {
-                'anonymize_ip': true,
-                'allow_ad_features': false
+        // Set default consent state BEFORE GA initialization
+        gtag('consent', 'default', {
+            'analytics_storage': 'denied',
+            'functionality_storage': 'denied',
+            'personalization_storage': 'denied',
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied'
+        });
+
+        // Initialize GA
+        gtag('js', new Date());
+
+        // Configure GA with your property
+        gtag('config', 'G-0YTPWVDXEZ', {
+            'anonymize_ip': true,
+            'allow_ad_features': false,
+            'cookie_flags': 'SameSite=None;Secure'
+        });
+
+        // Check for existing consent
+        const existingConsent = localStorage.getItem('cookieConsent');
+        if (existingConsent === 'accepted') {
+            gtag('consent', 'update', {
+                'analytics_storage': 'granted'
             });
         }
     </script>
@@ -2214,31 +2231,14 @@
             localStorage.setItem('cookieConsent', 'accepted');
             document.getElementById('cookieBanner').classList.remove('show');
 
-            // Initialize GA if not already loaded
-            if (typeof gtag === 'undefined') {
-                var script = document.createElement('script');
-                script.async = true;
-                script.src = 'https://www.googletagmanager.com/gtag/js?id=G-0YTPWVDXEZ';
-                document.head.appendChild(script);
-
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
+            // Update consent to allow analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('consent', 'update', {
+                    'analytics_storage': 'granted',
+                    'functionality_storage': 'granted'
+                });
+                console.log('Cookie consent accepted – GA enabled with full tracking');
             }
-
-            // Explicitly grant consent
-            gtag('consent', 'update', {
-                'analytics_storage': 'granted',
-                'ad_storage': 'denied'  // Set to 'granted' if you need ads/remarketing
-            });
-
-            // Configure GA
-            gtag('config', 'G-0YTPWVDXEZ', {
-                'anonymize_ip': true,
-                'allow_ad_features': false
-            });
-
-            console.log('Cookie consent accepted – GA enabled with anonymized IP');
         }
 
 
@@ -2246,7 +2246,6 @@
             localStorage.setItem('cookieConsent', 'declined');
             document.getElementById('cookieBanner').classList.remove('show');
 
-            // If GA was loaded, withdraw consent
             if (typeof gtag !== 'undefined') {
                 gtag('consent', 'update', {
                     'analytics_storage': 'denied',
