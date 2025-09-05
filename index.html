@@ -3,14 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0YTPWVDXEZ">    </script>
     <script>
         if (localStorage.getItem('cookieConsent') === 'accepted') {
-        var script = document.createElement('script');
-        script.async = true;
-        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-0YTPWVDXEZ';
-        document.head.appendChild(script);
-    }
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=G-0YTPWVDXEZ';
+            document.head.appendChild(script);
+
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-0YTPWVDXEZ', {
+                'anonymize_ip': true,
+                'allow_ad_features': false
+            });
+        }
     </script>
     <title>Tierambulanz Prater - Your Veterinary Practice in Vienna | Expat-Friendly | 24h Emergency</title>
     <meta name="description" content="Tierambulanz Prater - Modern veterinary practice in Vienna. Expat-owned, English-speaking, welcoming to Balkan community. Expert care for dogs, cats & small animals. ☎ +43 01 7269181">
@@ -2056,6 +2063,15 @@
             })
             .then(response => response.json())
             .then(result => {
+
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'form_submit_success', {
+                        'event_category': 'conversions',
+                        'event_label': 'appointment_request',
+                        'value': 1
+                    });
+                }
+
                 if (result.success) {
                     // Success state
                     button.innerHTML = '<i class="fas fa-check"></i> Vielen Dank! Wir melden uns bald.';
@@ -2191,30 +2207,59 @@
                 setTimeout(() => {
                     document.getElementById('cookieBanner').classList.add('show');
                 }, 2000);
-            } else if (cookieConsent === 'accepted') {
-                // Only initialize GA if cookies accepted
-                loadGoogleAnalytics();
             }
         }
 
         function acceptCookies() {
             localStorage.setItem('cookieConsent', 'accepted');
             document.getElementById('cookieBanner').classList.remove('show');
-            loadGoogleAnalytics();
+
+            // Initialize GA if not already loaded
+            if (typeof gtag === 'undefined') {
+                var script = document.createElement('script');
+                script.async = true;
+                script.src = 'https://www.googletagmanager.com/gtag/js?id=G-0YTPWVDXEZ';
+                document.head.appendChild(script);
+
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+            }
+
+            // Explicitly grant consent
+            gtag('consent', 'update', {
+                'analytics_storage': 'granted',
+                'ad_storage': 'denied'  // Set to 'granted' if you need ads/remarketing
+            });
+
+            // Configure GA
+            gtag('config', 'G-0YTPWVDXEZ', {
+                'anonymize_ip': true,
+                'allow_ad_features': false
+            });
+
+            console.log('Cookie consent accepted – GA enabled with anonymized IP');
         }
+
 
         function declineCookies() {
             localStorage.setItem('cookieConsent', 'declined');
             document.getElementById('cookieBanner').classList.remove('show');
-            // Disable GA cookies if already set
-            if (window.ga) {
-                window.ga('set', 'anonymizeIp', true);
-                window.ga('set', 'allowAdFeatures', false);
-                // Delete existing GA cookies
-                document.cookie = '_ga=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-                document.cookie = '_gid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-                document.cookie = '_gat=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+
+            // If GA was loaded, withdraw consent
+            if (typeof gtag !== 'undefined') {
+                gtag('consent', 'update', {
+                    'analytics_storage': 'denied',
+                    'ad_storage': 'denied'
+                });
             }
+
+            // Delete GA cookies (GA4)
+            document.cookie = '_ga=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            document.cookie = '_gid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            document.cookie = '_ga_0YTPWVDXEZ=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+
+            console.log('Cookie consent declined – GA disabled and cookies cleared');
         }
 
         function loadGoogleAnalytics() {
@@ -2233,7 +2278,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             initCookieConsent();
         });
-        
+
         initCookieConsent();
 
 
@@ -2331,6 +2376,16 @@
 
         // Initialize language on page load
         document.addEventListener('DOMContentLoaded', function() {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'page_view', {
+                    'page_title': document.title,
+                    'page_location': window.location.href,
+                    'page_path': window.location.pathname,
+                    'user_language': currentLang || 'de'
+                });
+            }
+
+
             updateLanguage();
             // Ensure preloader is hidden after DOM is loaded
             setTimeout(() => {
@@ -2413,17 +2468,137 @@
         }
 
     </script>
+
+    <script>
+    // Enhanced Google Analytics Event Tracking
+    (function() {
+        if (typeof gtag === 'undefined') return;
+
+        const appointmentForm = document.getElementById('appointmentForm');
+        if (appointmentForm) {
+            appointmentForm.addEventListener('submit', function() {
+                gtag('event', 'generate_lead', {
+                    'event_category': 'engagement',
+                    'event_label': 'contact_form',
+                    'value': 1
+                });
+            });
+        }
+
+        document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+            link.addEventListener('click', function() {
+                const phoneNumber = this.href.replace('tel:', '');
+                gtag('event', 'click', {
+                    'event_category': 'contact',
+                    'event_label': 'phone_call',
+                    'value': phoneNumber
+                });
+            });
+        });
+
+        document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+            link.addEventListener('click', function() {
+                gtag('event', 'click', {
+                    'event_category': 'contact',
+                    'event_label': 'email_click'
+                });
+            });
+        });
+
+        let scrollDepths = [25, 50, 75, 100];
+        let scrolledDepths = [];
+        window.addEventListener('scroll', throttle(function() {
+            const scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100;
+            scrollDepths.forEach(depth => {
+                if (scrollPercent >= depth && !scrolledDepths.includes(depth)) {
+                    scrolledDepths.push(depth);
+                    gtag('event', 'scroll', {
+                        'event_category': 'engagement',
+                        'event_label': 'scroll_depth',
+                        'value': depth
+                    });
+                }
+            });
+        }, 500));
+
+        document.querySelectorAll('.service-box').forEach((box, index) => {
+            box.addEventListener('click', function() {
+                const serviceName = this.querySelector('h4').textContent.trim();
+                gtag('event', 'view_item', {
+                    'event_category': 'services',
+                    'event_label': serviceName,
+                    'value': index + 1
+                });
+            });
+        });
+
+        document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                const section = this.getAttribute('href').replace('#', '');
+                gtag('event', 'navigation', {
+                    'event_category': 'site_navigation',
+                    'event_label': section
+                });
+            });
+        });
+
+        const langButton = document.getElementById('langToggle');
+        if (langButton) {
+            langButton.addEventListener('click', function() {
+                const newLang = currentLang === 'de' ? 'en' : 'de';
+                gtag('event', 'language_change', {
+                    'event_category': 'preferences',
+                    'event_label': newLang
+                });
+            });
+        }
+
+        let timeOnPage = 0;
+        setInterval(function() {
+            timeOnPage += 30;
+            if (timeOnPage % 60 === 0) {
+                gtag('event', 'time_on_page', {
+                    'event_category': 'engagement',
+                    'value': timeOnPage
+                });
+            }
+        }, 30000);
+
+        document.querySelectorAll('.social-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                const platform = this.getAttribute('aria-label');
+                gtag('event', 'social_click', {
+                    'event_category': 'social',
+                    'event_label': platform
+                });
+            });
+        });
+
+        const trackAnnouncementView = function() {
+            const announcements = document.querySelectorAll('#announcementContainer > div');
+            if (announcements.length > 0) {
+                gtag('event', 'announcement_view', {
+                    'event_category': 'announcements',
+                    'value': announcements.length
+                });
+            }
+        };
+        setTimeout(trackAnnouncementView, 2000);
+
+        function throttle(func, delay) {
+            let timeoutId;
+            let lastExecTime = 0;
+            return function() {
+                const currentTime = Date.now();
+                if (currentTime - lastExecTime > delay) {
+                    func.apply(this, arguments);
+                    lastExecTime = currentTime;
+                }
+            };
+        }
+    })();
+    </script>
+
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
