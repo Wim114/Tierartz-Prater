@@ -567,6 +567,8 @@
             flex-grow: 1; /* Add this */
             display: flex; /* Add this */
             flex-direction: column; /* Add this */
+            justify-content: space-between; /* Add this */
+            align-items: center; /* Add this */
         }
 
         .team-info h4 {
@@ -587,7 +589,13 @@
             line-height: 1.6;
             padding: 0.8rem 0.5rem 0;
             border-top: 1px solid #eee;
-            margin-top: 0.8rem;
+            margin: auto 0; /* This is key for vertical centering */
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
         }
 
         .team-info .team-description {
@@ -1384,7 +1392,7 @@
                             <span class="en" style="display:none;">Opening Hours</span>
                         </h3>
 
-                            
+
                         <ul class="hours-table">
                             <li>
                                 <span class="day">
@@ -1415,7 +1423,7 @@
                             <span class="de">Keine Terminvereinbarung notwendig!</span>
                             <span class="en" style="display:none;">No appointment necessary!</span>
                         </p>
-                        
+
                     </div>
                 </div>
             </div>
@@ -1602,6 +1610,33 @@
                     </div>
                 </div>
 
+                <div class="col-md-6">
+                    <div class="service-box" data-aos="fade-right">
+                        <i class="fas fa-calendar-check"></i>
+                        <h4>
+                            <span class="de">Keine Terminvereinbarung notwendig</span>
+                            <span class="en" style="display:none;">No Appointment Necessary</span>
+                        </h4>
+                        <p>
+                            <span class="de">Wir stehen Ihnen während unserer Öffnungszeiten ohne Terminvereinbarung für Untersuchungen, Behandlungen und Impfungen zur Verfügung.</span>
+                            <span class="en" style="display:none;">We are available during our opening hours without appointment for examinations, treatments and vaccinations.</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="service-box" data-aos="fade-left">
+                        <i class="fas fa-comments"></i>
+                        <h4>
+                            <span class="de">Mehrsprachige Betreuung</span>
+                            <span class="en" style="display:none;">Multilingual Care</span>
+                        </h4>
+                        <p>
+                            <span class="de">Wir kommunizieren mit Ihnen auf Deutsch, Englisch, Bosnisch, Kroatisch und Serbisch – für eine verständliche und vertrauensvolle Betreuung.</span>
+                            <span class="en" style="display:none;">We communicate with you in German, English, Bosnian, Croatian and Serbian – for understandable and trustworthy care.</span>
+                        </p>
+                    </div>
+                </div>
+
 
             </div>
         </div>
@@ -1633,13 +1668,13 @@
                                 <span class="en" style="display:none;">Head of Clinic & Veterinarian</span>
                             </p>
                             <p class="credentials">
-                                <span class="de">Chirurgie & Innere Medizin</span>
-                                <span class="en" style="display:none;">Specialist Veterinarian for Small Animals<br>Surgery & Internal Medicine</span>
+                                <span class="de"><strong>Schwerpunkte:</strong> Chirurgie & Innere Medizin</span>
+                                <span class="en" style="display:none;"><strong>Focus:</strong> Surgery & Internal Medicine</span>
                             </p>
 
                             <p class="team-description">
-                                <span class="de">„Seit Jahrzehnten mit Erfahrung und Leidenschaft für die Tiermedizin tätig."</span>
-                                <span class="en" style="display:none;">"Active in veterinary medicine with decades of experience and passion."</span>
+                                <span class="de"><em>„Seit Jahrzehnten mit Erfahrung und Leidenschaft für die Tiermedizin tätig. Steht für eine sorgfältige und kompetente tierärztliche Betreuung."</em></span>
+                                <span class="en" style="display:none;"><em>"Active in veterinary medicine with decades of experience and passion. Stands for careful and competent veterinary care."</em></span>
                             </p>
                         </div>
                     </div>
@@ -1652,12 +1687,13 @@
                         <div class="team-info">
                             <h4>Mag. med. vet. Emin Jasarevic</h4>
                             <p class="position">
-                                <span class="de">Innere Medizin & bildgebende Diagnostik</span>
-                                <span class="en" style="display:none;">Internal Medicine & Diagnostic Imaging</span>
+                                <span class="de">Tierarzt</span>
+                                <span class="en" style="display:none;">Veterinarian</span>
                             </p>
+
                             <p class="credentials">
-                                <span class="de">Spezialist für Intensivmedizin</span>
-                                <span class="en" style="display:none;">Specialist in Intensive Care Medicine</span>
+                                <span class="de"><strong>Schwerpunkte:</strong> Innere Medizin & bildgebende Diagnostik</span>
+                                <span class="en" style="display:none;"><strong>Focus:</strong> Internal Medicine & Diagnostic Imaging</span>
                             </p>
                             <p class="team-description">
                                 <span class="de">„Besonderes Interesse an internistischen Fragestellungen sowie an der umfassenden Betreuung von Kleintieren."</span>
@@ -1679,8 +1715,8 @@
                                 <span class="en" style="display:none;">Clinic Assistant & Administration</span>
                             </p>
                             <p class="credentials">
-                                <span class="de">Spezialist für Intensivmedizin</span>
-                                <span class="en" style="display:none;">Specialist in Intensive Care Medicine</span>
+                                <span class="de"><strong>Zuständigkeit:</strong> Organisation & Buchhaltung</span>
+                                <span class="en" style="display:none;"><strong>Responsibility:</strong> Organization & Accounting</span>
                             </p>
                             <p class="team-description">
                                 <span class="de">„Bringt juristische Ausbildung, Organisationstalent und Erfahrung in die Ordination ein – zusätzlich zuständig für die Buchhaltung."</span>
@@ -1698,12 +1734,12 @@
                         <div class="team-info">
                             <h4>BSc Edin Jasarevic</h4>
                             <p class="position">
-                                <span class="de">Ordinationsassistenz & Hundefriseur</span>
-                                <span class="en" style="display:none;">Clinic Assistant & Dog Groomer</span>
+                                <span class="de">Ordinationsassistenz & Administration & Hundefriseur</span>
+                                <span class="en" style="display:none;">Clinic Assistant & Administration & Dog Groomer</span>
                             </p>
                             <p class="credentials">
-                                <span class="de">Zusatzausbildung Verhaltensmedizin</span>
-                                <span class="en" style="display:none;">Additional Training in Behavioral Medicine</span>
+                                <span class="de"><strong>Zuständigkeit:</strong> Unterstützung im Ordinationsalltag & Buchhaltung</span>
+                                <span class="en" style="display:none;"><strong>Responsibility:</strong> Support in Daily Clinic Operations & Accounting</span>
                             </p>
                             <p class="team-description">
                                 <span class="de">„Vielseitige Unterstützung im Ordinationsalltag – zudem als Hundefriseur für die Pflege und das Wohlbefinden unserer Patienten verantwortlich."</span>
@@ -2602,7 +2638,6 @@
 </body>
 
 </html>
-
 
 
 
