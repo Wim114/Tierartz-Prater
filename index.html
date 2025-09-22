@@ -3,40 +3,18 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0YTPWVDXEZ"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LMF08KJS50"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-        // Set default consent state BEFORE GA initialization
-        gtag('consent', 'default', {
-            'analytics_storage': 'denied',
-            'functionality_storage': 'denied',
-            'personalization_storage': 'denied',
-            'ad_storage': 'denied',
-            'ad_user_data': 'denied',
-            'ad_personalization': 'denied'
-        });
-
-        // Initialize GA
-        gtag('js', new Date());
-
-        // Configure GA with your property
-        gtag('config', 'G-0YTPWVDXEZ', {
-            'anonymize_ip': true,
-            'allow_ad_features': false,
-            'cookie_flags': 'SameSite=None;Secure'
-        });
-
-        // Check for existing consent
-        const existingConsent = localStorage.getItem('cookieConsent');
-        if (existingConsent === 'accepted') {
-            gtag('consent', 'update', {
-                'analytics_storage': 'granted'
-            });
-        }
+      gtag('config', 'G-LMF08KJS50', {
+        send_page_view: true,
+        cookie_flags: 'SameSite=None;Secure'
+      });
     </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tierambulanz Prater - Your Veterinary Practice in Vienna | Expat-Friendly</title>
     <meta name="description" content="Tierambulanz Prater - Modern veterinary practice in Vienna. Expat-owned, English-speaking, welcoming to Balkan community. Expert care for dogs, cats & small animals. ☎ +43 01 7269181">
     <meta name="keywords" content="Tierarzt Wien, veterinarian Vienna, expat friendly vet, English speaking vet Vienna, Balkan community Vienna, pet care Wien, international veterinary clinic">
@@ -1328,6 +1306,28 @@
                 color: black !important;
             }
         }
+
+    /* Language Dropdown Styling */
+        .dropdown-menu {
+            min-width: 120px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .dropdown-item {
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background: var(--accent-color);
+            padding-left: 1.3rem;
+        }
+
+        #langToggle {
+            min-width: 80px;
+        }
+
     </style>
 
     <!-- Structured Data for SEO -->
@@ -1420,34 +1420,36 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#home"><span class="de">Startseite</span><span class="en" style="display:none;">Home</span></a>
+                            <a class="nav-link" href="#home"><span class="de">Startseite</span><span class="en" style="display:none;">Home</span><span class="bks" style="display:none;">Početna</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#about"><span class="de">Über uns</span><span class="en" style="display:none;">About Us</span></a>
+                            <a class="nav-link" href="#about">
+                                <span class="de">Über uns</span>
+                                <span class="en" style="display:none;">About Us</span>
+                                <span class="bks" style="display:none;">O nama</span>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#services"><span class="de">Leistungen</span><span class="en" style="display:none;">Services</span></a>
+                            <a class="nav-link" href="#services"><span class="de">Leistungen</span><span class="en" style="display:none;">Services</span><span class="bks" style="display:none;">Usluge</span></a>
+
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#team"><span class="de">Unser Team</span><span class="en" style="display:none;">Our Team</span></a>
+                            <a class="nav-link" href="#team"><span class="de">Unser Team</span><span class="en" style="display:none;">Our Team</span><span class="bks" style="display:none;">Naš tim</span></a>
+
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#contact"><span class="de">Kontakt</span><span class="en" style="display:none;">Contact</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="datum.html">Datenschutz</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="impressum.html">Impressum</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="agb.html">AGB</a>
+                            <a class="nav-link" href="#contact"><span class="de">Kontakt</span><span class="en" style="display:none;">Contact</span><span class="bks" style="display:none;">Kontakt</span></a>
                         </li>
 
-                        <li class="nav-item">
-                            <button class="btn btn-outline-primary btn-sm ms-2" id="langToggle" onclick="toggleLanguage()">
-                                <i class="fas fa-globe"></i> <span class="de">EN</span><span class="en" style="display:none;">DE</span>
+                        <li class="nav-item dropdown">
+                            <button class="btn btn-outline-primary btn-sm ms-2 dropdown-toggle" id="langToggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-globe"></i> <span id="currentLangDisplay">DE</span>
                             </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#" onclick="setLanguage('de'); return false;">🇦🇹 Deutsch</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="setLanguage('en'); return false;">🇬🇧 English</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="setLanguage('bks'); return false;">🇷🇸 BKS</a></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -1569,6 +1571,7 @@
     </script>
 
 
+
     <!-- Hero Section -->
     <section id="home" class="hero-section">
         <div class="container">
@@ -1578,10 +1581,12 @@
                         <h1>
                             <span class="de">Moderne Tiermedizin mit Herz in Wien</span>
                             <span class="en" style="display:none;">Modern Veterinary Care with Heart in Vienna</span>
+                            <span class="bks" style="display:none;">Moderna veterinarska medicina sa srcem u Beču</span>
                         </h1>
                         <p class="hero-subtitle">
                             <span class="de">Kompetente und liebevolle Betreuung für Ihre Haustiere</span>
                             <span class="en" style="display:none;">Competent and loving care for your pets</span>
+                            <span class="bks" style="display:none;">Kompetentna i brižna nega za vaše ljubimce</span>
                         </p>
 
                         <div class="hero-buttons">
@@ -1589,10 +1594,13 @@
                                     <i class="fas fa-route"></i>
                                     <span class="de">Route zur Praxis</span>
                                     <span class="en" style="display:none;">Directions</span>
+                                    <span class="bks" style="display:none;">Put do ordinacije</span>
+
                                 </button>
                                 <a href="#services" class="btn-secondary-custom">
                                     <span class="de">Unsere Leistungen</span>
                                     <span class="en" style="display:none;">Our Services</span>
+                                    <span class="bks" style="display:none;">Naše usluge</span>
                                 </a>
                         </div>
                     </div>
@@ -1603,6 +1611,7 @@
                             <i class="fas fa-clock"></i>
                             <span class="de">Öffnungszeiten</span>
                             <span class="en" style="display:none;">Opening Hours</span>
+                            <span class="bks" style="display:none;">Radno vreme</span>
                         </h3>
 
 
@@ -1611,6 +1620,7 @@
                                 <span class="day">
                                     <span class="de">Montag - Freitag</span>
                                     <span class="en" style="display:none;">Monday - Friday</span>
+                                    <span class="bks" style="display:none;">Ponedeljak - Petak</span>
                                 </span>
                                 <span class="time">09:00-12:00 & 16:00-19:00</span>
                             </li>
@@ -1618,6 +1628,7 @@
                                 <span class="day">
                                     <span class="de">Samstag</span>
                                     <span class="en" style="display:none;">Saturday</span>
+                                    <span class="bks" style="display:none;">Subota</span>
                                 </span>
                                 <span class="time">09:00 - 12:00</span>
                             </li>
@@ -1625,16 +1636,19 @@
                                 <span class="day">
                                     <span class="de">Sonntag</span>
                                     <span class="en" style="display:none;">Sunday</span>
+                                    <span class="bks" style="display:none;">Nedelja</span>
                                 </span>
                                 <span class="time" style="color: #ff4444; font-weight: 700;">
                                     <span class="de">GESCHLOSSEN</span>
                                     <span class="en" style="display:none;">CLOSED</span>
+                                    <span class="bks" style="display:none;">ZATVORENO</span>
                                 </span>
                             </li>
                         </ul>
                         <p style="text-align: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #eee; color: var(--secondary-color); font-weight: 600;">
                             <span class="de">Keine Terminvereinbarung notwendig!</span>
                             <span class="en" style="display:none;">No appointment necessary!</span>
+                            <span class="bks" style="display:none;">Nije potrebno zakazivanje!</span>
                         </p>
 
                     </div>
@@ -1653,6 +1667,7 @@
                         <div class="stat-label">
                             <span class="de">Jahre Tierambulanz Prater</span>
                             <span class="en" style="display:none;">Years of Prater Veterinary</span>
+                            <span class="bks" style="display:none;">Godine Ambulante Prater</span>
                         </div>
                     </div>
                 </div>
@@ -1662,6 +1677,7 @@
                         <div class="stat-label">
                             <span class="de">Jahre tierärztliche Erfahrung</span>
                             <span class="en" style="display:none;">Years of veterinary experience</span>
+                            <span class="bks" style="display:none;">Godine veterinarskog iskustva</span>
                         </div>
                     </div>
                 </div>
@@ -1671,6 +1687,7 @@
                         <div class="stat-label">
                             <span class="de">Tage pro Woche für Sie geöffnet</span>
                             <span class="en" style="display:none;">Days a Week</span>
+                            <span class="bks" style="display:none;">Dana nedeljno za vas</span>
                         </div>
                     </div>
                 </div>
@@ -1685,10 +1702,12 @@
                 <h2>
                     <span class="de">Unsere Mission</span>
                     <span class="en" style="display:none;">Our Mission</span>
+                    <span class="bks" style="display:none;">Naša misija</span>
                 </h2>
                 <p>
                     <span class="de">Wir setzen uns für das Wohlbefinden und die Gesundheit Ihrer Tiere ein.</span>
                     <span class="en" style="display:none;">We are committed to the well-being and health of your animals.</span>
+                    <span class="bks" style="display:none;">Posvećeni smo dobrobiti i zdravlju vaših životinja.</span>
                 </p>
             </div>
             <div class="row">
@@ -1700,10 +1719,12 @@
                         <h3>
                             <span class="de">Gesundheit & Wohlbefinden</span>
                             <span class="en" style="display:none;">Health & Wellbeing</span>
+                            <span class="bks" style="display:none;">Zdravlje i dobrobit</span>
                         </h3>
                         <p>
                             <span class="de">Individuelle Betreuung, präventive Gesundheitspläne und modernste Therapien für jedes Tier.</span>
                             <span class="en" style="display:none;">Individual care, preventive health plans and cutting-edge therapies for every pet.</span>
+                            <span class="bks" style="display:none;">Individualna nega, preventivni zdravstveni planovi i najmoderniji tretmani za svakog ljubimca.</span>
                         </p>
                     </div>
                 </div>
@@ -1715,10 +1736,12 @@
                         <h3>
                             <span class="de">Immer zusammen</span>
                             <span class="en" style="display:none;">Always Together</span>
+                            <span class="bks" style="display:none;">Uvek zajedno</span>
                         </h3>
                         <p>
                             <span class="de">Ihr verlässlicher Partner während der gesamten Lebensreise Ihres Haustieres.</span>
                             <span class="en" style="display:none;">Your reliable partner throughout your pet’s life journey..</span>
+                            <span class="bks" style="display:none;">Vaš pouzdani partner tokom celog životnog puta vašeg ljubimca.</span>
                         </p>
                     </div>
                 </div>
@@ -1730,10 +1753,12 @@
                         <h3>
                             <span class="de">Vertrauen</span>
                             <span class="en" style="display:none;">Trust</span>
+                            <span class="bks" style="display:none;">Poverenje</span>
                         </h3>
                         <p>
                             <span class="de">Offene und transparente Kommunikation mit Tierbesitzern für bewusste Entscheidungen.</span>
                             <span class="en" style="display:none;">Open and transparent communication with pet owners for informed decisions.</span>
+                            <span class="bks" style="display:none;">Otvorena i transparentna komunikacija sa vlasnicima ljubimaca za informisane odluke.</span>
                         </p>
                     </div>
                 </div>
@@ -1745,10 +1770,12 @@
                         <h3>
                             <span class="de">Solidarität</span>
                             <span class="en" style="display:none;">Solidarity</span>
+                            <span class="bks" style="display:none;">Solidarnost</span>
                         </h3>
                         <p>
                             <span class="de">Förderung der Aufklärung über Tiergesundheit und Respekt gegenüber allen Tieren.</span>
                             <span class="en" style="display:none;">Promoting awareness of animal health and respect for all animals.</span>
+                            <span class="bks" style="display:none;">Promovisanje svesti o zdravlju životinja i poštovanja prema svim životinjama.</span>
                         </p>
                     </div>
                 </div>
@@ -1763,10 +1790,12 @@
                 <h2>
                     <span class="de">Unsere Leistungen</span>
                     <span class="en" style="display:none;">Our Services</span>
+                    <span class="bks" style="display:none;">Naše usluge</span>
                 </h2>
                 <p>
                     <span class="de">Umfassende tiermedizinische Versorgung unter einem Dach</span>
                     <span class="en" style="display:none;">Comprehensive veterinary care under one roof</span>
+                    <span class="bks" style="display:none;">Sveobuhvatna veterinarska nega pod jednim krovom</span>
                 </p>
             </div>
             <div class="row">
@@ -1776,10 +1805,12 @@
                         <h4>
                             <span class="de">Allgemeine Tiermedizin</span>
                             <span class="en" style="display:none;">General Veterinary Medicine</span>
+                            <span class="bks" style="display:none;">Opšta veterinarska medicina</span>
                         </h4>
                         <p>
                             <span class="de">Routineuntersuchungen, Impfungen, Gesundheitschecks und Behandlung von Krankheiten.</span>
                             <span class="en" style="display:none;">Routine examinations, vaccinations, health checks and treatment of diseases.</span>
+                            <span class="bks" style="display:none;">Rutinski pregledi, vakcinacije, zdravstveni pregledi i lečenje bolesti.</span>
                         </p>
                     </div>
                 </div>
@@ -1789,10 +1820,12 @@
                         <h4>
                             <span class="de">Chirurgie</span>
                             <span class="en" style="display:none;">Surgery</span>
+                            <span class="bks" style="display:none;">Hirurgija</span>
                         </h4>
                         <p>
                             <span class="de">Operative Eingriffe im Rahmen der Kleintiermedizin – von Routineoperationen bis zu Spezialeingriffen.</span>
                             <span class="en" style="display:none;">Surgical procedures in small animal medicine – from routine operations to specialized surgeries.</span>
+                            <span class="bks" style="display:none;">Hirurške intervencije u okviru medicine malih životinja - od rutinskih operacija do specijalizovanih zahvata.</span>
                         </p>
                     </div>
                 </div>
@@ -1802,10 +1835,12 @@
                         <h4>
                             <span class="de">Diagnostik</span>
                             <span class="en" style="display:none;">Diagnostics</span>
+                            <span class="bks" style="display:none;">Dijagnostika</span>
                         </h4>
                         <p>
                             <span class="de">Digitales Röntgen, Ultraschall, Labor und modernste Diagnoseverfahren.</span>
                             <span class="en" style="display:none;">Digital X-ray, ultrasound, laboratory and state-of-the-art diagnostic procedures.</span>
+                            <span class="bks" style="display:none;">Digitalni rendgen, ultrazvuk, laboratorija i najmoderniji dijagnostički postupci.</span>
                         </p>
                     </div>
                 </div>
@@ -1815,10 +1850,12 @@
                         <h4>
                             <span class="de">Zahnmedizin</span>
                             <span class="en" style="display:none;">Dental Medicine</span>
+                            <span class="bks" style="display:none;">Stomatologija</span>
                         </h4>
                         <p>
                             <span class="de">Professionelle Zahnreinigung, Zahnextraktionen und Kieferchirurgie.</span>
                             <span class="en" style="display:none;">Professional dental cleaning, tooth extractions and oral surgery.</span>
+                            <span class="bks" style="display:none;">Profesionalno čišćenje zuba, vađenje zuba i oralna hirurgija.</span>
                         </p>
                     </div>
                 </div>
@@ -1829,10 +1866,13 @@
                         <h4>
                             <span class="de">Keine Terminvereinbarung notwendig</span>
                             <span class="en" style="display:none;">No Appointment Necessary</span>
+                            <span class="bks" style="display:none;">Nije potrebno zakazivanje</span>
                         </h4>
                         <p>
                             <span class="de">Wir stehen Ihnen während unserer Öffnungszeiten ohne Terminvereinbarung für Untersuchungen, Behandlungen und Impfungen zur Verfügung.</span>
                             <span class="en" style="display:none;">We are available during our opening hours without appointment for examinations, treatments and vaccinations.</span>
+                            <span class="bks" style="display:none;">Dostupni smo tokom radnog vremena bez zakazivanja za preglede, tretmane i vakcinacije.</span>
+
                         </p>
                     </div>
                 </div>
@@ -1842,10 +1882,12 @@
                         <h4>
                             <span class="de">Mehrsprachige Betreuung</span>
                             <span class="en" style="display:none;">Multilingual Care</span>
+                            <span class="bks" style="display:none;">Višejezična nega</span>
                         </h4>
                         <p>
                             <span class="de">Wir kommunizieren mit Ihnen auf Deutsch, Englisch, Bosnisch, Kroatisch und Serbisch – für eine verständliche und vertrauensvolle Betreuung.</span>
                             <span class="en" style="display:none;">We communicate with you in German, English, Bosnian, Croatian and Serbian – for understandable and trustworthy care.</span>
+                            <span class="bks" style="display:none;">Komuniciramo sa vama na nemačkom, engleskom, bosanskom, hrvatskom i srpskom - za razumljivu i pouzdanu negu.</span>
                         </p>
                     </div>
                 </div>
@@ -1862,10 +1904,12 @@
                 <h2>
                     <span class="de">Unser Team</span>
                     <span class="en" style="display:none;">Our Team</span>
+                    <span class="bks" style="display:none;">Naš tim</span>
                 </h2>
                 <p>
                     <span class="de">Erfahrene Tierärzte mit Leidenschaft für Tiergesundheit</span>
                     <span class="en" style="display:none;">Experienced veterinarians with a passion for animal health</span>
+                    <span class="bks" style="display:none;">Iskusni veterinari sa strašću za zdravlje životinja</span>
                 </p>
             </div>
             <div class="row align-items-stretch">
@@ -1879,15 +1923,21 @@
                             <p class="position">
                                 <span class="de">Leitung der Ordination & Tierarzt</span>
                                 <span class="en" style="display:none;">Head of Clinic & Veterinarian</span>
+                                <span class="bks" style="display:none;">Šef ordinacije i veterinar</span>
+
                             </p>
                             <p class="credentials">
                                 <span class="de"><strong>Schwerpunkte:</strong> Chirurgie & Innere Medizin</span>
                                 <span class="en" style="display:none;"><strong>Focus:</strong> Surgery & Internal Medicine</span>
+                                <span class="bks" style="display:none;"><strong>Fokus:</strong> Hirurgija i interna medicina</span>
+
                             </p>
 
                             <p class="team-description">
                                 <span class="de"><em>„Seit Jahrzehnten mit Erfahrung und Leidenschaft für die Tiermedizin tätig. Steht für eine sorgfältige und kompetente tierärztliche Betreuung."</em></span>
                                 <span class="en" style="display:none;"><em>"Active in veterinary medicine with decades of experience and passion. Stands for careful and competent veterinary care."</em></span>
+                                <span class="bks" style="display:none;"><em>"Aktivan u veterinarskoj medicini sa decenijama iskustva i strasti. Zalaže se za pažljivu i kompetentnu veterinarsku negu."</em></span>
+
                             </p>
                         </div>
                     </div>
@@ -1902,15 +1952,18 @@
                             <p class="position">
                                 <span class="de">Tierarzt</span>
                                 <span class="en" style="display:none;">Veterinarian</span>
+                                <span class="bks" style="display:none;">Veterinar</span>
                             </p>
 
                             <p class="credentials">
                                 <span class="de"><strong>Schwerpunkte:</strong> Innere Medizin & bildgebende Diagnostik</span>
                                 <span class="en" style="display:none;"><strong>Focus:</strong> Internal Medicine & Diagnostic Imaging</span>
+                                <span class="bks" style="display:none;"><strong>Fokus:</strong> Interna medicina i dijagnostičko snimanje</span>
                             </p>
                             <p class="team-description">
                                 <span class="de">„Besonderes Interesse an internistischen Fragestellungen sowie an der umfassenden Betreuung von Kleintieren."</span>
                                 <span class="en" style="display:none;">"Special interest in internal medicine questions and comprehensive care of small animals."</span>
+                                <span class="bks" style="display:none;">"Posebno interesovanje za interna medicinska pitanja i sveobuhvatnu negu malih životinja."</span>
                             </p>
                         </div>
                     </div>
@@ -1926,14 +1979,19 @@
                             <p class="position">
                                 <span class="de">Ordinationsassistenz & Administration</span>
                                 <span class="en" style="display:none;">Clinic Assistant & Administration</span>
+                                <span class="bks" style="display:none;">Asistent ordinacije i administracija</span>
                             </p>
                             <p class="credentials">
                                 <span class="de"><strong>Zuständigkeit:</strong> Organisation & Buchhaltung</span>
                                 <span class="en" style="display:none;"><strong>Responsibility:</strong> Organization & Accounting</span>
+                                <span class="bks" style="display:none;"><strong>Odgovornost:</strong> Organizacija i računovodstvo</span>
+
                             </p>
                             <p class="team-description">
                                 <span class="de">„Bringt juristische Ausbildung, Organisationstalent und Erfahrung in die Ordination ein – zusätzlich zuständig für die Buchhaltung."</span>
                                 <span class="en" style="display:none;">"Brings legal training, organizational talent and experience to the practice – also responsible for accounting."</span>
+                                <span class="bks" style="display:none;">"Donosi pravno obrazovanje, organizacioni talenat i iskustvo u ordinaciju - takođe odgovorna za računovodstvo."</span>
+
                             </p>
                         </div>
                     </div>
@@ -1949,14 +2007,17 @@
                             <p class="position">
                                 <span class="de">Ordinationsassistenz & Administration & Hundefriseur</span>
                                 <span class="en" style="display:none;">Clinic Assistant & Administration & Dog Groomer</span>
+                                <span class="bks" style="display:none;">Asistent ordinacije, administracija i frizer za pse</span>
                             </p>
                             <p class="credentials">
                                 <span class="de"><strong>Zuständigkeit:</strong> Unterstützung im Ordinationsalltag & Buchhaltung</span>
                                 <span class="en" style="display:none;"><strong>Responsibility:</strong> Support in Daily Clinic Operations & Accounting</span>
+                                <span class="bks" style="display:none;"><strong>Odgovornost:</strong> Podrška u svakodnevnom radu ordinacije i računovodstvo</span>
                             </p>
                             <p class="team-description">
                                 <span class="de">„Vielseitige Unterstützung im Ordinationsalltag – zudem als Hundefriseur für die Pflege und das Wohlbefinden unserer Patienten verantwortlich."</span>
                                 <span class="en" style="display:none;">"Versatile support in daily clinic operations – also responsible as a dog groomer for the care and wellbeing of our patients."</span>
+                                <span class="bks" style="display:none;">"Svestrana podrška u svakodnevnom radu ordinacije - takođe odgovoran kao frizer za pse za negu i dobrobit naših pacijenata."</span>
                             </p>
                         </div>
                     </div>
@@ -1973,10 +2034,12 @@
                         <h2 class="text-white text-center mb-4">
                             <span class="de">Möchten Sie eine Frage stellen?</span>
                             <span class="en" style="display:none;">Would you like to ask a question?</span>
+                            <span class="bks" style="display:none;">Želite li postaviti pitanje?</span>
                         </h2>
                         <p class="text-white text-center mb-5">
                             <span class="de">Hinterlassen Sie uns Ihre Kontaktdaten und wir melden uns schnellstmöglich bei Ihnen</span>
                             <span class="en" style="display:none;">Leave us your contact details and we'll get back to you as soon as possible</span>
+                            <span class="bks" style="display:none;">Ostavite nam svoje kontakt podatke i javićemo vam se što pre</span>
                         </p>
 
                         <form id="appointmentForm" novalidate>
@@ -2028,6 +2091,7 @@
                                     <div id="reasonHelp" class="form-text text-white-50">
                                         <span class="de">Optional: Helfen Sie uns, uns auf Ihren Besuch vorzubereiten</span>
                                         <span class="en" style="display:none;">Optional: Help us prepare for your visit</span>
+                                        <span class="bks" style="display:none;">Opciono: Pomozite nam da se pripremimo za vašu posetu</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12 mt-3">
@@ -2036,6 +2100,7 @@
                                         <label class="form-check-label" for="privacy">
                                             <span class="de">Ich habe die <a href="#datenschutz" class="text-white text-decoration-underline" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und akzeptiere sie.</span>
                                             <span class="en" style="display:none;">I have read and accept the <a href="#privacy-policy" class="text-white text-decoration-underline" target="_blank" rel="noopener">Privacy Policy</a>.</span>
+                                            <span class="bks" style="display:none;">Pročitao sam i prihvatam <a href="#datenschutz" class="text-white text-decoration-underline" target="_blank" rel="noopener">Politiku privatnosti</a>.</span>
                                         </label>
                                         <div id="privacyError" class="invalid-feedback"></div>
                                     </div>
@@ -2045,6 +2110,7 @@
                                         <i class="fas fa-paper-plane"></i>
                                         <span class="de">Anfrage senden</span>
                                         <span class="en" style="display:none;">Send Request</span>
+                                        <span class="bks" style="display:none;">Pošaljite zahtev</span>
                                     </button>
                                 </div>
                             </div>
@@ -2081,6 +2147,7 @@
                         <p>
                             <span class="de">🌍 Deutsch • English • Bosanski • Hrvatski • Srpski </span>
                             <span class="en" style="display:none;">🌍 German • English • Bosnian • Croatian • Serbian</span>
+                            <span class="bks" style="display:none;">🌐 Nemački • Engleski • Bosanski • Hrvatski • Srpski</span>
                         </p>
                     </div>
                     <div class="social-links mt-4">
@@ -2091,6 +2158,7 @@
                     <h3>
                         <span class="de">Kontakt</span>
                         <span class="en" style="display:none;">Contact</span>
+                        <span class="bks" style="display:none;">Kontakt</span>
                     </h3>
                     <ul>
                         <li>
@@ -2113,19 +2181,23 @@
                     <h3>
                         <span class="de">Schnellzugriff</span>
                         <span class="en" style="display:none;">Quick Links</span>
+                        <span class="bks" style="display:none;">Brzi pristup</span>
                     </h3>
                     <ul>
                         <li><i class="fas fa-chevron-right"></i> <a href="#services">
                             <span class="de">Unsere Leistungen</span>
                             <span class="en" style="display:none;">Our Services</span>
+                            <span class="bks" style="display:none;">Naše usluge</span>
                         </a></li>
                         <li><i class="fas fa-chevron-right"></i> <a href="#team">
                             <span class="de">Unser Team</span>
                             <span class="en" style="display:none;">Our Team</span>
+                            <span class="bks" style="display:none;">Naš tim</span>
                         </a></li>
                         <li><i class="fas fa-chevron-right"></i> <a href="#contact">
                             <span class="de">Fragen oder Anliegen</span>
                             <span class="en" style="display:none;">Questions or Concerns</span>
+                            <span class="bks" style="display:none;">Pitanja ili nedoumice</span>
                         </a></li>
                     </ul>
                 </div>
@@ -2133,18 +2205,20 @@
             <div class="footer-bottom" >
                 <p>&copy; 2015 Tierambulanz Prater Wien GmbH.
                    <span class="de">Alle Rechte vorbehalten.</span>
-                   <span class="en" style="display:none;">All rights reserved.</span> |
+                   <span class="en" style="display:none;">All rights reserved.</span>
+                    <span class="bks" style="display:none;">Sva prava zadržana.</span>
+
                    <a href="datum.html" class="text-white">
                        <span class="de">Datenschutz</span>
                        <span class="en" style="display:none;">Privacy</span>
+                       <span class="bks" style="display:none;">Privatnost</span>
+
                    </a> |
                    <a href="impressum.html" class="text-white">
                        <span class="de">Impressum</span>
                        <span class="en" style="display:none;">Legal Notice</span>
-                   </a> |
-                   <a href="agb.html" class="text-white">
-                       <span class="de">AGB</span>
-                       <span class="en" style="display:none;">Terms</span>
+                       <span class="bks" style="display:none;">Pravne napomene</span>
+
                    </a>
                 </p>
             </div>
@@ -2158,11 +2232,24 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-9">
-                    <p class="mb-0">Wir verwenden Cookies, um Ihre Erfahrung auf unserer Website zu verbessern. Durch die weitere Nutzung stimmen Sie unserer Cookie-Richtlinie zu.</p>
+                    <p class="mb-0">
+                        <span class="de">Wir verwenden Cookies, um Ihre Erfahrung auf unserer Website zu verbessern. Durch die weitere Nutzung stimmen Sie unserer Cookie-Richtlinie zu.</span>
+                        <span class="en" style="display:none;">We use cookies to improve your experience on our website. By continuing to use, you agree to our cookie policy.</span>
+                        <span class="bks" style="display:none;">Koristimo kolačiće da poboljšamo vaše iskustvo na našoj veb stranici. Nastavkom korišćenja slažete se sa našom politikom kolačića.</span>
+                    </p>
+
                 </div>
                 <div class="col-md-3 text-end">
-                    <button class="btn btn-primary me-2" onclick="acceptCookies()">Akzeptieren</button>
-                    <button class="btn btn-outline-secondary" onclick="declineCookies()">Ablehnen</button>
+                    <button class="btn btn-primary me-2" onclick="acceptCookies()">
+                        <span class="de">Akzeptieren</span>
+                        <span class="en" style="display:none;">Accept</span>
+                        <span class="bks" style="display:none;">Prihvati</span>
+                    </button>
+                    <button class="btn btn-outline-secondary" onclick="declineCookies()">
+                        <span class="de">Ablehnen</span>
+                        <span class="en" style="display:none;">Decline</span>
+                        <span class="bks" style="display:none;">Odbij</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -2331,7 +2418,7 @@
             .then(response => response.json())
             .then(result => {
 
-                if (typeof gtag !== 'undefined') {
+               if (typeof gtag !== 'undefined') {
                     gtag('event', 'form_submit_success', {
                         'event_category': 'conversions',
                         'event_label': 'appointment_request',
@@ -2481,14 +2568,11 @@
             localStorage.setItem('cookieConsent', 'accepted');
             document.getElementById('cookieBanner').classList.remove('show');
 
-            // Update consent to allow analytics
-            if (typeof gtag !== 'undefined') {
+             if (typeof gtag !== 'undefined') {
                 gtag('consent', 'update', {
-                    'analytics_storage': 'granted',
-                    'functionality_storage': 'granted'
+                        'analytics_storage': 'granted'
                 });
-                console.log('Cookie consent accepted – GA enabled with full tracking');
-            }
+             }
         }
 
 
@@ -2557,74 +2641,141 @@
         // Language toggle functionality
         let currentLang = localStorage.getItem('preferred-language') || 'de';
 
-        function toggleLanguage() {
-            currentLang = currentLang === 'de' ? 'en' : 'de';
-            localStorage.setItem('preferred-language', currentLang);
-            updateLanguage();
+        function setLanguage(lang) {
+                currentLang = lang;
+                localStorage.setItem('preferred-language', lang);
+                updateLanguage();
+                updateLanguageDisplay();
+
+                if(typeof gtag !== 'undefined'){
+                gtag('event', 'language_change', {
+                    'event_category': 'preferences',
+                    'event_label': lang
+
+                });
+                }
         }
+
+        function updateLanguageDisplay() {
+            const display = document.getElementById('currentLangDisplay');
+            if (display) {
+                const langMap = {
+                    'de': 'DE',
+                    'en': 'EN',
+                    'bks': 'BKS'
+                };
+                display.textContent = langMap[currentLang] || 'DE';
+            }
+        }
+
 
         function updateLanguage() {
             const deElements = document.querySelectorAll('.de');
             const enElements = document.querySelectorAll('.en');
+            const bksElements = document.querySelectorAll('.bks');
 
+            // Hide all language elements first
+            deElements.forEach(el => el.style.display = 'none');
+            enElements.forEach(el => el.style.display = 'none');
+            bksElements.forEach(el => el.style.display = 'none');
+
+            // Show the selected language
             if (currentLang === 'en') {
-                deElements.forEach(el => el.style.display = 'none');
                 enElements.forEach(el => el.style.display = '');
                 document.documentElement.lang = 'en';
-
-                // Update form placeholders
-                const fullNameInput = document.getElementById('fullName');
-                const phoneInput = document.getElementById('phone');
-                const emailInput = document.getElementById('email');
-                const reasonInput = document.getElementById('reason');
-                const selectOption = document.querySelector('#petType option[value=""]');
-
-                if (fullNameInput) fullNameInput.placeholder = 'First and Last Name *';
-                if (phoneInput) phoneInput.placeholder = 'Phone Number *';
-                if (emailInput) emailInput.placeholder = 'Email Address *';
-                if (reasonInput) reasonInput.placeholder = 'Briefly describe the reason for your visit';
-                if (selectOption) selectOption.textContent = 'Choose Pet Type *';
-
-                // Update select options
-                const options = document.querySelectorAll('#petType option');
-                if (options.length > 1) {
-                    options[1].textContent = 'Dog';
-                    options[2].textContent = 'Cat';
-                    options[3].textContent = 'Rabbit';
-                    options[4].textContent = 'Other';
-                }
-
+                updateFormPlaceholdersEN();
+            } else if (currentLang === 'bks') {
+                bksElements.forEach(el => el.style.display = '');
+                document.documentElement.lang = 'sr';
+                updateFormPlaceholdersBKS();
             } else {
                 deElements.forEach(el => el.style.display = '');
-                enElements.forEach(el => el.style.display = 'none');
                 document.documentElement.lang = 'de';
-
-                // Update form placeholders
-                const fullNameInput = document.getElementById('fullName');
-                const phoneInput = document.getElementById('phone');
-                const emailInput = document.getElementById('email');
-                const reasonInput = document.getElementById('reason');
-                const selectOption = document.querySelector('#petType option[value=""]');
-
-                if (fullNameInput) fullNameInput.placeholder = 'Vor- und Nachname *';
-                if (phoneInput) phoneInput.placeholder = 'Telefonnummer *';
-                if (emailInput) emailInput.placeholder = 'E-Mail-Adresse *';
-                if (reasonInput) reasonInput.placeholder = 'Beschreiben Sie kurz den Grund Ihres Besuchs';
-                if (selectOption) selectOption.textContent = 'Art des Tieres wählen *';
-
-                // Update select options
-                const options = document.querySelectorAll('#petType option');
-                if (options.length > 1) {
-                    options[1].textContent = 'Hund';
-                    options[2].textContent = 'Katze';
-                    options[3].textContent = 'Kaninchen';
-                    options[4].textContent = 'Andere';
-                }
+                updateFormPlaceholdersDE();
             }
         }
 
+        function updateFormPlaceholdersDE() {
+            const inputs = {
+                'fullName': 'Vor- und Nachname *',
+                'phone': 'Telefonnummer *',
+                'email': 'E-Mail-Adresse *',
+                'reason': 'Beschreiben Sie kurz den Grund Ihres Besuchs'
+            };
+
+            Object.keys(inputs).forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.placeholder = inputs[id];
+            });
+
+            const selectOption = document.querySelector('#petType option[value=""]');
+            if (selectOption) selectOption.textContent = 'Art des Tieres wählen *';
+
+            const options = document.querySelectorAll('#petType option');
+            if (options.length > 1) {
+                options[1].textContent = 'Hund';
+                options[2].textContent = 'Katze';
+                options[3].textContent = 'Kaninchen';
+                options[4].textContent = 'Andere';
+            }
+        }
+
+        function updateFormPlaceholdersEN() {
+            const inputs = {
+                'fullName': 'First and Last Name *',
+                'phone': 'Phone Number *',
+                'email': 'Email Address *',
+                'reason': 'Briefly describe the reason for your visit'
+            };
+
+            Object.keys(inputs).forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.placeholder = inputs[id];
+            });
+
+            const selectOption = document.querySelector('#petType option[value=""]');
+            if (selectOption) selectOption.textContent = 'Choose Pet Type *';
+
+            const options = document.querySelectorAll('#petType option');
+            if (options.length > 1) {
+                options[1].textContent = 'Dog';
+                options[2].textContent = 'Cat';
+                options[3].textContent = 'Rabbit';
+                options[4].textContent = 'Other';
+            }
+        }
+
+        function updateFormPlaceholdersBKS() {
+            const inputs = {
+                'fullName': 'Ime i prezime *',
+                'phone': 'Broj telefona *',
+                'email': 'E-mail adresa *',
+                'reason': 'Ukratko opišite razlog vaše posete'
+            };
+
+            Object.keys(inputs).forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.placeholder = inputs[id];
+            });
+
+            const selectOption = document.querySelector('#petType option[value=""]');
+            if (selectOption) selectOption.textContent = 'Izaberite vrstu ljubimca *';
+
+            const options = document.querySelectorAll('#petType option');
+            if (options.length > 1) {
+                options[1].textContent = 'Pas';
+                options[2].textContent = 'Mačka';
+                options[3].textContent = 'Zec';
+                options[4].textContent = 'Drugo';
+            }
+        }
+
+
         // Initialize language on page load
         document.addEventListener('DOMContentLoaded', function() {
+            updateLanguage();
+            updateLanguageDisplay();
+
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'page_view', {
                     'page_title': document.title,
@@ -2635,7 +2786,6 @@
             }
 
 
-            updateLanguage();
             // Ensure preloader is hidden after DOM is loaded
             setTimeout(() => {
                 const preloader = document.getElementById('preloader');
@@ -2866,10 +3016,10 @@
     })();
     </script>
 
+
 </body>
 
 </html>
-
 
 
 
