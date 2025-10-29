@@ -1334,7 +1334,7 @@
         }
         .team-member-image img {
             width: 100%;
-            height: 100%;
+            height: 100%
             object-fit: cover;
             object-position: 50% 20%;
         }
@@ -3038,14 +3038,68 @@
             };
         }
     })();
+
+
+
+     function loadWeekendSpecialHours() {
+        const specialHours = JSON.parse(localStorage.getItem('weekendSpecial') || '{}');
+
+        if (!specialHours.enabled) return;
+
+        const now = new Date();
+        const start = new Date(specialHours.startDate);
+        const end = new Date(specialHours.endDate);
+
+        if (now >= start && now <= end) {
+            // Display announcement banner
+            if (specialHours.announcement) {
+                const banner = document.createElement('div');
+                banner.style.cssText = 'background: linear-gradient(135deg, #ffd700, #ffc107); color: #333; padding: 15px; text-align: center; font-weight: bold; margin-bottom: 20px;';
+                banner.innerHTML = `🌟 ${specialHours.announcement} 🌟`;
+
+                const hero = document.querySelector('.hero-section .container');
+                if (hero) hero.insertBefore(banner, hero.firstChild);
+            }
+
+            // Update Saturday hours if special times exist
+            const hoursTable = document.querySelector('.hours-table');
+            if (hoursTable && specialHours.saturday && specialHours.saturday.length > 0) {
+                const satRow = hoursTable.querySelectorAll('li')[1];
+                if (satRow) {
+                    const timeSpan = satRow.querySelector('.time');
+                    if (timeSpan) {
+                        timeSpan.textContent = specialHours.saturday.map(slot =>
+                            `${slot.open}-${slot.close}`
+                        ).join(' & ');
+                        timeSpan.style.color = '#28a745';
+                    }
+                }
+            }
+
+            // Update Sunday hours if special times exist
+            if (hoursTable && specialHours.sunday && specialHours.sunday.length > 0) {
+                const sunRow = hoursTable.querySelectorAll('li')[2];
+                if (sunRow) {
+                    const timeSpan = sunRow.querySelector('.time');
+                    if (timeSpan) {
+                        timeSpan.textContent = specialHours.sunday.map(slot =>
+                            `${slot.open}-${slot.close}`
+                        ).join(' & ');
+                        timeSpan.style.color = '#28a745';
+                    }
+                }
+            }
+        }
+    }
+
+    // Call on page load
+    document.addEventListener('DOMContentLoaded', loadWeekendSpecialHours);
     </script>
 
 
 </body>
 
 </html>
-
-
 
 
 
