@@ -1,719 +1,242 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LMF08KJS50"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-LMF08KJS50', {
-        send_page_view: true,
-        cookie_flags: 'SameSite=None;Secure'
-      });
-    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tierambulanz Prater - Your Veterinary Practice in Vienna | Expat-Friendly</title>
-    <meta name="description" content="Tierambulanz Prater - Modern veterinary practice in Vienna. Expat-owned, English-speaking, welcoming to Balkan community. Expert care for dogs, cats & small animals. ☎ +43 01 7269181">
-    <meta name="keywords" content="Tierarzt Wien, veterinarian Vienna, expat friendly vet, English speaking vet Vienna, Balkan community Vienna, pet care Wien, international veterinary clinic">
-    <meta name="author" content="Tierambulanz Prater">
-    <meta name="robots" content="index, follow">
-    <meta name="googlebot" content="index, follow">
-    <meta name="theme-color" content="#00ace2">
-    <meta name="msapplication-TileColor" content="#00ace2">
-    <meta property="og:title" content="Tierambulanz Prater - Moderne Tierarztpraxis in Wien">
-    <meta property="og:description" content="Kompetente und liebevolle Betreuung für Ihre Haustiere. Termine nach Vereinbarung. ☎ +43 01 7269181">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://tierambulanz-prater.netlify.app">
-    <meta property="og:image" content="https://tierambulanz-prater.netlify.app/images/logo_eps%20(1).jpg">
-    <meta property="og:locale" content="de_AT">
-    <meta property="og:site_name" content="Tierambulanz Prater">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Tierambulanz Prater - Moderne Tierarztpraxis">
-    <meta name="twitter:description" content="Kompetente Tiermedizin in Wien.">
-    <meta name="twitter:image" content="https://tierambulanz-prater.netlify.app/images/logo_eps%20(1).jpg">
+    <title>Tierambulanz Prater - Admin Panel</title>
 
-    <!-- Favicon and Icons -->
-    <link rel="icon" type="image/jpeg" href="images/logo_eps%20(1).jpg">
-    <link rel="apple-touch-icon" href="images/logo_eps%20(1).jpg">
-    <link rel="shortcut icon" href="images/logo_eps%20(1).jpg">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- AOS Animation Library -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-
     <style>
         :root {
             --primary-color: #00ace2;
             --secondary-color: #005d83;
             --accent-color: #ebf9ff;
-            --balkan-accent: #c41e3a; /* Subtle red accent inspired by Balkan flags */
-            --balkan-gold: #ffd700; /* Gold accent for warmth */
             --text-dark: #22242C;
-            --text-light: #666;
-            --white: #ffffff;
-            --light-bg: #f8f9fa;
             --success: #28a745;
             --danger: #ff4444;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Oxygen', sans-serif;
-            color: var(--text-dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-            padding-top: 100px !important; /* Account for fixed navbar height */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
         }
 
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            color: var(--text-dark);
+        /* Admin Panel Styles */
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        /* Preloader */
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--white);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .loader {
-            width: 60px;
-            height: 60px;
-            position: relative;
-        }
-
-        .loader-logo {
-            animation: pulse 1.5s ease-in-out infinite;
-            width: 80px;
-            height: 80px;
+        .admin-header {
+            background: white;
+            padding: 20px;
             border-radius: 10px;
-            object-fit: cover;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.7; }
-        }
-
-        /* Header Styles */
-        .header-wrap {
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            margin-bottom: 30px;
         }
 
-        .header-wrap.scrolled {
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        .admin-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
 
-        .navbar {
-            padding: 0.8rem 0;
-
-        }
-
-
-    /* Tablet view - 2 columns */
-    @media (min-width: 769px) and (max-width: 991px) {
-        .team-section .col-lg-3 {
-            flex: 0 0 50%;
-            max-width: 50%;
-        }
-    }
-
-    /* Better spacing on very small devices */
-    @media (max-width: 576px) {
-        .team-section {
-            padding: 60px 0;
-        }
-
-        .team-member {
-            margin-bottom: 1rem;
-        }
-    }
-
-
-        .navbar-brand {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-        }
-
-        .logo-img {
-            width: 50px;
-            height: 50px;
-            margin-right: 15px;
-            transition: transform 0.3s ease;
+        .announcement-item {
+            background: #f8f9fa;
+            padding: 15px;
             border-radius: 8px;
-            object-fit: cover;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-color);
         }
 
-        .navbar-brand:hover .logo-svg {
-            transform: rotate(10deg) scale(1.1);
-        }
-
-        .brand-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.2;
-        }
-
-        .brand-main {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--secondary-color);
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .brand-sub {
-            font-size: 0.9rem;
-            color: var(--primary-color);
-            font-weight: 400;
-        }
-
-        .navbar-nav .nav-link {
-            color: var(--text-dark);
-            font-weight: 500;
-            padding: 0.5rem 1.2rem;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .navbar-nav .nav-link:hover {
-            color: var(--primary-color);
-        }
-
-        .navbar-nav .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
+        .edit-btn {
             background: var(--primary-color);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        .navbar-nav .nav-link:hover::after {
-            width: 80%;
-        }
-
-        .hero-section {
-            background: linear-gradient(rgba(0, 93, 131, 0.7), rgba(0, 172, 226, 0.3)), url('images/AdobeStock_481854656-1-scaled-545451366.jpg') center/cover no-repeat;
-            padding: 100px 0; /* Reset to normal padding since body has padding-top now */
-            position: relative;
-            overflow: hidden;
-            min-height: 600px;
-            display: flex;
-            align-items: center;
-        }
-
-
-        @keyframes float {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .expat-badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(10px);
+            color: white;
+            border: none;
             padding: 8px 20px;
-            border-radius: 25px;
-            color: var(--white);
-            font-weight: 600;
-            font-size: 0.95rem;
-            border: 1px solid rgba(255,255,255,0.2);
-            animation: pulse-glow 3s infinite;
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% {
-                box-shadow: 0 0 5px rgba(255,255,255,0.3);
-                transform: scale(1);
-            }
-            50% {
-                box-shadow: 0 0 20px rgba(255,255,255,0.5);
-                transform: scale(1.02);
-            }
-        }
-
-        .hero-content h1 {
-            color: var(--white);
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            line-height: 1.1;
-        }
-
-        .hero-subtitle {
-            color: var(--white);
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            opacity: 0.95;
-            font-weight: 400;
-            line-height: 1.6;
-        }
-
-        .community-message {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(5px);
-            padding: 15px 20px;
-            border-radius: 15px;
-            margin-bottom: 2rem;
-            border-left: 4px solid var(--white);
-        }
-
-        .community-message p {
-            color: var(--white);
-            font-size: 1.1rem;
-            margin: 0;
-            font-weight: 500;
-            opacity: 0.98;
-        }
-
-        .btn-primary-custom {
-            background: var(--white);
-            color: var(--secondary-color);
-            padding: 15px 35px;
-            border-radius: 50px;
-            border: none;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            margin-right: 1rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .btn-primary-custom:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            color: var(--secondary-color);
-        }
-
-        .btn-secondary-custom {
-            background: transparent;
-            color: var(--white);
-            border: 2px solid var(--white);
-            padding: 13px 35px;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
-
-        .btn-secondary-custom:hover {
-            background: var(--white);
-            color: var(--secondary-color);
-            transform: translateY(-3px);
-        }
-
-        /* Mission Cards */
-        .mission-section {
-            padding: 80px 0;
-            background: var(--light-bg);
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: var(--primary-color);
-        }
-
-        .mission-card {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            height: 100%;
-            text-align: center;
-        }
-
-        .mission-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-
-        .mission-card-icon {
-            font-size: 4rem;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .mission-card:hover .mission-card-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        /* Special styling for the cultural understanding card */
-        .mission-card:nth-child(2) {
-            border-top: 3px solid var(--balkan-accent);
-        }
-
-        .mission-card:nth-child(2) .mission-card-icon {
-            background: linear-gradient(135deg, var(--primary-color), var(--balkan-accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .mission-card:nth-child(2):hover {
-            box-shadow: 0 15px 40px rgba(196,30,58,0.1);
-        }
-
-        .mission-card h3 {
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .mission-card p {
-            color: var(--text-light);
-            line-height: 1.8;
-        }
-
-        /* Services Section */
-        .services-section {
-            padding: 80px 0;
-        }
-
-        .service-box {
-            background: var(--white);
-            border-radius: 15px;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-            border: 2px solid var(--accent-color);
-            transition: all 0.3s ease;
+            border-radius: 5px;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s;
         }
 
-        .service-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0,172,226,0.1), transparent);
-            transition: left 0.5s ease;
+        .edit-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
         }
 
-        .service-box:hover::before {
-            left: 100%;
+        .delete-btn {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
         }
 
-        .service-box:hover {
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-scheduled {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-expired {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Form Styles */
+        .form-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .form-control, .form-select {
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+            padding: 10px 15px;
+        }
+
+        .form-control:focus {
             border-color: var(--primary-color);
-            transform: translateX(10px);
-            box-shadow: 0 5px 20px rgba(0,172,226,0.2);
+            box-shadow: 0 0 0 0.2rem rgba(0,172,226,0.25);
         }
 
-        .service-box i {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
+        /* Tabs */
+        .nav-tabs {
+            border-bottom: 2px solid #dee2e6;
         }
 
-        .service-box:hover i {
-            transform: scale(1.2) rotate(10deg);
-        }
-
-        .service-box h4 {
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
-        }
-
-        /* Team Section */
-        .team-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        }
-
-        .team-member {
-            background: var(--white);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            margin-bottom: 2rem;
-            height: 100%; /* Add this */
-            display: flex; /* Add this */
-            flex-direction: column; /* Add this */
-        }
-
-        .team-member:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-
-        .team-member-image {
-            height: 350px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .team-info {
-            padding: 1.5rem;
-            text-align: center;
-            flex-grow: 1; /* Add this */
-            display: flex; /* Add this */
-            flex-direction: column; /* Add this */
-            justify-content: space-between; /* Add this */
-            align-items: center; /* Add this */
-        }
-
-        .team-info h4 {
-            color: var(--secondary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .team-info .position {
-            color: var(--primary-color);
+        .nav-tabs .nav-link {
+            color: var(--text-dark);
+            border: none;
+            padding: 12px 25px;
             font-weight: 500;
-            margin-bottom: 0.5rem;
         }
 
-        .team-info .credentials {
-            color: var(--text-dark);
-            font-size: 0.95rem;
-            font-style: italic;
-            line-height: 1.6;
-            padding: 0.8rem 0.5rem 0;
-            border-top: 1px solid #eee;
-            margin: auto 0; /* This is key for vertical centering */
-            min-height: 60px;
+        .nav-tabs .nav-link.active {
+            color: var(--primary-color);
+            background: white;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        /* Quick Actions */
+        .quick-action {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quick-action:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .quick-action i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        /* Loading spinner */
+        .spinner-border {
+            width: 1rem;
+            height: 1rem;
+            border-width: 0.2em;
+        }
+
+        /* Website Preview */
+        .website-preview {
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 30px;
+        }
+
+        .preview-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+        }
+
+        .preview-content {
+            padding: 20px;
+            background: white;
+            min-height: 200px;
+        }
+
+        .announcement-banner {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .hours-row {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            width: 100%;
+            gap: 15px;
         }
 
-        .team-info .team-description {
-            color: var(--text-dark);
-            font-size: 0.95rem;
-            font-style: italic;
-            line-height: 1.6;
-            padding: 0.8rem 0.5rem 0;
-            border-top: 1px solid #eee;
-            margin-top: auto; /* Add this - pushes description to bottom */
-        }
-
-
-
-
-
-        /* Appointment Form */
-        .appointment-section {
-            background: var(--primary-color);
-            padding: 60px 0;
-            color: var(--white);
-            position: relative;
-        }
-
-        .appointment-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,133.3C672,139,768,181,864,181.3C960,181,1056,139,1152,117.3C1248,96,1344,96,1392,96L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
-            background-size: cover;
-        }
-
-        .appointment-form {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 3rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .form-control-custom {
-            background: var(--white);
-            border: none;
-            border-radius: 50px;
-            padding: 15px 25px;
-            margin-bottom: 1rem;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-control-custom:focus {
-            box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
-            outline: none;
-            transform: translateY(-2px);
-        }
-
-        .submit-btn {
-            background: var(--secondary-color);
-            color: var(--white);
-            border: none;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            width: 100%;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .submit-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .submit-btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        /* Statistics Section */
-        .stats-section {
-            padding: 60px 0;
-            background: var(--secondary-color);
-            color: var(--white);
-        }
-
-        .stat-box {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        /* Opening Hours */
-        .opening-hours {
-            background: var(--white);
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        .opening-hours h3 {
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
+        .time-input-group {
             display: flex;
             align-items: center;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
-        .language-note {
-            background: linear-gradient(135deg, var(--accent-color), rgba(196,30,58,0.05));
-            padding: 12px 15px;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-            border-left: 4px solid var(--balkan-accent);
-            position: relative;
-            overflow: hidden;
+        .search-rule {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .language-note::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 30px;
-            height: 100%;
-            background: linear-gradient(45deg, var(--balkan-gold), transparent);
-            opacity: 0.1;
+        .rule-type {
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
         }
 
-        .language-note p {
-            margin: 0;
-            font-size: 0.9rem;
-            color: var(--secondary-color);
-            font-weight: 600;
-            position: relative;
-            z-index: 1;
-        }
-
+        /* Hours table for preview */
         .hours-table {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
 
         .hours-table li {
@@ -721,14 +244,6 @@
             justify-content: space-between;
             padding: 0.8rem 0;
             border-bottom: 1px solid #eee;
-            transition: all 0.3s ease;
-        }
-
-        .hours-table li:hover {
-            padding-left: 10px;
-            background: var(--accent-color);
-            margin: 0 -10px;
-            padding-right: 10px;
         }
 
         .hours-table li:last-child {
@@ -744,2438 +259,894 @@
             color: var(--primary-color);
             font-weight: 500;
         }
-
-        /* Footer */
-        footer {
-            background: #3d3e40;
-            color: var(--white);
-            padding: 50px 0 20px;
-            position: relative;
-        }
-
-        .footer-content h3 {
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-
-        .footer-content ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-content ul li {
-            margin-bottom: 0.8rem;
-            transition: transform 0.3s ease;
-        }
-
-        .footer-content ul li:hover {
-            transform: translateX(5px);
-        }
-
-        .footer-content ul li i {
-            color: var(--primary-color);
-            margin-right: 10px;
-            width: 20px;
-        }
-
-        .footer-content a {
-            color: var(--white);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-content a:hover {
-            color: var(--primary-color);
-        }
-
-        .community-footer-message {
-            background: rgba(196,30,58,0.1);
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            border-left: 3px solid var(--balkan-accent);
-        }
-
-        .community-footer-message p {
-            margin: 0;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--white);
-            opacity: 0.9;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            align-items: center;
-            justify-content: center;
-            margin-right: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: var(--primary-color);
-            transform: translateY(-5px);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            margin-top: 2rem;
-            padding-top: 2rem;
-            text-align: center;
-        }
-
-        /* Back to Top Button */
-        #backToTop {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 1000;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        #backToTop:hover {
-            background: var(--secondary-color);
-            transform: translateY(-5px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-        }
-
-        /* Cookie Banner */
-        .cookie-banner {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--white);
-            padding: 20px;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-            z-index: 9998;
-            display: none;
-        }
-
-        .cookie-banner.show {
-            display: block;
-            animation: slideUp 0.5s ease;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
-        }
-
-       @media (max-width: 768px) {
-            body {
-                padding-top: 70px !important;
-            }
-
-            /* Mobile Navigation Fix */
-            .navbar {
-                padding: 0.5rem 0 !important;
-            }
-
-            .navbar-brand {
-                max-width: 65%;
-            }
-
-            .logo-img {
-                width: 40px !important;
-                height: 40px !important;
-                margin-right: 10px !important;
-            }
-
-            .brand-main {
-                font-size: 1.2rem !important;
-            }
-
-            .brand-sub {
-                font-size: 0.7rem !important;
-            }
-
-            .navbar-toggler {
-                padding: 4px 8px !important;
-                font-size: 0.9rem !important;
-            }
-
-            .navbar-nav {
-                max-height: 60vh !important;
-                overflow-y: auto !important;
-                text-align: center;
-                padding: 1rem 0;
-                background: rgba(255,255,255,0.98);
-                margin-top: 1rem;
-                border-radius: 10px;
-            }
-
-            .navbar-nav .nav-link {
-                padding: 12px 20px !important;
-                font-size: 16px !important;
-            }
-
-            /* Mobile Hero Fix */
-            .hero-section {
-                padding: 50px 0 40px 0 !important;
-                min-height: auto !important;
-                background-attachment: scroll !important;
-            }
-
-            .hero-content h1 {
-                font-size: 1.6rem !important;
-                line-height: 1.2 !important;
-            }
-
-            .hero-subtitle {
-                font-size: 0.95rem !important;
-            }
-
-            /* Stack hero buttons */
-            .hero-buttons {
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .btn-primary-custom,
-            .btn-secondary-custom {
-                width: 100% !important;
-                margin-right: 0 !important;
-                padding: 12px 20px !important;
-                font-size: 0.9rem !important;
-                text-align: center;
-            }
-
-            /* Mobile Cards */
-            .mission-card,
-            .service-box {
-                padding: 1.3rem !important;
-                margin-bottom: 1.5rem !important;
-            }
-
-            .mission-card:hover,
-            .service-box:hover {
-                transform: translateY(-5px) !important;
-            }
-
-            .mission-card-icon {
-                font-size: 3rem !important;
-            }
-
-            .service-box i {
-                font-size: 2.5rem !important;
-            }
-
-            /* Mobile Team */
-            .team-member {
-                height: auto !important;
-                margin-bottom: 1.5rem;
-            }
-
-            .team-member-image {
-                height: 200px !important;
-            }
-
-            .team-info {
-                padding: 1.2rem !important;
-            }
-
-            .team-info h4 {
-                font-size: 1.1rem !important;
-            }
-
-            .team-info .position,
-            .team-info .credentials,
-            .team-info .team-description {
-                font-size: 0.85rem !important;
-            }
-
-            /* Mobile Form - Prevent iOS zoom */
-            input[type="text"],
-            input[type="email"],
-            input[type="tel"],
-            select,
-            textarea,
-            .form-control-custom {
-                font-size: 16px !important;
-                padding: 12px 18px !important;
-            }
-
-            .appointment-form {
-                padding: 1.5rem !important;
-            }
-
-            .appointment-form h2 {
-                font-size: 1.5rem !important;
-            }
-
-            .submit-btn {
-                padding: 12px 30px !important;
-                font-size: 1rem !important;
-            }
-
-            /* Mobile Stats */
-            .stat-box {
-                padding: 1rem !important;
-            }
-
-            .stat-number {
-                font-size: 2rem !important;
-            }
-
-            /* Mobile Opening Hours */
-            .opening-hours {
-                margin-top: 2rem !important;
-                padding: 1.2rem !important;
-            }
-
-            .hours-table li {
-                font-size: 0.85rem !important;
-                flex-wrap: wrap;
-            }
-
-            /* Mobile Footer */
-            footer {
-                padding: 30px 0 20px !important;
-            }
-
-            .footer-content h3 {
-                font-size: 1.2rem !important;
-                margin-top: 1.5rem;
-            }
-
-            .footer-content ul li {
-                font-size: 0.85rem !important;
-            }
-
-            /* Mobile Cookie Banner */
-            .cookie-banner {
-                padding: 12px !important;
-            }
-
-            .cookie-banner button {
-                width: 48%;
-                display: inline-block;
-                margin: 2px;
-                padding: 8px 12px !important;
-                font-size: 0.85rem !important;
-            }
-
-            /* Mobile Back to Top */
-            #backToTop {
-                width: 45px !important;
-                height: 45px !important;
-                font-size: 1.2rem !important;
-                bottom: 15px !important;
-                right: 15px !important;
-            }
-
-            /* Section padding */
-            .mission-section,
-            .services-section,
-            .team-section {
-                padding: 50px 0 !important;
-            }
-
-            .appointment-section,
-            .stats-section {
-                padding: 40px 0 !important;
-            }
-
-            .section-title h2 {
-                font-size: 1.8rem !important;
-            }
-
-            /* Container padding */
-            .container {
-                padding-left: 15px !important;
-                padding-right: 15px !important;
-            }
-
-            /* Disable complex animations */
-            .service-box::before {
-                display: none;
-            }
-
-            .service-box:hover {
-                transform: translateY(-5px) !important;
-            }
-        }
-
-        /* Extra small devices */
-        @media (max-width: 576px) {
-            .brand-sub {
-                display: none !important;
-            }
-
-            .hero-content h1 {
-                font-size: 1.4rem !important;
-            }
-
-            .section-title h2 {
-                font-size: 1.4rem !important;
-            }
-
-            .team-section {
-                padding: 40px 0 !important;
-            }
-
-            .team-member {
-                margin-bottom: 1rem !important;
-            }
-        }
-
-        /* Landscape mobile */
-        @media (max-width: 768px) and (orientation: landscape) {
-            .hero-section {
-                min-height: 400px !important;
-            }
-
-            .navbar-nav {
-                max-height: 50vh !important;
-            }
-        }
-
-        /* Touch device improvements */
-        @media (pointer: coarse) {
-            button, a, input, select, textarea {
-                min-height: 44px;
-            }
-
-            .navbar-nav .nav-link {
-                padding: 15px 20px !important;
-            }
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--light-bg);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--secondary-color);
-        }
-
-        /* Notification Animations */
-        @keyframes slideInRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        /* Form Validation Styles */
-        .invalid-feedback {
-            display: none;
-            width: 100%;
-            margin-top: 0.25rem;
-            font-size: 0.875em;
-            color: #dc3545;
-        }
-
-        .is-invalid {
-            border-color: #dc3545 !important;
-            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
-        }
-
-        .form-control-custom.is-invalid:focus {
-            border-color: #dc3545;
-            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
-        }
-
-        /* Modern sleek enhancements */
-        .btn-outline-primary {
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            background: rgba(0,172,226,0.1);
-            backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
-            border-radius: 25px;
-        }
-
-        .btn-outline-primary:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,172,226,0.3);
-        }
-
-        /* Sleek card hover effects */
-        .mission-card, .service-box, .team-member {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .mission-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-        }
-
-        /* Gradient text for headings */
-        .section-title h2 {
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Smooth glass morphism effect */
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg,
-                rgba(0, 93, 131, 0.3) 0%,
-                rgba(0, 172, 226, 0.2) 50%,
-                rgba(196, 30, 58, 0.05) 100%);
-            z-index: 0;
-        }
-
-        /* Performance Optimizations */
-        * {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* Reduce motion for users who prefer it */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-        }
-
-        /* High contrast mode support */
-        @media (prefers-contrast: high) {
-            :root {
-                --primary-color: #0066cc;
-                --secondary-color: #003d7a;
-                --text-dark: #000000;
-                --text-light: #333333;
-            }
-        }
-
-        /* Print Styles */
-        @media print {
-            .no-print {
-                display: none !important;
-            }
-
-            body {
-                background: white !important;
-                color: black !important;
-            }
-
-            .hero-section {
-                background: white !important;
-                color: black !important;
-            }
-
-            .hero-content h1,
-            .hero-content p {
-                color: black !important;
-            }
-        }
-
-    /* Language Dropdown Styling */
-        .dropdown-menu {
-            min-width: 120px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        .dropdown-item {
-            padding: 0.5rem 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .dropdown-item:hover {
-            background: var(--accent-color);
-            padding-left: 1.3rem;
-        }
-
-        #langToggle {
-            min-width: 80px;
-        }
-
-        .team-member-image {
-            aspect-ratio: 4/5;
-            height: auto !important;
-        }
-        .team-member-image img {
-            width: 100%;
-            height: 100%
-            object-fit: cover;
-            object-position: 50% 20%;
-        }
-        @media (max-width: 768px){
-            .team-member-image {
-            aspect-ratio: 4/5;
-            height: auto !important;
-            }
-            .team-member-image img {
-                object-position: 50% 15%;
-            }
-        }
-        @media (mex-width: 576px){
-            .team-member-image {
-            height: clamp(220px, 55vw, 320px) !important;
-            aspect-ratio: auto;
-            }
-        }
     </style>
-
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "VeterinaryClinic",
-        "name": "Tierambulanz Prater",
-        "description": "Modern veterinary practice in Vienna. Expat-owned and operated, welcoming English speakers and Balkan community. Expert and loving care for your pets.",
-        "url": "https://tierambulanz-prater.netlify.app",
-        "logo": "https://tierambulanz-prater.netlify.app/images/logo_eps%20(1).jpg",
-        "image": "https://tierambulanz-prater.netlify.app/images/AdobeStock_481854656-1-scaled-545451366.jpg",
-        "telephone": "+43 01 7269181",
-        "email": "tierambulanzprater@gmx.at",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Ausstellungsstraße 19",
-            "addressLocality": "Wien",
-            "postalCode": "1020",
-            "addressCountry": "AT"
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 48.217789,
-            "longitude": 16.398223
-        },
-        "openingHours": [
-            "Mo-Fr 09:00-12:00",
-            "Mo-Fr 16:00-19:00",
-            "Sa 09:00-12:00"
-        ],
-        "priceRange": "$$",
-        "paymentAccepted": ["Cash", "Credit Card"],
-        "currenciesAccepted": "EUR",
-        "areaServed": {
-            "@type": "City",
-            "name": "Wien"
-        },
-        "serviceType": ["Veterinary Services", "Pet Care", "Emergency Services"],
-        "medicalSpecialty": ["Small Animal Medicine", "Surgery", "Dentistry", "Diagnostics"],
-        "knowsLanguage": ["German", "English", "Serbian", "Croatian", "Bosnian"],
-        "audience": {
-            "@type": "Audience",
-            "audienceType": "Expats, International Community, Local Residents"
-        },
-        "sameAs": [
-            "https://www.facebook.com/TierambulanzPrater"
-        ]
-    }
-    </script>
-
-    <script>
-        // Redirect identity tokens to admin
-        (function() {
-            if (window.location.hash.includes("invite_token") ||
-                window.location.hash.includes("recovery_token") ||
-                window.location.hash.includes("confirmation_token")) {
-                window.location.replace('/admin/' + window.location.hash);
-            }
-        })();
-    </script>
-
-
 </head>
 <body>
+    <!-- Admin Panel -->
+    <div class="admin-container">
+      <div class="admin-header">
+          <div class="row align-items-center">
+              <div class="col-md-6">
+                  <h1><i class="fas fa-cog"></i> Tierambulanz Prater - Admin Panel</h1>
+                  <p class="mb-0 text-muted">Verwalten Sie Ihre Website-Inhalte</p>
+              </div>
+              <div class="col-md-6 text-end">
+                  <span class="text-muted me-3">
+                      <i class="fas fa-user-shield"></i> Admin
+                  </span>
+                  <button class="edit-btn" onclick="viewWebsite()" aria-label="Website in neuem Tab öffnen">
+                      <i class="fas fa-eye"></i> Website Ansehen
+                  </button>
+                  <button class="btn btn-outline-secondary" onclick="logout()" aria-label="Vom Admin-Panel abmelden">
+                      <i class="fas fa-sign-out-alt"></i> Abmelden
+                  </button>
+              </div>
+          </div>
+      </div>
 
+      <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item" role="presentation">
+              <a class="nav-link" data-bs-toggle="tab" href="#announcements" role="tab" aria-controls="announcements" aria-selected="false">
+                  <i class="fas fa-bullhorn"></i> Ankündigungen
+              </a>
+          </li>
+          <li class="nav-item" role="presentation">
+              <a class="nav-link active" data-bs-toggle="tab" href="#opening-hours" role="tab" aria-controls="opening-hours" aria-selected="true">
+                  <i class="fas fa-clock"></i> Öffnungszeiten
+              </a>
+          </li>
+          <li class="nav-item" role="presentation">
+              <a class="nav-link" data-bs-toggle="tab" href="#search-management" role="tab" aria-controls="search-management" aria-selected="false">
+                  <i class="fas fa-search"></i> Suchverwaltung
+              </a>
+          </li>
+      </ul>
 
+        <div class="tab-content">
+            <!-- Announcements Tab -->
+            <div class="tab-pane fade" id="announcements" role="tabpanel" aria-labelledby="announcements-tab">
+                <div class="admin-card">
+                    <h3><i class="fas fa-plus-circle"></i> Neue Ankündigung erstellen</h3>
+                    <form id="announcementForm">
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label" for="announcementType">Art der Ankündigung</label>
+                                <select class="form-select" id="announcementType" required aria-required="true">
+                                    <option value="holiday">🖖️ Urlaubszeit</option>
+                                    <option value="emergency">🚨 Notfall-Information</option>
+                                    <option value="news">📰 Neuigkeiten</option>
+                                    <option value="special">⭐ Sonderaktion</option>
+                                    <option value="warning">⚠️ Wichtiger Hinweis</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" for="startDate">Start Datum</label>
+                                <input type="datetime-local" class="form-control" id="startDate" required aria-required="true">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" for="endDate">End Datum</label>
+                                <input type="datetime-local" class="form-control" id="endDate" required aria-required="true">
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label" for="announcementTitle">Titel</label>
+                                <input type="text" class="form-control" id="announcementTitle"
+                                       placeholder="z.B. Urlaubszeit vom 24.12. bis 02.01." required aria-required="true">
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label" for="announcementMessage">Nachricht</label>
+                                <textarea class="form-control" id="announcementMessage" rows="3"
+                                          placeholder="z.B. Wir sind vom 24. Dezember bis 2. Januar im Urlaub. In dringenden Notfällen wenden Sie sich bitte an die Tierklinik Wien unter +43 1 234567" required aria-required="true"></textarea>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label" for="substituteInfo">Vertretung (optional)</label>
+                                <input type="text" class="form-control" id="substituteInfo"
+                                       placeholder="z.B. Dr. Müller, Tierklinik Wien, Tel: +43 1 234567">
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" class="edit-btn" id="submitBtn">
+                                    <i class="fas fa-save"></i> Ankündigung Speichern
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
-    <!-- Preloader - Disabled for local development -->
-    <div id="preloader" style="display: none;">
-        <div class="loader">
-            <img src="images/logo_eps%20(1).jpg" alt="Tierambulanz Prater Logo" class="loader-logo" width="80" height="80">
-        </div>
-    </div>
-
-    <!-- Header -->
-    <header class="header-wrap fixed-top">
-        <nav class="navbar navbar-expand-lg navbar-light bg-white">
-            <div class="container">
-                <a class="navbar-brand" href="#home">
-                    <img src="images/logo_eps%20(1).jpg" alt="Tierambulanz Prater Logo" class="logo-img" width="50" height="50">
-                    <div class="brand-text">
-                        <span class="brand-main">Tierambulanz Prater</span>
-                        <span class="brand-sub">Moderne Tiermedizin mit Herz</span>
+                <!-- Current Announcements -->
+                <div class="admin-card">
+                    <h3><i class="fas fa-list"></i> Aktuelle Ankündigungen</h3>
+                    <div id="announcementsList" role="region" aria-label="Liste der aktuellen Ankündigungen" aria-live="polite">
+                        <div class="text-center py-4">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Lädt...</span>
+                            </div>
+                        </div>
                     </div>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Hauptmenü öffnen/schließen">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#home"><span class="de">Startseite</span><span class="en" style="display:none;">Home</span><span class="bks" style="display:none;">Početna</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#about">
-                                <span class="de">Über uns</span>
-                                <span class="en" style="display:none;">About Us</span>
-                                <span class="bks" style="display:none;">O nama</span>
+                </div>
+            </div>
+
+            <!-- UPDATED: Opening Hours Tab -->
+            <div class="tab-pane fade show active" id="opening-hours" role="tabpanel" aria-labelledby="opening-hours-tab">
+                <div class="admin-card">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h3><i class="fas fa-clock"></i> Reguläre Öffnungszeiten</h3>
+                        <button class="btn btn-outline-secondary" onclick="resetToDefaultHours()" aria-label="Öffnungszeiten auf Standardwerte zurücksetzen">
+                            <i class="fas fa-undo"></i> Auf Standard zurücksetzen
+                        </button>
+                    </div>
+
+                    <div class="alert alert-info" role="alert">
+                        <i class="fas fa-info-circle"></i> Ändern Sie die Öffnungszeiten, die auf Ihrer Website angezeigt werden. Die Änderungen werden sofort übernommen.
+                    </div>
+
+                    <div class="hours-row">
+                        <strong style="width: 150px;">Montag - Freitag</strong>
+                        <div class="time-input-group">
+                            <label for="weekday-open-1" class="visually-hidden">Montag bis Freitag Öffnung morgens</label>
+                            <input type="time" class="form-control" id="weekday-open-1" value="09:00" style="width: 120px;" aria-label="Öffnungszeit Vormittag">
+                            <span aria-hidden="true">bis</span>
+                            <label for="weekday-close-1" class="visually-hidden">Montag bis Freitag Schließung morgens</label>
+                            <input type="time" class="form-control" id="weekday-close-1" value="12:00" style="width: 120px;" aria-label="Schließzeit Vormittag">
+                            <span aria-hidden="true">&</span>
+                            <label for="weekday-open-2" class="visually-hidden">Montag bis Freitag Öffnung nachmittags</label>
+                            <input type="time" class="form-control" id="weekday-open-2" value="16:00" style="width: 120px;" aria-label="Öffnungszeit Nachmittag">
+                            <span aria-hidden="true">bis</span>
+                            <label for="weekday-close-2" class="visually-hidden">Montag bis Freitag Schließung nachmittags</label>
+                            <input type="time" class="form-control" id="weekday-close-2" value="19:00" style="width: 120px;" aria-label="Schließzeit Nachmittag">
+                        </div>
+                    </div>
+
+                    <div class="hours-row">
+                        <strong style="width: 150px;">Samstag</strong>
+                        <div class="time-input-group">
+                            <label for="saturday-open" class="visually-hidden">Samstag Öffnungszeit</label>
+                            <input type="time" class="form-control" id="saturday-open" value="09:00" style="width: 120px;" aria-label="Samstag Öffnungszeit">
+                            <span aria-hidden="true">bis</span>
+                            <label for="saturday-close" class="visually-hidden">Samstag Schließzeit</label>
+                            <input type="time" class="form-control" id="saturday-close" value="12:00" style="width: 120px;" aria-label="Samstag Schließzeit">
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" type="checkbox" id="saturday-closed" aria-describedby="saturday-closed-help">
+                                <label class="form-check-label" for="saturday-closed">
+                                    Geschlossen
+                                </label>
+                                <span id="saturday-closed-help" class="visually-hidden">Markieren Sie dies, wenn samstags geschlossen ist</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hours-row">
+                        <strong style="width: 150px;">Sonntag</strong>
+                        <div class="time-input-group">
+                            <label for="sunday-open" class="visually-hidden">Sonntag Öffnungszeit</label>
+                            <input type="time" class="form-control" id="sunday-open" value="09:00" disabled style="width: 120px;" aria-label="Sonntag Öffnungszeit">
+                            <span aria-hidden="true">bis</span>
+                            <label for="sunday-close" class="visually-hidden">Sonntag Schließzeit</label>
+                            <input type="time" class="form-control" id="sunday-close" value="12:00" disabled style="width: 120px;" aria-label="Sonntag Schließzeit">
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" type="checkbox" id="sunday-closed" checked aria-describedby="sunday-closed-help">
+                                <label class="form-check-label" for="sunday-closed">
+                                    Geschlossen
+                                </label>
+                                <span id="sunday-closed-help" class="visually-hidden">Markieren Sie dies, wenn sonntags geschlossen ist</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="edit-btn mt-3" onclick="saveRegularHours()" aria-label="Geänderte Öffnungszeiten speichern">
+                        <i class="fas fa-save"></i> Öffnungszeiten Speichern
+                    </button>
+
+                    <button class="btn btn-outline-primary mt-3 ms-2" onclick="previewHoursOnMainSite()" aria-label="Hauptwebsite in neuem Tab öffnen um Änderungen zu überprüfen">
+                        <i class="fas fa-eye"></i> Vorschau auf Hauptseite
+                    </button>
+                </div>
+
+                <!-- Preview Section -->
+                <div class="admin-card">
+                    <h4><i class="fas fa-desktop"></i> Vorschau - So erscheint es auf der Website</h4>
+                    <div class="website-preview">
+                        <div class="preview-header">
+                            <i class="fas fa-clock"></i> Öffnungszeiten
+                        </div>
+                        <div class="preview-content">
+                            <ul class="hours-table" id="previewHoursList" role="list" aria-label="Vorschau der Öffnungszeiten">
+                                <li role="listitem">
+                                    <span class="day">Montag - Freitag</span>
+                                    <span class="time">09:00-12:00 & 16:00-19:00</span>
+                                </li>
+                                <li role="listitem">
+                                    <span class="day">Samstag</span>
+                                    <span class="time">09:00 - 12:00</span>
+                                </li>
+                                <li role="listitem">
+                                    <span class="day">Sonntag</span>
+                                    <span class="time" style="color: #ff4444; font-weight: 700;">GESCHLOSSEN</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search Management Tab -->
+            <div class="tab-pane fade" id="search-management" role="tabpanel" aria-labelledby="search-management-tab">
+                <div class="admin-card">
+                    <h3><i class="fas fa-search"></i> Suchverwaltung & SEO</h3>
+
+                    <ul class="nav nav-pills mb-3" style="background: #f8f9fa; padding: 10px; border-radius: 10px;" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" data-bs-toggle="pill" href="#pinned" role="tab" aria-controls="pinned" aria-selected="true">
+                                <i class="fas fa-thumbtack"></i> Gepinnt
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#services"><span class="de">Leistungen</span><span class="en" style="display:none;">Services</span><span class="bks" style="display:none;">Usluge</span></a>
-
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="pill" href="#excluded" role="tab" aria-controls="excluded" aria-selected="false">
+                                <i class="fas fa-ban"></i> Ausgeschlossen
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#team"><span class="de">Unser Team</span><span class="en" style="display:none;">Our Team</span><span class="bks" style="display:none;">Naš tim</span></a>
-
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="pill" href="#synonyms" role="tab" aria-controls="synonyms" aria-selected="false">
+                                <i class="fas fa-exchange-alt"></i> Synonyme
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#contact"><span class="de">Kontakt</span><span class="en" style="display:none;">Contact</span><span class="bks" style="display:none;">Kontakt</span></a>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <button class="btn btn-outline-primary btn-sm ms-2 dropdown-toggle" id="langToggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-globe"></i> <span id="currentLangDisplay">DE</span>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="#" onclick="setLanguage('de'); return false;">🇦🇹 Deutsch</a></li>
-                                <li><a class="dropdown-item" href="#" onclick="setLanguage('en'); return false;">🇬🇧 English</a></li>
-                                <li><a class="dropdown-item" href="#" onclick="setLanguage('bks'); return false;">🇧🇦 BKS</a></li>
-                            </ul>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="pill" href="#metadata" role="tab" aria-controls="metadata" aria-selected="false">
+                                <i class="fas fa-tags"></i> Metadaten
+                            </a>
                         </li>
                     </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <div id="announcementContainer"></div>
-    <script>
-    // Load announcements from API or localStorage (for testing)
-    async function loadAnnouncements() {
-        try {
-            // Check if on Netlify or local development
-            const isProduction = window.location.hostname.includes('netlify') ||
-                               window.location.hostname.includes('tierambulanz');
-
-            if (isProduction) {
-                // Production: Use Netlify Functions
-                const response = await fetch('/.netlify/functions/get-announcements');
-                if (response.ok) {
-                    const announcements = await response.json();
-                    displayAnnouncements(announcements);
-                }
-            } else {
-                // Local development: Use localStorage fallback
-                const announcements = JSON.parse(localStorage.getItem('announcements') || '[]');
-                const now = new Date();
-                const activeAnnouncements = announcements.filter(ann => {
-                    const start = new Date(ann.startDate);
-                    const end = new Date(ann.endDate);
-                    return now >= start && now <= end && ann.isActive !== false;
-                });
-                displayAnnouncements(activeAnnouncements);
-            }
-        } catch (error) {
-            console.error('Failed to load announcements:', error);
-            // Silently fail - don't show error to visitors
-        }
-    }
-
-    function displayAnnouncements(announcements) {
-        const container = document.getElementById('announcementContainer');
-        if (!container) return;
-
-        container.innerHTML = '';
-
-        if (!announcements || announcements.length === 0) {
-            return; // No announcements to show
-        }
-
-        announcements.forEach(ann => {
-            const banner = document.createElement('div');
-            banner.style.cssText = `
-                background: linear-gradient(135deg, #00ace2, #005d83);
-                color: white;
-                padding: 15px;
-                text-align: center;
-                position: relative;
-                font-family: Arial, sans-serif;
-                animation: slideDown 0.5s ease-in-out;
-            `;
-
-            const icons = {
-                'holiday': '🏖️',
-                'emergency': '🚨',
-                'news': '📰',
-                'special': '⭐',
-                'warning': '⚠️'
-            };
-
-            banner.innerHTML = `
-                <strong>${icons[ann.type] || '📢'} ${ann.title}:</strong> ${ann.message}
-                ${ann.substitute ? `<br>Vertretung: ${ann.substitute}` : ''}
-                <button onclick="this.parentElement.remove()" style="
-                    position: absolute;
-                    right: 15px;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    background: rgba(255,255,255,0.2);
-                    border: none;
-                    color: white;
-                    font-size: 24px;
-                    cursor: pointer;
-                    padding: 5px 10px;
-                    border-radius: 5px;
-                    transition: background 0.3s;
-                " onmouseover="this.style.background='rgba(255,255,255,0.3)'"
-                   onmouseout="this.style.background='rgba(255,255,255,0.2)'">×</button>
-            `;
-
-            container.appendChild(banner);
-        });
-    }
-
-    // Add animation keyframes if not already present
-    if (!document.querySelector('#announcement-animations')) {
-        const style = document.createElement('style');
-        style.id = 'announcement-animations';
-        style.textContent = `
-            @keyframes slideDown {
-                from {
-                    transform: translateY(-100%);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateY(0);
-                    opacity: 1;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-    // Load announcements when page loads
-    document.addEventListener('DOMContentLoaded', loadAnnouncements);
-
-    // Refresh announcements every 5 minutes
-    setInterval(loadAnnouncements, 5 * 60 * 1000);
-    </script>
-
-
-
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-7">
-                    <div class="hero-content" data-aos="fade-right">
-                        <h1>
-                            <span class="de">Moderne Tiermedizin mit Herz in Wien</span>
-                            <span class="en" style="display:none;">Modern Veterinary Care with Heart in Vienna</span>
-                            <span class="bks" style="display:none;">Moderna veterinarska medicina sa srcem u Beču</span>
-                        </h1>
-                        <p class="hero-subtitle">
-                            <span class="de">Kompetente und liebevolle Betreuung für Ihre Haustiere</span>
-                            <span class="en" style="display:none;">Competent and loving care for your pets</span>
-                            <span class="bks" style="display:none;">Kompetentna i brižna nega za vaše ljubimce</span>
-                        </p>
-
-                        <div class="hero-buttons">
-                                <button onclick="openDirections()" class="btn-primary-custom">
-                                    <i class="fas fa-route"></i>
-                                    <span class="de">Route zur Praxis</span>
-                                    <span class="en" style="display:none;">Directions</span>
-                                    <span class="bks" style="display:none;">Put do ordinacije</span>
-
-                                </button>
-                                <a href="#services" class="btn-secondary-custom">
-                                    <span class="de">Unsere Leistungen</span>
-                                    <span class="en" style="display:none;">Our Services</span>
-                                    <span class="bks" style="display:none;">Naše usluge</span>
-                                </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5">
-                    <div class="opening-hours" data-aos="fade-left">
-                        <h3>
-                            <i class="fas fa-clock"></i>
-                            <span class="de">Öffnungszeiten</span>
-                            <span class="en" style="display:none;">Opening Hours</span>
-                            <span class="bks" style="display:none;">Radno vreme</span>
-                        </h3>
-
-
-                        <ul class="hours-table">
-                            <li>
-                                <span class="day">
-                                    <span class="de">Montag - Freitag</span>
-                                    <span class="en" style="display:none;">Monday - Friday</span>
-                                    <span class="bks" style="display:none;">Ponedeljak - Petak</span>
-                                </span>
-                                <span class="time">09:00-12:00 & 16:00-19:00</span>
-                            </li>
-                            <li>
-                                <span class="day">
-                                    <span class="de">Samstag</span>
-                                    <span class="en" style="display:none;">Saturday</span>
-                                    <span class="bks" style="display:none;">Subota</span>
-                                </span>
-                                <span class="time">09:00 - 12:00</span>
-                            </li>
-                            <li>
-                                <span class="day">
-                                    <span class="de">Sonntag</span>
-                                    <span class="en" style="display:none;">Sunday</span>
-                                    <span class="bks" style="display:none;">Nedelja</span>
-                                </span>
-                                <span class="time" style="color: #ff4444; font-weight: 700;">
-                                    <span class="de">GESCHLOSSEN</span>
-                                    <span class="en" style="display:none;">CLOSED</span>
-                                    <span class="bks" style="display:none;">ZATVORENO</span>
-                                </span>
-                            </li>
-                        </ul>
-                        <p style="text-align: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #eee; color: var(--secondary-color); font-weight: 600;">
-                            <span class="de">Keine Terminvereinbarung notwendig!</span>
-                            <span class="en" style="display:none;">No appointment necessary!</span>
-                            <span class="bks" style="display:none;">Nije potrebno zakazivanje!</span>
-                        </p>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Statistics Section -->
-    <section class="stats-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="stat-box" data-aos="zoom-in">
-                        <div class="stat-number" data-target="18">0</div>
-                        <div class="stat-label">
-                            <span class="de">Jahre Tierambulanz Prater</span>
-                            <span class="en" style="display:none;">Years of Prater Veterinary</span>
-                            <span class="bks" style="display:none;">Godine Ambulante Prater</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="stat-box" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="stat-number" data-target="30">0</div>
-                        <div class="stat-label">
-                            <span class="de">Jahre tierärztliche Erfahrung</span>
-                            <span class="en" style="display:none;">Years of veterinary experience</span>
-                            <span class="bks" style="display:none;">Godine veterinarskog iskustva</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="stat-box" data-aos="zoom-in" data-aos-delay="300">
-                        <div class="stat-number" data-target="6">0</div>
-                        <div class="stat-label">
-                            <span class="de">Tage pro Woche für Sie geöffnet</span>
-                            <span class="en" style="display:none;">Days a Week</span>
-                            <span class="bks" style="display:none;">Dana nedeljno za vas</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Mission Section -->
-    <section id="about" class="mission-section">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <h2>
-                    <span class="de">Unsere Mission</span>
-                    <span class="en" style="display:none;">Our Mission</span>
-                    <span class="bks" style="display:none;">Naša misija</span>
-                </h2>
-                <p>
-                    <span class="de">Wir setzen uns für das Wohlbefinden und die Gesundheit Ihrer Tiere ein.</span>
-                    <span class="en" style="display:none;">We are committed to the well-being and health of your animals.</span>
-                    <span class="bks" style="display:none;">Posvećeni smo dobrobiti i zdravlju vaših životinja.</span>
-                </p>
-            </div>
-            <div class="row">
-                <div class="col-md-3 mb-4">
-                    <div class="mission-card" data-aos="fade-up">
-                        <div class="mission-card-icon">
-                            <i class="fas fa-heartbeat"></i>
-                        </div>
-                        <h3>
-                            <span class="de">Gesundheit & Wohlbefinden</span>
-                            <span class="en" style="display:none;">Health & Wellbeing</span>
-                            <span class="bks" style="display:none;">Zdravlje i dobrobit</span>
-                        </h3>
-                        <p>
-                            <span class="de">Individuelle Betreuung, präventive Gesundheitspläne und modernste Therapien für jedes Tier.</span>
-                            <span class="en" style="display:none;">Individual care, preventive health plans and cutting-edge therapies for every pet.</span>
-                            <span class="bks" style="display:none;">Individualna nega, preventivni zdravstveni planovi i najmoderniji tretmani za svakog ljubimca.</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="mission-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="mission-card-icon">
-                            <i class="fas fa-infinity"></i>
-                        </div>
-                        <h3>
-                            <span class="de">Immer zusammen</span>
-                            <span class="en" style="display:none;">Always Together</span>
-                            <span class="bks" style="display:none;">Uvek zajedno</span>
-                        </h3>
-                        <p>
-                            <span class="de">Ihr verlässlicher Partner während der gesamten Lebensreise Ihres Haustieres.</span>
-                            <span class="en" style="display:none;">Your reliable partner throughout your pet’s life journey..</span>
-                            <span class="bks" style="display:none;">Vaš pouzdani partner tokom celog životnog puta vašeg ljubimca.</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="mission-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="mission-card-icon">
-                            <i class="fas fa-handshake"></i>
-                        </div>
-                        <h3>
-                            <span class="de">Vertrauen</span>
-                            <span class="en" style="display:none;">Trust</span>
-                            <span class="bks" style="display:none;">Poverenje</span>
-                        </h3>
-                        <p>
-                            <span class="de">Offene und transparente Kommunikation mit Tierbesitzern für bewusste Entscheidungen.</span>
-                            <span class="en" style="display:none;">Open and transparent communication with pet owners for informed decisions.</span>
-                            <span class="bks" style="display:none;">Otvorena i transparentna komunikacija sa vlasnicima ljubimaca za informisane odluke.</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="mission-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="mission-card-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h3>
-                            <span class="de">Solidarität</span>
-                            <span class="en" style="display:none;">Solidarity</span>
-                            <span class="bks" style="display:none;">Solidarnost</span>
-                        </h3>
-                        <p>
-                            <span class="de">Förderung der Aufklärung über Tiergesundheit und Respekt gegenüber allen Tieren.</span>
-                            <span class="en" style="display:none;">Promoting awareness of animal health and respect for all animals.</span>
-                            <span class="bks" style="display:none;">Promovisanje svesti o zdravlju životinja i poštovanja prema svim životinjama.</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="services-section">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <h2>
-                    <span class="de">Unsere Leistungen</span>
-                    <span class="en" style="display:none;">Our Services</span>
-                    <span class="bks" style="display:none;">Naše usluge</span>
-                </h2>
-                <p>
-                    <span class="de">Umfassende tiermedizinische Versorgung unter einem Dach</span>
-                    <span class="en" style="display:none;">Comprehensive veterinary care under one roof</span>
-                    <span class="bks" style="display:none;">Sveobuhvatna veterinarska nega pod jednim krovom</span>
-                </p>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="service-box" data-aos="fade-right">
-                        <i class="fas fa-stethoscope"></i>
-                        <h4>
-                            <span class="de">Allgemeine Tiermedizin</span>
-                            <span class="en" style="display:none;">General Veterinary Medicine</span>
-                            <span class="bks" style="display:none;">Opšta veterinarska medicina</span>
-                        </h4>
-                        <p>
-                            <span class="de">Routineuntersuchungen, Impfungen, Gesundheitschecks und Behandlung von Krankheiten.</span>
-                            <span class="en" style="display:none;">Routine examinations, vaccinations, health checks and treatment of diseases.</span>
-                            <span class="bks" style="display:none;">Rutinski pregledi, vakcinacije, zdravstveni pregledi i lečenje bolesti.</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="service-box" data-aos="fade-left">
-                        <i class="fas fa-procedures"></i>
-                        <h4>
-                            <span class="de">Chirurgie</span>
-                            <span class="en" style="display:none;">Surgery</span>
-                            <span class="bks" style="display:none;">Hirurgija</span>
-                        </h4>
-                        <p>
-                            <span class="de">Operative Eingriffe im Rahmen der Kleintiermedizin – von Routineoperationen bis zu Spezialeingriffen.</span>
-                            <span class="en" style="display:none;">Surgical procedures in small animal medicine – from routine operations to specialized surgeries.</span>
-                            <span class="bks" style="display:none;">Hirurške intervencije u okviru medicine malih životinja - od rutinskih operacija do specijalizovanih zahvata.</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="service-box" data-aos="fade-right">
-                        <i class="fas fa-x-ray"></i>
-                        <h4>
-                            <span class="de">Diagnostik</span>
-                            <span class="en" style="display:none;">Diagnostics</span>
-                            <span class="bks" style="display:none;">Dijagnostika</span>
-                        </h4>
-                        <p>
-                            <span class="de">Digitales Röntgen, Ultraschall, Labor und modernste Diagnoseverfahren.</span>
-                            <span class="en" style="display:none;">Digital X-ray, ultrasound, laboratory and state-of-the-art diagnostic procedures.</span>
-                            <span class="bks" style="display:none;">Digitalni rendgen, ultrazvuk, laboratorija i najmoderniji dijagnostički postupci.</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="service-box" data-aos="fade-left">
-                        <i class="fas fa-tooth"></i>
-                        <h4>
-                            <span class="de">Zahnmedizin</span>
-                            <span class="en" style="display:none;">Dental Medicine</span>
-                            <span class="bks" style="display:none;">Stomatologija</span>
-                        </h4>
-                        <p>
-                            <span class="de">Professionelle Zahnreinigung, Zahnextraktionen und Kieferchirurgie.</span>
-                            <span class="en" style="display:none;">Professional dental cleaning, tooth extractions and oral surgery.</span>
-                            <span class="bks" style="display:none;">Profesionalno čišćenje zuba, vađenje zuba i oralna hirurgija.</span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="service-box" data-aos="fade-right">
-                        <i class="fas fa-calendar-check"></i>
-                        <h4>
-                            <span class="de">Keine Terminvereinbarung notwendig</span>
-                            <span class="en" style="display:none;">No Appointment Necessary</span>
-                            <span class="bks" style="display:none;">Nije potrebno zakazivanje</span>
-                        </h4>
-                        <p>
-                            <span class="de">Wir stehen Ihnen während unserer Öffnungszeiten ohne Terminvereinbarung für Untersuchungen, Behandlungen und Impfungen zur Verfügung.</span>
-                            <span class="en" style="display:none;">We are available during our opening hours without appointment for examinations, treatments and vaccinations.</span>
-                            <span class="bks" style="display:none;">Dostupni smo tokom radnog vremena bez zakazivanja za preglede, tretmane i vakcinacije.</span>
-
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="service-box" data-aos="fade-left">
-                        <i class="fas fa-comments"></i>
-                        <h4>
-                            <span class="de">Mehrsprachige Betreuung</span>
-                            <span class="en" style="display:none;">Multilingual Care</span>
-                            <span class="bks" style="display:none;">Višejezična nega</span>
-                        </h4>
-                        <p>
-                            <span class="de">Wir kommunizieren mit Ihnen auf Deutsch, Englisch, Bosnisch, Kroatisch und Serbisch – für eine verständliche und vertrauensvolle Betreuung.</span>
-                            <span class="en" style="display:none;">We communicate with you in German, English, Bosnian, Croatian and Serbian – for understandable and trustworthy care.</span>
-                            <span class="bks" style="display:none;">Komuniciramo sa vama na nemačkom, engleskom, bosanskom, hrvatskom i srpskom - za razumljivu i pouzdanu negu.</span>
-                        </p>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Team Section -->
-        <section id="team" class="team-section">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <h2>
-                    <span class="de">Unser Team</span>
-                    <span class="en" style="display:none;">Our Team</span>
-                    <span class="bks" style="display:none;">Naš tim</span>
-                </h2>
-                <p>
-                    <span class="de">Erfahrene Tierärzte mit Leidenschaft für Tiergesundheit</span>
-                    <span class="en" style="display:none;">Experienced veterinarians with a passion for animal health</span>
-                    <span class="bks" style="display:none;">Iskusni veterinari sa strašću za zdravlje životinja</span>
-                </p>
-            </div>
-            <div class="row align-items-stretch">
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="team-member" data-aos="flip-left">
-                        <div class="team-member-image">
-                            <img src="images/4.png" alt="Dr. med. vet. Mirsad Jasarevic" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <div class="team-info">
-                            <h4>Dr. med. vet. Mirsad Jasarevic</h4>
-                            <p class="position">
-                                <span class="de">Leitung der Ordination & Tierarzt</span>
-                                <span class="en" style="display:none;">Head of Clinic & Veterinarian</span>
-                                <span class="bks" style="display:none;">Šef ordinacije i veterinar</span>
-
-                            </p>
-                            <p class="credentials">
-                                <span class="de"><strong>Schwerpunkte:</strong> Chirurgie & Innere Medizin</span>
-                                <span class="en" style="display:none;"><strong>Focus:</strong> Surgery & Internal Medicine</span>
-                                <span class="bks" style="display:none;"><strong>Fokus:</strong> Hirurgija i interna medicina</span>
-
-                            </p>
-
-                            <p class="team-description">
-                                <span class="de"><em>„Seit Jahrzehnten mit Erfahrung und Leidenschaft für die Tiermedizin tätig. Steht für eine sorgfältige und kompetente tierärztliche Betreuung."</em></span>
-                                <span class="en" style="display:none;"><em>"Active in veterinary medicine with decades of experience and passion. Stands for careful and competent veterinary care."</em></span>
-                                <span class="bks" style="display:none;"><em>"Aktivan u veterinarskoj medicini sa decenijama iskustva i strasti. Zalaže se za pažljivu i kompetentnu veterinarsku negu."</em></span>
-
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="team-member" data-aos="flip-left" data-aos-delay="100">
-                        <div class="team-member-image">
-                            <img src="images/3.png" alt="Mag. med. vet. Emin Jasarevic" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <div class="team-info">
-                            <h4>Mag. med. vet. Emin Jasarevic</h4>
-                            <p class="position">
-                                <span class="de">Tierarzt</span>
-                                <span class="en" style="display:none;">Veterinarian</span>
-                                <span class="bks" style="display:none;">Veterinar</span>
-                            </p>
-
-                            <p class="credentials">
-                                <span class="de"><strong>Schwerpunkte:</strong> Innere Medizin & bildgebende Diagnostik</span>
-                                <span class="en" style="display:none;"><strong>Focus:</strong> Internal Medicine & Diagnostic Imaging</span>
-                                <span class="bks" style="display:none;"><strong>Fokus:</strong> Interna medicina i dijagnostičko snimanje</span>
-                            </p>
-                            <p class="team-description">
-                                <span class="de">„Besonderes Interesse an internistischen Fragestellungen sowie an der umfassenden Betreuung von Kleintieren."</span>
-                                <span class="en" style="display:none;">"Special interest in internal medicine questions and comprehensive care of small animals."</span>
-                                <span class="bks" style="display:none;">"Posebno interesovanje za interna medicinska pitanja i sveobuhvatnu negu malih životinja."</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="team-member" data-aos="flip-left" data-aos-delay="100">
-                        <div class="team-member-image">
-                            <img src="images/5.png" alt="Mag. iur. Zerina Jasarevic" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <div class="team-info">
-                            <h4>Mag. iur. Zerina Jasarevic</h4>
-                            <p class="position">
-                                <span class="de">Ordinationsassistenz & Administration</span>
-                                <span class="en" style="display:none;">Clinic Assistant & Administration</span>
-                                <span class="bks" style="display:none;">Asistent ordinacije i administracija</span>
-                            </p>
-                            <p class="credentials">
-                                <span class="de"><strong>Zuständigkeit:</strong> Organisation & Buchhaltung</span>
-                                <span class="en" style="display:none;"><strong>Responsibility:</strong> Organization & Accounting</span>
-                                <span class="bks" style="display:none;"><strong>Odgovornost:</strong> Organizacija i računovodstvo</span>
-
-                            </p>
-                            <p class="team-description">
-                                <span class="de">„Bringt juristische Ausbildung, Organisationstalent und Erfahrung in die Ordination ein – zusätzlich zuständig für die Buchhaltung."</span>
-                                <span class="en" style="display:none;">"Brings legal training, organizational talent and experience to the practice – also responsible for accounting."</span>
-                                <span class="bks" style="display:none;">"Donosi pravno obrazovanje, organizacioni talenat i iskustvo u ordinaciju - takođe odgovorna za računovodstvo."</span>
-
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="team-member" data-aos="flip-left" data-aos-delay="200">
-                        <div class="team-member-image">
-                            <img src="images/2.png" alt="BSc Edin Jasarevic" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <div class="team-info">
-                            <h4>BSc Edin Jasarevic</h4>
-                            <p class="position">
-                                <span class="de">Ordinationsassistenz & Administration & Hundefriseur</span>
-                                <span class="en" style="display:none;">Clinic Assistant & Administration & Dog Groomer</span>
-                                <span class="bks" style="display:none;">Asistent ordinacije, administracija i frizer za pse</span>
-                            </p>
-                            <p class="credentials">
-                                <span class="de"><strong>Zuständigkeit:</strong> Unterstützung im Ordinationsalltag & Buchhaltung</span>
-                                <span class="en" style="display:none;"><strong>Responsibility:</strong> Support in Daily Clinic Operations & Accounting</span>
-                                <span class="bks" style="display:none;"><strong>Odgovornost:</strong> Podrška u svakodnevnom radu ordinacije i računovodstvo</span>
-                            </p>
-                            <p class="team-description">
-                                <span class="de">„Vielseitige Unterstützung im Ordinationsalltag – zudem als Hundefriseur für die Pflege und das Wohlbefinden unserer Patienten verantwortlich."</span>
-                                <span class="en" style="display:none;">"Versatile support in daily clinic operations – also responsible as a dog groomer for the care and wellbeing of our patients."</span>
-                                <span class="bks" style="display:none;">"Svestrana podrška u svakodnevnom radu ordinacije - takođe odgovoran kao frizer za pse za negu i dobrobit naših pacijenata."</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="appointment" class="appointment-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="appointment-form" data-aos="zoom-in">
-                        <h2 class="text-white text-center mb-4">
-                            <span class="de">Möchten Sie eine Frage stellen?</span>
-                            <span class="en" style="display:none;">Would you like to ask a question?</span>
-                            <span class="bks" style="display:none;">Želite li postaviti pitanje?</span>
-                        </h2>
-                        <p class="text-white text-center mb-5">
-                            <span class="de">Hinterlassen Sie uns Ihre Kontaktdaten und wir melden uns schnellstmöglich bei Ihnen</span>
-                            <span class="en" style="display:none;">Leave us your contact details and we'll get back to you as soon as possible</span>
-                            <span class="bks" style="display:none;">Ostavite nam svoje kontakt podatke i javićemo vam se što pre</span>
-                        </p>
-
-                        <form id="appointmentForm" novalidate>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="fullName" class="visually-hidden">
-                                        <span class="de">Vor- und Nachname</span>
-                                        <span class="en" style="display:none;">First and Last Name</span>
-                                    </label>
-                                    <input type="text" id="fullName" name="fullName" class="form-control form-control-custom" placeholder="Vor- und Nachname *" required aria-describedby="fullNameError" autocomplete="name">
-                                    <div id="fullNameError" class="invalid-feedback"></div>
+                    <div class="tab-content">
+                        <!-- Pinned Results -->
+                        <div class="tab-pane fade show active" id="pinned" role="tabpanel">
+                            <p class="text-muted">Pinnen Sie wichtige Seiten für Suchbegriffe</p>
+                            <div class="row mb-3">
+                                <div class="col-md-5">
+                                    <label for="pinnedKeyword" class="visually-hidden">Suchbegriff</label>
+                                    <input type="text" class="form-control" id="pinnedKeyword" placeholder="Suchbegriff" aria-label="Suchbegriff für gepinnte Seite">
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="phone" class="visually-hidden">
-                                        <span class="de">Telefonnummer</span>
-                                        <span class="en" style="display:none;">Phone Number</span>
-                                    </label>
-                                    <input type="tel" id="phone" name="phone" class="form-control form-control-custom" placeholder="Telefonnummer *" required aria-describedby="phoneError" autocomplete="tel" pattern="[+]?[0-9\s\-\(\)]{10,}">
-                                    <div id="phoneError" class="invalid-feedback"></div>
+                                <div class="col-md-5">
+                                    <label for="pinnedUrl" class="visually-hidden">URL</label>
+                                    <input type="text" class="form-control" id="pinnedUrl" placeholder="URL" aria-label="URL der zu pinnenden Seite">
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="email" class="visually-hidden">
-                                        <span class="de">E-Mail-Adresse</span>
-                                        <span class="en" style="display:none;">Email Address</span>
-                                    </label>
-                                    <input type="email" id="email" name="email" class="form-control form-control-custom" placeholder="E-Mail-Adresse *" required aria-describedby="emailError" autocomplete="email">
-                                    <div id="emailError" class="invalid-feedback"></div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="petType" class="visually-hidden">
-                                        <span class="de">Art des Tieres</span>
-                                        <span class="en" style="display:none;">Type of Pet</span>
-                                    </label>
-                                    <select id="petType" name="petType" class="form-control form-control-custom" required aria-describedby="petTypeError">
-                                        <option value="">Art des Tieres wählen *</option>
-                                        <option value="hund">Hund</option>
-                                        <option value="katze">Katze</option>
-                                        <option value="kaninchen">Kaninchen</option>
-                                        <option value="andere">Andere</option>
-                                    </select>
-                                    <div id="petTypeError" class="invalid-feedback"></div>
-                                </div>
-                                <div class="col-md-12">
-                                    <label for="reason" class="visually-hidden">
-                                        <span class="de">Grund des Besuchs</span>
-                                        <span class="en" style="display:none;">Reason for Visit</span>
-                                    </label>
-                                    <textarea id="reason" name="reason" class="form-control form-control-custom" rows="4" placeholder="Beschreiben Sie kurz den Grund Ihres Besuchs" aria-describedby="reasonHelp"></textarea>
-                                    <div id="reasonHelp" class="form-text text-white-50">
-                                        <span class="de">Optional: Helfen Sie uns, uns auf Ihren Besuch vorzubereiten</span>
-                                        <span class="en" style="display:none;">Optional: Help us prepare for your visit</span>
-                                        <span class="bks" style="display:none;">Opciono: Pomozite nam da se pripremimo za vašu posetu</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 mt-3">
-                                    <div class="form-check text-white mb-3">
-                                        <input class="form-check-input" type="checkbox" id="privacy" name="privacy" required aria-describedby="privacyError">
-                                        <label class="form-check-label" for="privacy">
-                                            <span class="de">Ich habe die <a href="#datenschutz" class="text-white text-decoration-underline" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und akzeptiere sie.</span>
-                                            <span class="en" style="display:none;">I have read and accept the <a href="#privacy-policy" class="text-white text-decoration-underline" target="_blank" rel="noopener">Privacy Policy</a>.</span>
-                                            <span class="bks" style="display:none;">Pročitao sam i prihvatam <a href="#datenschutz" class="text-white text-decoration-underline" target="_blank" rel="noopener">Politiku privatnosti</a>.</span>
-                                        </label>
-                                        <div id="privacyError" class="invalid-feedback"></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mx-auto">
-                                    <button type="submit" class="submit-btn" id="submitButton">
-                                        <i class="fas fa-paper-plane"></i>
-                                        <span class="de">Anfrage senden</span>
-                                        <span class="en" style="display:none;">Send Request</span>
-                                        <span class="bks" style="display:none;">Pošaljite zahtev</span>
+                                <div class="col-md-2">
+                                    <button class="edit-btn" onclick="addPinnedResult()" aria-label="Gepinntes Suchergebnis hinzufügen">
+                                        <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
                             </div>
-                        </form>
+                            <div id="pinnedList" role="region" aria-label="Liste der gepinnten Suchergebnisse" aria-live="polite"></div>
+                        </div>
+                        <div class="tab-pane fade" id="excluded" role="tabpanel">
+                            <p class="text-muted">Schließen Sie Begriffe aus</p>
+                            <div class="row mb-3">
+                                <div class="col-md-8">
+                                    <label for="excludedTerm" class="visually-hidden">Begriff zum Ausschließen</label>
+                                    <input type="text" class="form-control" id="excludedTerm" placeholder="Begriff" aria-label="Begriff der ausgeschlossen werden soll">
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="edit-btn" onclick="addExcludedTerm()" aria-label="Begriff von Suche ausschließen">
+                                        <i class="fas fa-ban"></i> Ausschließen
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="excludedList" role="region" aria-label="Liste der ausgeschlossenen Begriffe" aria-live="polite"></div>
+                        </div>
+                        <div class="tab-pane fade" id="synonyms" role="tabpanel">
+                            <p class="text-muted">Definieren Sie Synonyme</p>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="synonymTerm" class="visually-hidden">Begriff</label>
+                                    <input type="text" class="form-control" id="synonymTerm" placeholder="Begriff" aria-label="Hauptbegriff">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="synonymAlias" class="visually-hidden">Synonyme</label>
+                                    <input type="text" class="form-control" id="synonymAlias" placeholder="Synonyme (kommagetrennt)" aria-label="Synonyme durch Komma getrennt">
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="edit-btn" onclick="addSynonym()" aria-label="Synonym hinzufügen">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="synonymsList" role="region" aria-label="Liste der definierten Synonyme" aria-live="polite"></div>
+                        </div>
+                        <div class="tab-pane fade" id="metadata" role="tabpanel">
+                            <p class="text-muted">SEO-Metadaten verwalten</p>
+                            <div class="mb-3">
+                                <label class="form-label" for="metaTitle">Seitentitel</label>
+                                <input type="text" class="form-control" id="metaTitle"
+                                       value="Tierambulanz Prater - Veterinary Practice Vienna" aria-describedby="metaTitle-help">
+                                <small id="metaTitle-help" class="form-text text-muted">Der Titel erscheint in Suchergebnissen</small>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="metaDescription">Beschreibung</label>
+                                <textarea class="form-control" id="metaDescription" rows="3" aria-describedby="metaDescription-help">Modern veterinary practice in Vienna.</textarea>
+                                <small id="metaDescription-help" class="form-text text-muted">Die Beschreibung erscheint unter dem Titel in Suchergebnissen</small>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="metaKeywords">Keywords</label>
+                                <input type="text" class="form-control" id="metaKeywords"
+                                       value="Tierarzt Wien, veterinarian Vienna" aria-describedby="metaKeywords-help">
+                                <small id="metaKeywords-help" class="form-text text-muted">Durch Komma getrennte Suchbegriffe</small>
+                            </div>
+                            <button class="edit-btn" onclick="saveMetadata()" aria-label="SEO-Metadaten speichern">
+                                <i class="fas fa-save"></i> Speichern
+                            </button>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Map Section -->
-    <section class="map-section" aria-label="Standort der Tierambulanz Prater">
-        <div style="width: 100%; height: 400px; background: #f8f9fa; position: relative;">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1329.2099505803017!2d16.398223274241484!3d48.217788551029585!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476d071ac36c0371%3A0xb1d4028f922cf125!2sTierambulanz%20Prater!5e0!3m2!1sit!2sat!4v1756032450440!5m2!1sit!2sat"
-                width="100%"
-                height="400"
-                style="border:0;"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                title="Standort Tierambulanz Prater - Ausstellungsstraße 19, 1020 Wien"
-                aria-label="Interaktive Karte mit dem Standort der Tierambulanz Prater">
-            </iframe>
-        </div>
-    </section>
-
-    <footer id="contact">
-        <div class="container">
-            <div class="row footer-content">
-                <div class="col-md-4 mb-4">
-                    <h3>Tierambulanz Prater Wien</h3>
-                    <div class="community-footer-message">
-                        <p>
-                            <span class="de">🌍 Deutsch • English • Bosanski • Hrvatski • Srpski </span>
-                            <span class="en" style="display:none;">🌍 German • English • Bosnian • Croatian • Serbian</span>
-                            <span class="bks" style="display:none;">🌐 Nemački • Engleski • Bosanski • Hrvatski • Srpski</span>
-                        </p>
-                    </div>
-                    <div class="social-links mt-4">
-                        <a href="https://www.facebook.com/TierambulanzPrater" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <h3>
-                        <span class="de">Kontakt</span>
-                        <span class="en" style="display:none;">Contact</span>
-                        <span class="bks" style="display:none;">Kontakt</span>
-                    </h3>
-                    <ul>
-                        <li>
-                            <i class="fas fa-phone"></i>
-                            <a href="tel:+43 01 7269181">+43 01 7269181</a>
-                        </li>
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <a href="mailto:tierambulanzprater@gmx.at">tierambulanzprater@gmx.at</a>
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            Ausstellungsstraße 19<br>
-                            <span style="margin-left: 30px;">1020 Wien, Österreich</span>
-                        </li>
-
-                    </ul>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <h3>
-                        <span class="de">Schnellzugriff</span>
-                        <span class="en" style="display:none;">Quick Links</span>
-                        <span class="bks" style="display:none;">Brzi pristup</span>
-                    </h3>
-                    <ul>
-                        <li><i class="fas fa-chevron-right"></i> <a href="#services">
-                            <span class="de">Unsere Leistungen</span>
-                            <span class="en" style="display:none;">Our Services</span>
-                            <span class="bks" style="display:none;">Naše usluge</span>
-                        </a></li>
-                        <li><i class="fas fa-chevron-right"></i> <a href="#team">
-                            <span class="de">Unser Team</span>
-                            <span class="en" style="display:none;">Our Team</span>
-                            <span class="bks" style="display:none;">Naš tim</span>
-                        </a></li>
-                        <li><i class="fas fa-chevron-right"></i> <a href="#contact">
-                            <span class="de">Fragen oder Anliegen</span>
-                            <span class="en" style="display:none;">Questions or Concerns</span>
-                            <span class="bks" style="display:none;">Pitanja ili nedoumice</span>
-                        </a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom" >
-                <p>&copy; 2015 Tierambulanz Prater Wien GmbH.
-                   <span class="de">Alle Rechte vorbehalten.</span>
-                   <span class="en" style="display:none;">All rights reserved.</span>
-                    <span class="bks" style="display:none;">Sva prava zadržana.</span>
-
-                   <a href="datum.html" class="text-white">
-                       <span class="de">Datenschutz</span>
-                       <span class="en" style="display:none;">Privacy</span>
-                       <span class="bks" style="display:none;">Privatnost</span>
-
-                   </a> |
-                   <a href="impressum.html" class="text-white">
-                       <span class="de">Impressum</span>
-                       <span class="en" style="display:none;">Legal Notice</span>
-                       <span class="bks" style="display:none;">Pravne napomene</span>
-
-                   </a>
-                </p>
-            </div>
-        </div>
-    </footer>
-
-
-
-    <!-- Cookie Banner -->
-    <div class="cookie-banner" id="cookieBanner">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-9">
-                    <p class="mb-0">
-                        <span class="de">Wir verwenden Cookies, um Ihre Erfahrung auf unserer Website zu verbessern. Durch die weitere Nutzung stimmen Sie unserer Cookie-Richtlinie zu.</span>
-                        <span class="en" style="display:none;">We use cookies to improve your experience on our website. By continuing to use, you agree to our cookie policy.</span>
-                        <span class="bks" style="display:none;">Koristimo kolačiće da poboljšamo vaše iskustvo na našoj veb stranici. Nastavkom korišćenja slažete se sa našom politikom kolačića.</span>
-                    </p>
-
-                </div>
-                <div class="col-md-3 text-end">
-                    <button class="btn btn-primary me-2" onclick="acceptCookies()">
-                        <span class="de">Akzeptieren</span>
-                        <span class="en" style="display:none;">Accept</span>
-                        <span class="bks" style="display:none;">Prihvati</span>
-                    </button>
-                    <button class="btn btn-outline-secondary" onclick="declineCookies()">
-                        <span class="de">Ablehnen</span>
-                        <span class="en" style="display:none;">Decline</span>
-                        <span class="bks" style="display:none;">Odbij</span>
-                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Back to Top Button -->
-    <button id="backToTop" aria-label="Nach oben scrollen" class="no-print">
-        <i class="fas fa-chevron-up"></i>
-    </button>
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- AOS Animation Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-
-    <!-- Custom JavaScript -->
     <script>
-        // Initialize AOS
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 100
-        });
+        // Check authentication
+        if (sessionStorage.getItem('adminAuth') !== 'true') {
+            window.location.href = '/admin/';
+        }
 
-        // Preloader - Enhanced for local development
-        function hidePreloader() {
-            const preloader = document.getElementById('preloader');
-            if (preloader) {
-                preloader.style.opacity = '0';
-                setTimeout(() => {
-                    preloader.style.display = 'none';
-                }, 500);
+        // API Configuration
+        const API_BASE = '/.netlify/functions';
+        const IS_PRODUCTION = window.location.hostname.includes('netlify') ||
+                             window.location.hostname.includes('tierambulanz');
+
+        // Default hours configuration
+        const DEFAULT_HOURS = {
+            weekday: {
+                morning: { open: '09:00', close: '12:00' },
+                afternoon: { open: '16:00', close: '19:00' }
+            },
+            saturday: {
+                open: '09:00',
+                close: '12:00',
+                closed: false
+            },
+            sunday: {
+                closed: true,
+                open: '',
+                close: ''
+            }
+        };
+
+        // ============================================
+        // ANNOUNCEMENTS MANAGEMENT (UNCHANGED)
+        // ============================================
+
+        async function loadAnnouncements() {
+            try {
+                if (IS_PRODUCTION) {
+                    const response = await fetch(`${API_BASE}/get-announcements`);
+                    if (response.ok) {
+                        const announcements = await response.json();
+                        displayAnnouncements(announcements);
+                    } else {
+                        throw new Error(`Failed to load announcements (Status: ${response.status})`);
+                    }
+                } else {
+                    const announcements = JSON.parse(localStorage.getItem('announcements') || '[]');
+                    displayAnnouncements(announcements);
+                }
+            } catch (error) {
+                console.error('Failed to load announcements:', error);
+                document.getElementById('announcementsList').innerHTML =
+                    `<div class="alert alert-danger"><strong>Fehler beim Laden der Ankündigungen:</strong><br>${error.message}</div>`;
             }
         }
 
-        // Hide preloader when page loads
-        window.addEventListener('load', () => {
-            setTimeout(hidePreloader, 300);
-        });
-
-        // Fallback: Hide preloader after 2 seconds regardless
-        setTimeout(hidePreloader, 2000);
-
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header-wrap');
-            const navbar = document.querySelector('.navbar');
-
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-                navbar.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const navbarHeight = document.querySelector('.header-wrap').offsetHeight;
-                    const offsetTop = target.offsetTop - navbarHeight - 20; // Add some extra spacing
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
+        async function createAnnouncement(data) {
+            try {
+                if (IS_PRODUCTION) {
+                    const response = await fetch(`${API_BASE}/create-announcement`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Admin-Auth': sessionStorage.getItem('adminAuth')
+                        },
+                        body: JSON.stringify(data)
                     });
 
-                    // Close mobile menu if open
-                    const navCollapse = document.querySelector('.navbar-collapse');
-                    if (navCollapse.classList.contains('show')) {
-                        navCollapse.classList.remove('show');
-                    }
-                }
-            });
-        });
-
-        // Back to top button
-        const backToTopButton = document.getElementById('backToTop');
-
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTopButton.style.display = 'block';
-            } else {
-                backToTopButton.style.display = 'none';
-            }
-        });
-
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Animate numbers
-        const animateNumbers = () => {
-            const numbers = document.querySelectorAll('.stat-number[data-target]');
-
-            numbers.forEach(num => {
-                const target = parseInt(num.getAttribute('data-target'));
-                const duration = 2000;
-                const increment = target / (duration / 16);
-                let current = 0;
-
-                const updateNumber = () => {
-                    if (current < target) {
-                        current += increment;
-                        num.textContent = Math.ceil(current).toLocaleString('de-DE');
-                        requestAnimationFrame(updateNumber);
+                    if (response.ok) {
+                        showNotification('Ankündigung erstellt!', 'success');
+                        loadAnnouncements();
                     } else {
-                        num.textContent = target.toLocaleString('de-DE');
+                        throw new Error('Failed to create announcement');
                     }
-                };
+                } else {
+                    const announcements = JSON.parse(localStorage.getItem('announcements') || '[]');
+                    const newAnnouncement = {
+                        ...data,
+                        id: Date.now().toString(),
+                        createdAt: new Date().toISOString(),
+                        isActive: true
+                    };
+                    announcements.push(newAnnouncement);
+                    localStorage.setItem('announcements', JSON.stringify(announcements));
+                    showNotification('Ankündigung erstellt!', 'success');
+                    loadAnnouncements();
+                }
+            } catch (error) {
+                console.error('Failed to create announcement:', error);
+                showNotification(`Fehler: ${error.message}`, 'danger');
+            }
+        }
 
-                // Start animation when element is in view
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            updateNumber();
-                            observer.unobserve(entry.target);
-                        }
+        async function deleteAnnouncement(id) {
+            if (!confirm('Möchten Sie diese Ankündigung wirklich löschen?')) return;
+
+            try {
+                if (IS_PRODUCTION) {
+                    const response = await fetch(`${API_BASE}/delete-announcement?id=${id}`, {
+                        method: 'DELETE',
+                        headers: { 'X-Admin-Auth': sessionStorage.getItem('adminAuth') }
                     });
-                });
 
-                observer.observe(num);
-            });
-        };
+                    if (response.ok) {
+                        showNotification('Ankündigung gelöscht!', 'success');
+                        loadAnnouncements();
+                    } else {
+                        throw new Error('Failed to delete announcement');
+                    }
+                } else {
+                    let announcements = JSON.parse(localStorage.getItem('announcements') || '[]');
+                    announcements = announcements.filter(a => a.id !== id);
+                    localStorage.setItem('announcements', JSON.stringify(announcements));
+                    showNotification('Ankündigung gelöscht!', 'success');
+                    loadAnnouncements();
+                }
+            } catch (error) {
+                console.error('Failed to delete announcement:', error);
+                showNotification(`Fehler: ${error.message}`, 'danger');
+            }
+        }
 
-        animateNumbers();
+        function displayAnnouncements(announcements) {
+            const container = document.getElementById('announcementsList');
 
-        // Form validation and submission
-        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            const form = this;
-            const button = document.getElementById('submitButton');
-            const originalText = button.innerHTML;
-
-            // Clear previous errors
-            clearFormErrors();
-
-            // Validate form
-            if (!validateForm(form)) {
-                form.classList.add('was-validated');
+            if (!announcements || announcements.length === 0) {
+                container.innerHTML = '<p class="text-muted text-center py-4">Keine Ankündigungen vorhanden.</p>';
                 return;
             }
 
-            // Show loading state
-            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Wird gesendet...';
-            button.disabled = true;
+            const now = new Date();
+            const sortedAnnouncements = announcements.sort((a, b) =>
+                new Date(b.createdAt || b.created_at) - new Date(a.createdAt || a.created_at)
+            );
 
-            // Collect form data
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
+            container.innerHTML = sortedAnnouncements.map(ann => {
+                const startDate = new Date(ann.startDate || ann.start_date);
+                const endDate = new Date(ann.endDate || ann.end_date);
+                const isActive = now >= startDate && now <= endDate;
+                const isScheduled = now < startDate;
+                const isExpired = now > endDate;
 
-            // Simulate form submission (in production, send to server)
-           fetch('/.netlify/functions/submit-form', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(result => {
+                let statusBadge = '';
+                if (isActive) statusBadge = '<span class="status-badge status-active">Aktiv</span>';
+                else if (isScheduled) statusBadge = '<span class="status-badge status-scheduled">Geplant</span>';
+                else if (isExpired) statusBadge = '<span class="status-badge status-expired">Abgelaufen</span>';
 
-               if (typeof gtag !== 'undefined') {
-                    gtag('event', 'form_submit_success', {
-                        'event_category': 'conversions',
-                        'event_label': 'appointment_request',
-                        'value': 1
-                    });
-                }
+                const icons = {
+                    'holiday': '🖖️',
+                    'emergency': '🚨',
+                    'news': '📰',
+                    'special': '⭐',
+                    'warning': '⚠️'
+                };
 
-                if (result.success) {
-                    // Success state
-                    button.innerHTML = '<i class="fas fa-check"></i> Vielen Dank! Wir melden uns bald.';
-                    button.style.background = '#28a745';
-                    showNotification('Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns bald bei Ihnen!', 'success');
+                return `
+                    <div class="announcement-item">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h5>${icons[ann.type] || '📢'} ${ann.title}</h5>
+                                <p class="mb-1">${ann.message}</p>
+                                ${ann.substitute ? `<small class="text-muted">Vertretung: ${ann.substitute}</small><br>` : ''}
+                                <small class="text-muted">
+                                    ${startDate.toLocaleDateString('de-AT')} - ${endDate.toLocaleDateString('de-AT')}
+                                </small>
+                                <br>${statusBadge}
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <button class="delete-btn" onclick="deleteAnnouncement('${ann.id}')" aria-label="Ankündigung ${ann.title} löschen">
+                                    <i class="fas fa-trash"></i> Löschen
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
 
-                    setTimeout(() => {
-                        form.reset();
-                        form.classList.remove('was-validated');
-                        button.innerHTML = originalText;
-                        button.style.background = '';
-                        button.disabled = false;
-                    }, 3000);
-                } else {
-                    throw new Error('Submission failed');
-                }
-            })
+        document.getElementById('announcementForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
 
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Speichert...';
 
-            .catch(error => {
-                button.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Fehler beim Senden';
-                button.style.background = '#dc3545';
-                showNotification('Fehler beim Senden. Bitte versuchen Sie es erneut.', 'error');
+            const announcement = {
+                type: document.getElementById('announcementType').value,
+                startDate: document.getElementById('startDate').value,
+                endDate: document.getElementById('endDate').value,
+                title: document.getElementById('announcementTitle').value,
+                message: document.getElementById('announcementMessage').value,
+                substitute: document.getElementById('substituteInfo').value
+            };
 
-                setTimeout(() => {
-                    button.innerHTML = originalText;
-                    button.style.background = '';
-                    button.disabled = false;
-                }, 3000);
-            });
+            await createAnnouncement(announcement);
+            this.reset();
+
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-save"></i> Ankündigung Speichern';
         });
 
-        // Form validation function
-        function validateForm(form) {
-            let isValid = true;
+        // ============================================
+        // OPENING HOURS MANAGEMENT (FIXED VERSION)
+        // ============================================
 
-            // Name validation
-            const fullName = form.fullName;
-            if (!fullName.value.trim() || fullName.value.length < 2) {
-                showFieldError('fullNameError', 'Bitte geben Sie Ihren vollständigen Namen ein.');
-                isValid = false;
-            }
+        // Load saved hours on page load
+        function loadSavedHours() {
+            const saved = localStorage.getItem('openingHours');
+            if (!saved) return;
 
-            // Phone validation
-            const phone = form.phone;
-            const phonePattern = /^[+]?[0-9\s\-\(\)]{10,}$/;
-            if (!phone.value.trim() || !phonePattern.test(phone.value)) {
-                showFieldError('phoneError', 'Bitte geben Sie eine gültige Telefonnummer ein.');
-                isValid = false;
-            }
+            try {
+                const hours = JSON.parse(saved);
 
-            // Email validation
-            const email = form.email;
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!email.value.trim() || !emailPattern.test(email.value)) {
-                showFieldError('emailError', 'Bitte geben Sie eine gültige E-Mail-Adresse ein.');
-                isValid = false;
-            }
+                if (hours.weekday) {
+                    document.getElementById('weekday-open-1').value = hours.weekday.morning.open;
+                    document.getElementById('weekday-close-1').value = hours.weekday.morning.close;
+                    document.getElementById('weekday-open-2').value = hours.weekday.afternoon.open;
+                    document.getElementById('weekday-close-2').value = hours.weekday.afternoon.close;
+                }
 
-            // Pet type validation
-            const petType = form.petType;
-            if (!petType.value) {
-                showFieldError('petTypeError', 'Bitte wählen Sie die Art Ihres Tieres aus.');
-                isValid = false;
-            }
+                if (hours.saturday) {
+                    document.getElementById('saturday-open').value = hours.saturday.open;
+                    document.getElementById('saturday-close').value = hours.saturday.close;
+                    document.getElementById('saturday-closed').checked = hours.saturday.closed;
 
-            // Privacy checkbox validation
-            const privacy = form.privacy;
-            if (!privacy.checked) {
-                showFieldError('privacyError', 'Bitte akzeptieren Sie die Datenschutzerklärung.');
-                isValid = false;
-            }
+                    if (hours.saturday.closed) {
+                        document.getElementById('saturday-open').disabled = true;
+                        document.getElementById('saturday-close').disabled = true;
+                    }
+                }
 
-            return isValid;
-        }
+                if (hours.sunday) {
+                    document.getElementById('sunday-closed').checked = hours.sunday.closed;
 
-        // Helper functions for form validation
-        function showFieldError(errorId, message) {
-            const errorElement = document.getElementById(errorId);
-            if (errorElement) {
-                errorElement.textContent = message;
-                errorElement.style.display = 'block';
-                errorElement.parentElement.querySelector('input, select, textarea').classList.add('is-invalid');
+                    if (!hours.sunday.closed && hours.sunday.open && hours.sunday.close) {
+                        document.getElementById('sunday-open').value = hours.sunday.open;
+                        document.getElementById('sunday-close').value = hours.sunday.close;
+                        document.getElementById('sunday-open').disabled = false;
+                        document.getElementById('sunday-close').disabled = false;
+                    }
+                }
+
+                updateHoursPreview();
+                console.log('✅ Loaded saved hours:', hours);
+            } catch (error) {
+                console.error('Error loading saved hours:', error);
             }
         }
 
-        function clearFormErrors() {
-            const errorElements = document.querySelectorAll('.invalid-feedback');
-            errorElements.forEach(error => {
-                error.textContent = '';
-                error.style.display = 'none';
-            });
+        // Checkbox handlers
+        document.getElementById('sunday-closed').addEventListener('change', function() {
+            const open = document.getElementById('sunday-open');
+            const close = document.getElementById('sunday-close');
+            open.disabled = this.checked;
+            close.disabled = this.checked;
+            updateHoursPreview();
+        });
 
-            const invalidInputs = document.querySelectorAll('.is-invalid');
-            invalidInputs.forEach(input => input.classList.remove('is-invalid'));
+        document.getElementById('saturday-closed').addEventListener('change', function() {
+            const open = document.getElementById('saturday-open');
+            const close = document.getElementById('saturday-close');
+            open.disabled = this.checked;
+            close.disabled = this.checked;
+            updateHoursPreview();
+        });
+
+        // Update preview when inputs change
+        ['weekday-open-1', 'weekday-close-1', 'weekday-open-2', 'weekday-close-2',
+         'saturday-open', 'saturday-close', 'sunday-open', 'sunday-close'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('change', updateHoursPreview);
+        });
+
+        // Update preview display
+        function updateHoursPreview() {
+            const preview = document.getElementById('previewHoursList');
+            if (!preview) return;
+
+            const weekdayMorningOpen = document.getElementById('weekday-open-1').value;
+            const weekdayMorningClose = document.getElementById('weekday-close-1').value;
+            const weekdayAfternoonOpen = document.getElementById('weekday-open-2').value;
+            const weekdayAfternoonClose = document.getElementById('weekday-close-2').value;
+
+            const saturdayOpen = document.getElementById('saturday-open').value;
+            const saturdayClose = document.getElementById('saturday-close').value;
+            const saturdayClosed = document.getElementById('saturday-closed').checked;
+
+            const sundayOpen = document.getElementById('sunday-open').value;
+            const sundayClose = document.getElementById('sunday-close').value;
+            const sundayClosed = document.getElementById('sunday-closed').checked;
+
+            preview.innerHTML = `
+                <li role="listitem">
+                    <span class="day">Montag - Freitag</span>
+                    <span class="time">${weekdayMorningOpen}-${weekdayMorningClose} & ${weekdayAfternoonOpen}-${weekdayAfternoonClose}</span>
+                </li>
+                <li role="listitem">
+                    <span class="day">Samstag</span>
+                    <span class="time" style="${saturdayClosed ? 'color: #ff4444; font-weight: 700;' : ''}">
+                        ${saturdayClosed ? 'GESCHLOSSEN' : `${saturdayOpen} - ${saturdayClose}`}
+                    </span>
+                </li>
+                <li role="listitem">
+                    <span class="day">Sonntag</span>
+                    <span class="time" style="${sundayClosed ? 'color: #ff4444; font-weight: 700;' : ''}">
+                        ${sundayClosed ? 'GESCHLOSSEN' : `${sundayOpen} - ${sundayClose}`}
+                    </span>
+                </li>
+            `;
         }
 
-        // Notification system
+        // Save regular hours
+        function saveRegularHours() {
+            const hours = {
+                weekday: {
+                    morning: {
+                        open: document.getElementById('weekday-open-1').value,
+                        close: document.getElementById('weekday-close-1').value
+                    },
+                    afternoon: {
+                        open: document.getElementById('weekday-open-2').value,
+                        close: document.getElementById('weekday-close-2').value
+                    }
+                },
+                saturday: {
+                    open: document.getElementById('saturday-open').value,
+                    close: document.getElementById('saturday-close').value,
+                    closed: document.getElementById('saturday-closed').checked
+                },
+                sunday: {
+                    open: document.getElementById('sunday-open').value,
+                    close: document.getElementById('sunday-close').value,
+                    closed: document.getElementById('sunday-closed').checked
+                },
+                lastUpdated: new Date().toISOString()
+            };
+
+            try {
+                localStorage.setItem('openingHours', JSON.stringify(hours));
+                console.log('✅ Saved hours:', hours);
+                showNotification('Öffnungszeiten erfolgreich gespeichert! Die Änderungen sind jetzt auf Ihrer Website sichtbar.', 'success');
+                updateHoursPreview();
+            } catch (error) {
+                console.error('Error saving hours:', error);
+                showNotification('Fehler beim Speichern der Öffnungszeiten.', 'danger');
+            }
+        }
+
+        // Reset to default hours
+        function resetToDefaultHours() {
+            if (!confirm('Möchten Sie die Öffnungszeiten auf die Standardwerte zurücksetzen?')) return;
+
+            try {
+                document.getElementById('weekday-open-1').value = DEFAULT_HOURS.weekday.morning.open;
+                document.getElementById('weekday-close-1').value = DEFAULT_HOURS.weekday.morning.close;
+                document.getElementById('weekday-open-2').value = DEFAULT_HOURS.weekday.afternoon.open;
+                document.getElementById('weekday-close-2').value = DEFAULT_HOURS.weekday.afternoon.close;
+
+                document.getElementById('saturday-open').value = DEFAULT_HOURS.saturday.open;
+                document.getElementById('saturday-close').value = DEFAULT_HOURS.saturday.close;
+                document.getElementById('saturday-closed').checked = DEFAULT_HOURS.saturday.closed;
+                document.getElementById('saturday-open').disabled = false;
+                document.getElementById('saturday-close').disabled = false;
+
+                document.getElementById('sunday-closed').checked = DEFAULT_HOURS.sunday.closed;
+                document.getElementById('sunday-open').disabled = true;
+                document.getElementById('sunday-close').disabled = true;
+
+                localStorage.removeItem('openingHours');
+
+                updateHoursPreview();
+                showNotification('Öffnungszeiten wurden auf Standard zurückgesetzt.', 'info');
+
+                console.log('✅ Reset to default hours');
+            } catch (error) {
+                console.error('Error resetting hours:', error);
+                showNotification('Fehler beim Zurücksetzen.', 'danger');
+            }
+        }
+
+        // Preview on main site
+        function previewHoursOnMainSite() {
+            window.open('/', '_blank');
+        }
+
+        // ============================================
+        // SEARCH MANAGEMENT (UNCHANGED)
+        // ============================================
+
+        function addPinnedResult() {
+            const keyword = document.getElementById('pinnedKeyword').value;
+            const url = document.getElementById('pinnedUrl').value;
+            if (!keyword || !url) return;
+
+            const pinned = JSON.parse(localStorage.getItem('pinnedResults') || '[]');
+            pinned.push({ keyword, url, id: Date.now() });
+            localStorage.setItem('pinnedResults', JSON.stringify(pinned));
+            loadPinnedResults();
+
+            document.getElementById('pinnedKeyword').value = '';
+            document.getElementById('pinnedUrl').value = '';
+            showNotification('Hinzugefügt', 'success');
+        }
+
+        function loadPinnedResults() {
+            const list = document.getElementById('pinnedList');
+            if (!list) return;
+
+            const pinned = JSON.parse(localStorage.getItem('pinnedResults') || '[]');
+            list.innerHTML = pinned.map(item => `
+                <div class="search-rule">
+                    <div>
+                        <span class="rule-type">PINNED</span>
+                        <strong>${item.keyword}</strong> → ${item.url}
+                    </div>
+                    <button class="delete-btn" onclick="removePinned(${item.id})" aria-label="Gepinntes Ergebnis für ${item.keyword} entfernen">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function removePinned(id) {
+            const pinned = JSON.parse(localStorage.getItem('pinnedResults') || '[]');
+            localStorage.setItem('pinnedResults', JSON.stringify(pinned.filter(item => item.id !== id)));
+            loadPinnedResults();
+        }
+
+        function addExcludedTerm() {
+            const term = document.getElementById('excludedTerm').value;
+            if (!term) return;
+
+            const excluded = JSON.parse(localStorage.getItem('excludedTerms') || '[]');
+            excluded.push({ term, id: Date.now() });
+            localStorage.setItem('excludedTerms', JSON.stringify(excluded));
+            loadExcludedTerms();
+
+            document.getElementById('excludedTerm').value = '';
+            showNotification('Begriff ausgeschlossen', 'success');
+        }
+
+        function loadExcludedTerms() {
+            const list = document.getElementById('excludedList');
+            if (!list) return;
+
+            const excluded = JSON.parse(localStorage.getItem('excludedTerms') || '[]');
+            list.innerHTML = excluded.map(item => `
+                <div class="search-rule">
+                    <div>
+                        <span class="rule-type" style="background: #dc3545;">EXCLUDED</span>
+                        ${item.term}
+                    </div>
+                    <button class="delete-btn" onclick="removeExcluded(${item.id})" aria-label="Ausschluss für ${item.term} entfernen">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function removeExcluded(id) {
+            const excluded = JSON.parse(localStorage.getItem('excludedTerms') || '[]');
+            localStorage.setItem('excludedTerms', JSON.stringify(excluded.filter(item => item.id !== id)));
+            loadExcludedTerms();
+        }
+
+        function addSynonym() {
+            const term = document.getElementById('synonymTerm').value;
+            const aliases = document.getElementById('synonymAlias').value;
+            if (!term || !aliases) return;
+
+            const synonyms = JSON.parse(localStorage.getItem('synonyms') || '[]');
+            synonyms.push({ term, aliases: aliases.split(',').map(a => a.trim()), id: Date.now() });
+            localStorage.setItem('synonyms', JSON.stringify(synonyms));
+            loadSynonyms();
+
+            document.getElementById('synonymTerm').value = '';
+            document.getElementById('synonymAlias').value = '';
+            showNotification('Synonym hinzugefügt', 'success');
+        }
+
+        function loadSynonyms() {
+            const list = document.getElementById('synonymsList');
+            if (!list) return;
+
+            const synonyms = JSON.parse(localStorage.getItem('synonyms') || '[]');
+            list.innerHTML = synonyms.map(item => `
+                <div class="search-rule">
+                    <div>
+                        <span class="rule-type" style="background: #28a745;">SYNONYM</span>
+                        <strong>${item.term}</strong> = ${item.aliases.join(', ')}
+                    </div>
+                    <button class="delete-btn" onclick="removeSynonym(${item.id})" aria-label="Synonym für ${item.term} entfernen">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function removeSynonym(id) {
+            const synonyms = JSON.parse(localStorage.getItem('synonyms') || '[]');
+            localStorage.setItem('synonyms', JSON.stringify(synonyms.filter(item => item.id !== id)));
+            loadSynonyms();
+        }
+
+        function saveMetadata() {
+            const metadata = {
+                title: document.getElementById('metaTitle').value,
+                description: document.getElementById('metaDescription').value,
+                keywords: document.getElementById('metaKeywords').value
+            };
+            localStorage.setItem('siteMetadata', JSON.stringify(metadata));
+            showNotification('Metadaten gespeichert', 'success');
+        }
+
+        // ============================================
+        // UTILITY FUNCTIONS
+        // ============================================
+
         function showNotification(message, type) {
             const notification = document.createElement('div');
-            notification.className = `alert alert-${type === 'success' ? 'success' : 'danger'} position-fixed`;
-            notification.style.cssText = `
-                top: 20px;
-                right: 20px;
-                z-index: 9999;
-                min-width: 300px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-                border-radius: 8px;
-                animation: slideInRight 0.3s ease;
-            `;
-            notification.innerHTML = `
-                <div class="d-flex align-items-center">
-                    <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-triangle'} me-2"></i>
-                    <div>${message}</div>
-                    <button type="button" class="btn-close ms-auto" onclick="this.parentElement.parentElement.remove()"></button>
-                </div>
-            `;
-
+            notification.className = `alert alert-${type} position-fixed top-0 end-0 m-3`;
+            notification.style.zIndex = '9999';
+            notification.setAttribute('role', 'alert');
+            notification.innerHTML = message;
             document.body.appendChild(notification);
 
-            // Auto-remove after 5 seconds
-            setTimeout(() => {
-                if (notification.parentElement) {
-                    notification.remove();
-                }
-            }, 5000);
+            setTimeout(() => notification.remove(), 3000);
         }
 
-        function initCookieConsent() {
-            const cookieConsent = localStorage.getItem('cookieConsent');
+        function viewWebsite() {
+            window.open('/', '_blank');
+        }
 
-            if (!cookieConsent) {
-                setTimeout(() => {
-                    document.getElementById('cookieBanner').classList.add('show');
-                }, 2000);
+        function logout() {
+            if (confirm('Möchten Sie sich wirklich abmelden?')) {
+                sessionStorage.clear();
+                window.location.href = '/admin/';
             }
         }
 
-        function acceptCookies() {
-            localStorage.setItem('cookieConsent', 'accepted');
-            document.getElementById('cookieBanner').classList.remove('show');
+        function loadAllStoredData() {
+            loadSavedHours();
+            loadPinnedResults();
+            loadExcludedTerms();
+            loadSynonyms();
 
-             if (typeof gtag !== 'undefined') {
-                gtag('consent', 'update', {
-                        'analytics_storage': 'granted'
-                });
-             }
+            const metadata = JSON.parse(localStorage.getItem('siteMetadata') || '{}');
+            if (metadata.title) document.getElementById('metaTitle').value = metadata.title;
+            if (metadata.description) document.getElementById('metaDescription').value = metadata.description;
+            if (metadata.keywords) document.getElementById('metaKeywords').value = metadata.keywords;
         }
 
-
-        function declineCookies() {
-            localStorage.setItem('cookieConsent', 'declined');
-            document.getElementById('cookieBanner').classList.remove('show');
-
-            if (typeof gtag !== 'undefined') {
-                gtag('consent', 'update', {
-                    'analytics_storage': 'denied',
-                    'ad_storage': 'denied'
-                });
-            }
-
-            // Delete GA cookies (GA4)
-            document.cookie = '_ga=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-            document.cookie = '_gid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-            document.cookie = '_ga_0YTPWVDXEZ=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-
-            console.log('Cookie consent declined – GA disabled and cookies cleared');
-        }
-
-        function loadGoogleAnalytics() {
-            // Only load GA if not already loaded
-            if (!window.ga) {
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'G-0YTPWVDXEZ', {
-                    'anonymize_ip': true,
-                    'allow_ad_features': false
-                });
-            }
-        }
+        // ============================================
+        // INITIALIZATION
+        // ============================================
 
         document.addEventListener('DOMContentLoaded', function() {
-            initCookieConsent();
+            loadAnnouncements();
+            loadAllStoredData();
         });
 
-        initCookieConsent();
-
-
-        // Active navigation highlighting
-        window.addEventListener('scroll', () => {
-            let current = '';
-            const sections = document.querySelectorAll('section');
-            const navbarHeight = document.querySelector('.header-wrap').offsetHeight;
-            const scrollY = window.pageYOffset;
-
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - navbarHeight - 100)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').slice(1) === current) {
-                    link.classList.add('active');
-                }
-            });
-        });
-
-        // Language toggle functionality
-        let currentLang = localStorage.getItem('preferred-language') || 'de';
-
-        function setLanguage(lang) {
-                currentLang = lang;
-                localStorage.setItem('preferred-language', lang);
-                updateLanguage();
-                updateLanguageDisplay();
-
-                if(typeof gtag !== 'undefined'){
-                gtag('event', 'language_change', {
-                    'event_category': 'preferences',
-                    'event_label': lang
-
-                });
-                }
-        }
-
-        function updateLanguageDisplay() {
-            const display = document.getElementById('currentLangDisplay');
-            if (display) {
-                const langMap = {
-                    'de': 'DE',
-                    'en': 'EN',
-                    'bks': 'BKS'
-                };
-                display.textContent = langMap[currentLang] || 'DE';
-            }
-        }
-
-
-        function updateLanguage() {
-            const deElements = document.querySelectorAll('.de');
-            const enElements = document.querySelectorAll('.en');
-            const bksElements = document.querySelectorAll('.bks');
-
-            // Hide all language elements first
-            deElements.forEach(el => el.style.display = 'none');
-            enElements.forEach(el => el.style.display = 'none');
-            bksElements.forEach(el => el.style.display = 'none');
-
-            // Show the selected language
-            if (currentLang === 'en') {
-                enElements.forEach(el => el.style.display = '');
-                document.documentElement.lang = 'en';
-                updateFormPlaceholdersEN();
-            } else if (currentLang === 'bks') {
-                bksElements.forEach(el => el.style.display = '');
-                document.documentElement.lang = 'sr';
-                updateFormPlaceholdersBKS();
-            } else {
-                deElements.forEach(el => el.style.display = '');
-                document.documentElement.lang = 'de';
-                updateFormPlaceholdersDE();
-            }
-        }
-
-        function updateFormPlaceholdersDE() {
-            const inputs = {
-                'fullName': 'Vor- und Nachname *',
-                'phone': 'Telefonnummer *',
-                'email': 'E-Mail-Adresse *',
-                'reason': 'Beschreiben Sie kurz den Grund Ihres Besuchs'
-            };
-
-            Object.keys(inputs).forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.placeholder = inputs[id];
-            });
-
-            const selectOption = document.querySelector('#petType option[value=""]');
-            if (selectOption) selectOption.textContent = 'Art des Tieres wählen *';
-
-            const options = document.querySelectorAll('#petType option');
-            if (options.length > 1) {
-                options[1].textContent = 'Hund';
-                options[2].textContent = 'Katze';
-                options[3].textContent = 'Kaninchen';
-                options[4].textContent = 'Andere';
-            }
-        }
-
-        function updateFormPlaceholdersEN() {
-            const inputs = {
-                'fullName': 'First and Last Name *',
-                'phone': 'Phone Number *',
-                'email': 'Email Address *',
-                'reason': 'Briefly describe the reason for your visit'
-            };
-
-            Object.keys(inputs).forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.placeholder = inputs[id];
-            });
-
-            const selectOption = document.querySelector('#petType option[value=""]');
-            if (selectOption) selectOption.textContent = 'Choose Pet Type *';
-
-            const options = document.querySelectorAll('#petType option');
-            if (options.length > 1) {
-                options[1].textContent = 'Dog';
-                options[2].textContent = 'Cat';
-                options[3].textContent = 'Rabbit';
-                options[4].textContent = 'Other';
-            }
-        }
-
-        function updateFormPlaceholdersBKS() {
-            const inputs = {
-                'fullName': 'Ime i prezime *',
-                'phone': 'Broj telefona *',
-                'email': 'E-mail adresa *',
-                'reason': 'Ukratko opišite razlog vaše posete'
-            };
-
-            Object.keys(inputs).forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.placeholder = inputs[id];
-            });
-
-            const selectOption = document.querySelector('#petType option[value=""]');
-            if (selectOption) selectOption.textContent = 'Izaberite vrstu ljubimca *';
-
-            const options = document.querySelectorAll('#petType option');
-            if (options.length > 1) {
-                options[1].textContent = 'Pas';
-                options[2].textContent = 'Mačka';
-                options[3].textContent = 'Zec';
-                options[4].textContent = 'Drugo';
-            }
-        }
-
-
-        // Initialize language on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            updateLanguage();
-            updateLanguageDisplay();
-
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'page_view', {
-                    'page_title': document.title,
-                    'page_location': window.location.href,
-                    'page_path': window.location.pathname,
-                    'user_language': currentLang || 'de'
-                });
-            }
-
-
-            // Ensure preloader is hidden after DOM is loaded
+        // Initialize when opening hours tab becomes active
+        document.querySelector('a[href="#opening-hours"]').addEventListener('click', function() {
             setTimeout(() => {
-                const preloader = document.getElementById('preloader');
-                if (preloader) {
-                    preloader.style.opacity = '0';
-                    setTimeout(() => {
-                        preloader.style.display = 'none';
-                    }, 500);
-                }
+                loadSavedHours();
+                updateHoursPreview();
             }, 100);
         });
-
-        // Console welcome message - Multilingual
-        if (currentLang === 'en') {
-            console.log('%c🐾 Welcome to Tierambulanz Prater! 🐾', 'color: #00ace2; font-size: 20px; font-weight: bold;');
-            console.log('%cWe care for your beloved pets with heart and expertise.', 'color: #005d83; font-size: 14px;');
-            console.log('%c🏠 From expats to expats - you are welcome here!', 'color: #00ace2; font-size: 14px;');
-        } else {
-            console.log('%c🐾 Willkommen bei Tierambulanz Prater! 🐾', 'color: #00ace2; font-size: 20px; font-weight: bold;');
-            console.log('%cWir kümmern uns um Ihre Lieblinge mit Herz und Kompetenz.', 'color: #005d83; font-size: 14px;');
-            console.log('%c🏠 Von Expats für Expats - Sie sind hier willkommen!', 'color: #00ace2; font-size: 14px;');
-        }
-
-        function openDirections() {
-            // Clinic coordinates (Tierambulanz Prater actual location)
-            const clinicLat = 48.217789;
-            const clinicLng = 16.398223;
-            const clinicName = "Tierambulanz Prater";
-            const clinicAddress = "Ausstellungsstraße 49, 1020 Wien"; // Correct address based on map
-
-            // Check if geolocation is supported
-            if ("geolocation" in navigator) {
-                // Show loading state on button
-                const button = event.target.closest('button');
-                const originalContent = button.innerHTML;
-                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Standort wird ermittelt...';
-                button.disabled = true;
-
-                // Try to get user's current location
-                navigator.geolocation.getCurrentPosition(
-                    function(position) {
-                        // Success: Open Google Maps with directions from current location
-                        const userLat = position.coords.latitude;
-                        const userLng = position.coords.longitude;
-
-                        // Construct Google Maps URL with directions
-                        const mapsUrl = `https://www.google.com/maps/dir/${userLat},${userLng}/${clinicLat},${clinicLng}/@${clinicLat},${clinicLng},15z`;
-
-                        // Reset button
-                        button.innerHTML = originalContent;
-                        button.disabled = false;
-
-                        // Open in new tab
-                        window.open(mapsUrl, '_blank');
-                    },
-                    function(error) {
-                        // Error or permission denied: Open Google Maps without starting point
-                        console.log('Geolocation error:', error);
-
-                        // Reset button
-                        button.innerHTML = originalContent;
-                        button.disabled = false;
-
-                        // Open Google Maps centered on clinic (user can enter their location)
-                        const mapsUrl = `https://www.google.com/maps/dir//${clinicLat},${clinicLng}/@${clinicLat},${clinicLng},15z`;
-                        window.open(mapsUrl, '_blank');
-                    },
-                    {
-                        enableHighAccuracy: true,
-                        timeout: 5000,
-                        maximumAge: 0
-                    }
-                );
-            } else {
-                // Geolocation not supported: Open Google Maps without starting point
-                const mapsUrl = `https://www.google.com/maps/dir//${clinicLat},${clinicLng}/@${clinicLat},${clinicLng},15z`;
-                window.open(mapsUrl, '_blank');
-            }
-        }
-
-        function setVH() {
-            let vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
-        }
-        setVH();
-        window.addEventListener('resize', setVH);
-
-        // Close menu when clicking outside
-        document.addEventListener('click', function(e) {
-            const navbar = document.querySelector('.navbar-collapse');
-            const navbarToggler = document.querySelector('.navbar-toggler');
-            if (navbar && navbar.classList.contains('show') &&
-                !navbar.contains(e.target) &&
-                !navbarToggler.contains(e.target)) {
-                navbar.classList.remove('show');
-            }
-        });
-
     </script>
-
-    <script>
-    // Enhanced Google Analytics Event Tracking
-    (function() {
-        if (typeof gtag === 'undefined') return;
-
-        const appointmentForm = document.getElementById('appointmentForm');
-        if (appointmentForm) {
-            appointmentForm.addEventListener('submit', function() {
-                gtag('event', 'generate_lead', {
-                    'event_category': 'engagement',
-                    'event_label': 'contact_form',
-                    'value': 1
-                });
-            });
-        }
-
-        document.querySelectorAll('a[href^="tel:"]').forEach(link => {
-            link.addEventListener('click', function() {
-                const phoneNumber = this.href.replace('tel:', '');
-                gtag('event', 'click', {
-                    'event_category': 'contact',
-                    'event_label': 'phone_call',
-                    'value': phoneNumber
-                });
-            });
-        });
-
-        document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
-            link.addEventListener('click', function() {
-                gtag('event', 'click', {
-                    'event_category': 'contact',
-                    'event_label': 'email_click'
-                });
-            });
-        });
-
-        let scrollDepths = [25, 50, 75, 100];
-        let scrolledDepths = [];
-        window.addEventListener('scroll', throttle(function() {
-            const scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100;
-            scrollDepths.forEach(depth => {
-                if (scrollPercent >= depth && !scrolledDepths.includes(depth)) {
-                    scrolledDepths.push(depth);
-                    gtag('event', 'scroll', {
-                        'event_category': 'engagement',
-                        'event_label': 'scroll_depth',
-                        'value': depth
-                    });
-                }
-            });
-        }, 500));
-
-        document.querySelectorAll('.service-box').forEach((box, index) => {
-            box.addEventListener('click', function() {
-                const serviceName = this.querySelector('h4').textContent.trim();
-                gtag('event', 'view_item', {
-                    'event_category': 'services',
-                    'event_label': serviceName,
-                    'value': index + 1
-                });
-            });
-        });
-
-        document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
-            link.addEventListener('click', function() {
-                const section = this.getAttribute('href').replace('#', '');
-                gtag('event', 'navigation', {
-                    'event_category': 'site_navigation',
-                    'event_label': section
-                });
-            });
-        });
-
-        const langButton = document.getElementById('langToggle');
-        if (langButton) {
-            langButton.addEventListener('click', function() {
-                const newLang = currentLang === 'de' ? 'en' : 'de';
-                gtag('event', 'language_change', {
-                    'event_category': 'preferences',
-                    'event_label': newLang
-                });
-            });
-        }
-
-        let timeOnPage = 0;
-        setInterval(function() {
-            timeOnPage += 30;
-            if (timeOnPage % 60 === 0) {
-                gtag('event', 'time_on_page', {
-                    'event_category': 'engagement',
-                    'value': timeOnPage
-                });
-            }
-        }, 30000);
-
-        document.querySelectorAll('.social-links a').forEach(link => {
-            link.addEventListener('click', function() {
-                const platform = this.getAttribute('aria-label');
-                gtag('event', 'social_click', {
-                    'event_category': 'social',
-                    'event_label': platform
-                });
-            });
-        });
-
-        const trackAnnouncementView = function() {
-            const announcements = document.querySelectorAll('#announcementContainer > div');
-            if (announcements.length > 0) {
-                gtag('event', 'announcement_view', {
-                    'event_category': 'announcements',
-                    'value': announcements.length
-                });
-            }
-        };
-        setTimeout(trackAnnouncementView, 2000);
-
-        function throttle(func, delay) {
-            let timeoutId;
-            let lastExecTime = 0;
-            return function() {
-                const currentTime = Date.now();
-                if (currentTime - lastExecTime > delay) {
-                    func.apply(this, arguments);
-                    lastExecTime = currentTime;
-                }
-            };
-        }
-    })();
-
-    function loadRegularHours() {
-        const hours = JSON.parse(localStorage.getItem('openingHours') || '{}');
-        if (!hours.weekday) return; // No saved hours, keep defaults
-
-        const hoursTable = document.querySelector('.hours-table');
-        if (!hoursTable) return;
-
-        // Update Monday-Friday hours
-        if (hours.weekday && hours.weekday.morning && hours.weekday.afternoon) {
-            const weekdayRow = hoursTable.querySelectorAll('li')[0];
-            if (weekdayRow) {
-                const timeSpan = weekdayRow.querySelector('.time');
-                if (timeSpan) {
-                    timeSpan.textContent =
-                        `${hours.weekday.morning.open}-${hours.weekday.morning.close} & ${hours.weekday.afternoon.open}-${hours.weekday.afternoon.close}`;
-                }
-            }
-        }
-
-        // Update Saturday hours
-        if (hours.saturday) {
-            const satRow = hoursTable.querySelectorAll('li')[1];
-            if (satRow) {
-                const timeSpan = satRow.querySelector('.time');
-                if (timeSpan) {
-                    if (hours.saturday.closed) {
-                        timeSpan.textContent = 'GESCHLOSSEN';
-                        timeSpan.style.color = '#ff4444';
-                        timeSpan.style.fontWeight = '700';
-                    } else {
-                        timeSpan.textContent = `${hours.saturday.open} - ${hours.saturday.close}`;
-                        timeSpan.style.color = '';
-                        timeSpan.style.fontWeight = '';
-                    }
-                }
-            }
-        }
-
-        // Update Sunday hours
-        if (hours.sunday) {
-            const sunRow = hoursTable.querySelectorAll('li')[2];
-            if (sunRow) {
-                const timeSpan = sunRow.querySelector('.time');
-                if (timeSpan) {
-                    if (hours.sunday.closed !== false) {
-                        // Keep default "GESCHLOSSEN" unless explicitly set as open
-                        if (hours.sunday.open && hours.sunday.close) {
-                            timeSpan.textContent = `${hours.sunday.open} - ${hours.sunday.close}`;
-                            timeSpan.style.color = '';
-                            timeSpan.style.fontWeight = '';
-                        }
-                    }
-                }
-            }
-        }
-    }
-    function loadWeekendSpecialHours() {
-        const specialHours = JSON.parse(localStorage.getItem('weekendSpecial') || '{}');
-
-        if (!specialHours.enabled) return;
-
-        // Better date handling - normalize to avoid timezone issues
-        const now = new Date();
-        now.setHours(0, 0, 0, 0); // Start of current day
-
-        const start = new Date(specialHours.startDate);
-        start.setHours(0, 0, 0, 0); // Start of start day
-
-        const end = new Date(specialHours.endDate);
-        end.setHours(23, 59, 59, 999); // End of end day
-
-        // Check if we're in the date range
-        if (now < start || now > end) return;
-
-        // Display announcement banner
-        if (specialHours.announcement) {
-            const banner = document.createElement('div');
-            banner.style.cssText = 'background: linear-gradient(135deg, #ffd700, #ffc107); color: #333; padding: 15px; text-align: center; font-weight: bold; margin-bottom: 20px; border-radius: 8px;';
-            banner.innerHTML = `🌟 ${specialHours.announcement} 🌟`;
-
-            const hero = document.querySelector('.hero-section .container');
-            if (hero) hero.insertBefore(banner, hero.firstChild);
-        }
-
-        // Update hours table
-        const hoursTable = document.querySelector('.hours-table');
-        if (!hoursTable) return;
-
-        // Update Saturday special hours
-        if (specialHours.saturday && specialHours.saturday.length > 0) {
-            const satRow = hoursTable.querySelectorAll('li')[1];
-            if (satRow) {
-                const timeSpan = satRow.querySelector('.time');
-                if (timeSpan) {
-                    timeSpan.textContent = specialHours.saturday.map(slot =>
-                        `${slot.open}-${slot.close}`
-                    ).join(' & ');
-                    timeSpan.style.color = '#28a745';
-                    timeSpan.style.fontWeight = 'bold';
-                }
-            }
-        }
-
-        // Update Sunday special hours
-        if (specialHours.sunday && specialHours.sunday.length > 0) {
-            const sunRow = hoursTable.querySelectorAll('li')[2];
-            if (sunRow) {
-                const timeSpan = sunRow.querySelector('.time');
-                if (timeSpan) {
-                    timeSpan.textContent = specialHours.sunday.map(slot =>
-                        `${slot.open}-${slot.close}`
-                    ).join(' & ');
-                    timeSpan.style.color = '#28a745';
-                    timeSpan.style.fontWeight = 'bold';
-                }
-            }
-        }
-    }
-
-
-
-
-    document.addEventListener('DOMContentLoaded', function() {
-        loadRegularHours();
-        loadWeekendSpecialHours();
-    });
-    </script>
-
-
 </body>
-
 </html>
-
-
-
-
-
-
-
-
