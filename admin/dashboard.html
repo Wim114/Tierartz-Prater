@@ -196,32 +196,118 @@
             position: relative;
             margin-bottom: 10px;
         }
+
+        .hours-row {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .time-input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .time-slot {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .btn-add-slot {
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-remove-slot {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .search-rule {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .rule-type {
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .weekend-banner-preview {
+            background: linear-gradient(135deg, #ffd700, #ffc107);
+            color: #333;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
     <!-- Admin Panel -->
     <div class="admin-container">
-        <div class="admin-header">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <h1><i class="fas fa-cog"></i> Tierambulanz Prater - Admin Panel</h1>
-                    <p class="mb-0 text-muted">Verwalten Sie Ihre Website-Inhalte einfach und schnell</p>
-                </div>
-                <div class="col-md-6 text-end">
-                    <span class="text-muted me-3">
-                        <i class="fas fa-user-shield"></i> Admin
-                    </span>
-                    <button class="edit-btn" onclick="viewWebsite()">
-                        <i class="fas fa-eye"></i> Website Ansehen
-                    </button>
-                    <button class="btn btn-outline-secondary" onclick="logout()">
-                        <i class="fas fa-sign-out-alt"></i> Abmelden
-                    </button>
-                </div>
-            </div>
-        </div>
+      <div class="admin-header">
+          <div class="row align-items-center">
+              <div class="col-md-6">
+                  <h1><i class="fas fa-cog"></i> Tierambulanz Prater - Admin Panel</h1>
+                  <p class="mb-0 text-muted">Verwalten Sie Ihre Website-Inhalte</p>
+              </div>
+              <div class="col-md-6 text-end">
+                  <span class="text-muted me-3">
+                      <i class="fas fa-user-shield"></i> Admin
+                  </span>
+                  <button class="edit-btn" onclick="viewWebsite()">
+                      <i class="fas fa-eye"></i> Website Ansehen
+                  </button>
+                  <button class="btn btn-outline-secondary" onclick="logout()">
+                      <i class="fas fa-sign-out-alt"></i> Abmelden
+                  </button>
+              </div>
+          </div>
+      </div>
 
-        <!-- Tab Content -->
+      <ul class="nav nav-tabs">
+          <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" href="#announcements">
+                  <i class="fas fa-bullhorn"></i> Ankündigungen
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link active" data-bs-toggle="tab" href="#opening-hours">
+                  <i class="fas fa-clock"></i> Öffnungszeiten
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" href="#search-management">
+                  <i class="fas fa-search"></i> Suchverwaltung
+              </a>
+          </li>
+      </ul>
+
         <div class="tab-content">
             <!-- Announcements Tab -->
             <div class="tab-pane fade show active" id="announcements">
@@ -284,33 +370,230 @@
                 </div>
             </div>
 
-            <!-- Other tabs -->
-            <div class="tab-pane fade" id="hours">
+             <!-- NEW: Opening Hours Tab -->
+            <div class="tab-pane fade show active" id="opening-hours">
                 <div class="admin-card">
-                    <h3><i class="fas fa-clock"></i> Öffnungszeiten bearbeiten</h3>
-                    <p class="text-muted">Diese Funktion wird bald verfügbar sein.</p>
-                </div>
-            </div>
+                    <h3><i class="fas fa-clock"></i> Reguläre Öffnungszeiten</h3>
+                    <div class="hours-row">
+                      <strong style="width: 150px;">Montag - Freitag</strong>
+                      <div class="time-input-group">
+                          <input type="time" class="form-control" id="weekday-open-1" value="09:00" style="width: 120px;">
+                          <span>bis</span>
+                          <input type="time" class="form-control" id="weekday-close-1" value="12:00" style="width: 120px;">
+                          <span>&</span>
+                          <input type="time" class="form-control" id="weekday-open-2" value="16:00" style="width: 120px;">
+                          <span>bis</span>
+                          <input type="time" class="form-control" id="weekday-close-2" value="19:00" style="width: 120px;">
+                      </div>
+                  </div>
+                  <div class="hours-row">
+                      <strong style="width: 150px;">Samstag</strong>
+                      <div class="time-input-group">
+                          <input type="time" class="form-control" id="saturday-open" value="09:00" style="width: 120px;">
+                          <span>bis</span>
+                          <input type="time" class="form-control" id="saturday-close" value="12:00" style="width: 120px;">
+                          <div class="form-check ms-3">
+                              <input class="form-check-input" type="checkbox" id="saturday-closed">
+                              <label class="form-check-label">Geschlossen</label>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="hours-row">
+                      <strong style="width: 150px;">Sonntag</strong>
+                      <div class="time-input-group">
+                          <input type="time" class="form-control" id="sunday-open" disabled style="width: 120px;">
+                          <span>bis</span>
+                          <input type="time" class="form-control" id="sunday-close" disabled style="width: 120px;">
+                          <div class="form-check ms-3">
+                              <input class="form-check-input" type="checkbox" id="sunday-closed" checked>
+                              <label class="form-check-label">Geschlossen</label>
+                          </div>
+                      </div>
+                  </div>
+                  <button class="edit-btn mt-3" onclick="saveRegularHours()">
+                      <i class="fas fa-save"></i> Speichern
+                  </button>
+              </div>
+              <div class="admin-card">
+                  <h3><i class="fas fa-star"></i> Wochenend-Sonderzeiten</h3>
+                  <p class="text-muted">Aktivieren Sie spezielle Öffnungszeiten für Wochenenden</p>
 
-            <div class="tab-pane fade" id="team">
-                <div class="admin-card">
-                    <h3><i class="fas fa-users"></i> Team verwalten</h3>
-                    <p class="text-muted">Diese Funktion wird bald verfügbar sein.</p>
-                </div>
-            </div>
+                  <div class="form-check form-switch mb-3">
+                      <input class="form-check-input" type="checkbox" id="enableWeekendSpecial">
+                      <label class="form-check-label">
+                          <strong>Wochenend-Sonderzeiten aktivieren</strong>
+                      </label>
+                  </div>
+                  <div id="weekendSpecialConfig" style="display: none;">
+                    <div class="weekend-banner-preview">
+                        <strong>🌟 Vorschau 🌟</strong><br>
+                        <span id="previewText">Sonderöffnungszeiten!</span>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Startdatum</label>
+                            <input type="date" class="form-control" id="weekendStartDate">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Enddatum</label>
+                            <input type="date" class="form-control" id="weekendEndDate">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Ankündigungstext</label>
+                        <input type="text" class="form-control" id="weekendAnnouncementText"
+                               placeholder="z.B. 'Oster-Wochenende!'"
+                               onkeyup="updatePreview()">
+                    </div>
+                    <h6>Samstag Sonderzeiten</h6>
+                    <div id="saturdaySpecialSlots">
+                        <div class="time-slot">
+                            <div class="row align-items-center">
+                                <div class="col-md-5">
+                                    <input type="time" class="form-control">
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="time" class="form-control">
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn-remove-slot" onclick="removeTimeSlot(this)">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-add-slot mb-3" onclick="addTimeSlot('saturdaySpecialSlots')">
+                        <i class="fas fa-plus"></i> Zeitfenster hinzufügen
+                    </button>
+                    <h6>Sonntag Sonderzeiten</h6>
+                    <div id="sundaySpecialSlots">
+                        <div class="time-slot">
+                            <div class="row align-items-center">
+                                <div class="col-md-5">
+                                    <input type="time" class="form-control">
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="time" class="form-control">
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn-remove-slot" onclick="removeTimeSlot(this)">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-add-slot mb-3" onclick="addTimeSlot('sundaySpecialSlots')">
+                        <i class="fas fa-plus"></i> Zeitfenster hinzufügen
+                    </button>
 
-            <div class="tab-pane fade" id="services">
-                <div class="admin-card">
-                    <h3><i class="fas fa-heartbeat"></i> Leistungen verwalten</h3>
-                    <p class="text-muted">Diese Funktion wird bald verfügbar sein.</p>
+                    <button class="edit-btn" onclick="saveWeekendSpecial()">
+                        <i class="fas fa-save"></i> Sonderzeiten Speichern
+                    </button>
                 </div>
             </div>
         </div>
+        <div class="tab-pane fade" id="search-management">
+            <div class="admin-card">
+                <h3><i class="fas fa-search"></i> Suchverwaltung & SEO</h3>
 
-        <!-- Quick Actions -->
-
-
-
+                <ul class="nav nav-pills mb-3" style="background: #f8f9fa; padding: 10px; border-radius: 10px;">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="pill" href="#pinned">
+                            <i class="fas fa-thumbtack"></i> Gepinnt
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="pill" href="#excluded">
+                            <i class="fas fa-ban"></i> Ausgeschlossen
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="pill" href="#synonyms">
+                            <i class="fas fa-exchange-alt"></i> Synonyme
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="pill" href="#metadata">
+                            <i class="fas fa-tags"></i> Metadaten
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                      <!-- Pinned Results -->
+                      <div class="tab-pane fade show active" id="pinned">
+                          <p class="text-muted">Pinnen Sie wichtige Seiten für Suchbegriffe</p>
+                          <div class="row mb-3">
+                              <div class="col-md-5">
+                                  <input type="text" class="form-control" id="pinnedKeyword" placeholder="Suchbegriff">
+                              </div>
+                              <div class="col-md-5">
+                                  <input type="text" class="form-control" id="pinnedUrl" placeholder="URL">
+                              </div>
+                              <div class="col-md-2">
+                                  <button class="edit-btn" onclick="addPinnedResult()">
+                                      <i class="fas fa-plus"></i>
+                                  </button>
+                              </div>
+                          </div>
+                          <div id="pinnedList"></div>
+                      </div>
+                      <div class="tab-pane fade" id="excluded">
+                          <p class="text-muted">Schließen Sie Begriffe aus</p>
+                          <div class="row mb-3">
+                              <div class="col-md-8">
+                                  <input type="text" class="form-control" id="excludedTerm" placeholder="Begriff">
+                              </div>
+                              <div class="col-md-4">
+                                  <button class="edit-btn" onclick="addExcludedTerm()">
+                                      <i class="fas fa-ban"></i> Ausschließen
+                                  </button>
+                              </div>
+                          </div>
+                          <div id="excludedList"></div>
+                      </div>
+                      <div class="tab-pane fade" id="synonyms">
+                          <p class="text-muted">Definieren Sie Synonyme</p>
+                          <div class="row mb-3">
+                              <div class="col-md-4">
+                                  <input type="text" class="form-control" id="synonymTerm" placeholder="Begriff">
+                              </div>
+                              <div class="col-md-6">
+                                  <input type="text" class="form-control" id="synonymAlias" placeholder="Synonyme (kommagetrennt)">
+                              </div>
+                              <div class="col-md-2">
+                                  <button class="edit-btn" onclick="addSynonym()">
+                                      <i class="fas fa-plus"></i>
+                                  </button>
+                              </div>
+                          </div>
+                          <div id="synonymsList"></div>
+                      </div>
+                      <div class="tab-pane fade" id="metadata">
+                          <p class="text-muted">SEO-Metadaten verwalten</p>
+                          <div class="mb-3">
+                              <label class="form-label">Seitentitel</label>
+                              <input type="text" class="form-control" id="metaTitle"
+                                     value="Tierambulanz Prater - Veterinary Practice Vienna">
+                          </div>
+                          <div class="mb-3">
+                              <label class="form-label">Beschreibung</label>
+                              <textarea class="form-control" id="metaDescription" rows="3">Modern veterinary practice in Vienna.</textarea>
+                          </div>
+                          <div class="mb-3">
+                              <label class="form-label">Keywords</label>
+                              <input type="text" class="form-control" id="metaKeywords"
+                                     value="Tierarzt Wien, veterinarian Vienna">
+                          </div>
+                          <button class="edit-btn" onclick="saveMetadata()">
+                              <i class="fas fa-save"></i> Speichern
+                          </button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
     <!-- Bootstrap Bundle JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
@@ -547,7 +830,7 @@
             }
 
             // Update preview
-            
+
 
             // Form submission handler
             document.getElementById('announcementForm').addEventListener('submit', async function(e) {
@@ -646,9 +929,294 @@
             document.addEventListener('DOMContentLoaded', function() {
                 loadAnnouncements();
             });
+
+      // ============================================
+      // OPENING HOURS MANAGEMENT
+      // ============================================
+
+      // Checkbox handlers
+      document.getElementById('sunday-closed')?.addEventListener('change', function() {
+          ['sunday-open', 'sunday-close'].forEach(id => {
+              const el = document.getElementById(id);
+              if (el) el.disabled = this.checked;
+          });
+      });
+
+      document.getElementById('saturday-closed')?.addEventListener('change', function() {
+          ['saturday-open', 'saturday-close'].forEach(id => {
+              const el = document.getElementById(id);
+              if (el) el.disabled = this.checked;
+          });
+      });
+
+      document.getElementById('enableWeekendSpecial')?.addEventListener('change', function() {
+          const config = document.getElementById('weekendSpecialConfig');
+          if (config) config.style.display = this.checked ? 'block' : 'none';
+      });
+
+      function updatePreview() {
+          const text = document.getElementById('weekendAnnouncementText')?.value || 'Sonderöffnungszeiten!';
+          const preview = document.getElementById('previewText');
+          if (preview) preview.textContent = text;
+      }
+
+      function saveRegularHours() {
+          const hours = {
+              weekday: {
+                  morning: {
+                      open: document.getElementById('weekday-open-1')?.value,
+                      close: document.getElementById('weekday-close-1')?.value
+                  },
+                  afternoon: {
+                      open: document.getElementById('weekday-open-2')?.value,
+                      close: document.getElementById('weekday-close-2')?.value
+                  }
+              },
+              saturday: {
+                  open: document.getElementById('saturday-open')?.value,
+                  close: document.getElementById('saturday-close')?.value,
+                  closed: document.getElementById('saturday-closed')?.checked
+              },
+              sunday: {
+                  closed: document.getElementById('sunday-closed')?.checked
+              }
+          };
+          localStorage.setItem('openingHours', JSON.stringify(hours));
+          showNotification('Öffnungszeiten gespeichert!', 'success');
+      }
+
+      function saveWeekendSpecial() {
+          const enabled = document.getElementById('enableWeekendSpecial')?.checked;
+
+          if (!enabled) {
+              localStorage.removeItem('weekendSpecial');
+              showNotification('Sonderzeiten deaktiviert', 'info');
+              return;
+          }
+
+          const specialHours = {
+              enabled: true,
+              startDate: document.getElementById('weekendStartDate')?.value,
+              endDate: document.getElementById('weekendEndDate')?.value,
+              saturday: getTimeSlots('saturdaySpecialSlots'),
+              sunday: getTimeSlots('sundaySpecialSlots'),
+              announcement: document.getElementById('weekendAnnouncementText')?.value
+          };
+
+          localStorage.setItem('weekendSpecial', JSON.stringify(specialHours));
+          showNotification('Sonderzeiten gespeichert!', 'success');
+      }
+
+      function getTimeSlots(containerId) {
+          const slots = [];
+          const container = document.getElementById(containerId);
+          if (!container) return slots;
+
+          container.querySelectorAll('.time-slot').forEach(slot => {
+              const inputs = slot.querySelectorAll('input[type="time"]');
+              if (inputs[0]?.value && inputs[1]?.value) {
+                  slots.push({ open: inputs[0].value, close: inputs[1].value });
+              }
+          });
+          return slots;
+      }
+
+      function addTimeSlot(containerId) {
+          const container = document.getElementById(containerId);
+          if (!container) return;
+
+          const newSlot = document.createElement('div');
+          newSlot.className = 'time-slot';
+          newSlot.innerHTML = `
+              <div class="row align-items-center">
+                  <div class="col-md-5">
+                      <input type="time" class="form-control">
+                  </div>
+                  <div class="col-md-5">
+                      <input type="time" class="form-control">
+                  </div>
+                  <div class="col-md-2">
+                      <button class="btn-remove-slot" onclick="removeTimeSlot(this)">
+                          <i class="fas fa-times"></i>
+                      </button>
+                  </div>
+              </div>
+          `;
+          container.appendChild(newSlot);
+      }
+
+      function removeTimeSlot(button) {
+          button.closest('.time-slot')?.remove();
+      }
+
+      // ============================================
+      // SEARCH MANAGEMENT
+      // ============================================
+
+      function addPinnedResult() {
+          const keyword = document.getElementById('pinnedKeyword')?.value;
+          const url = document.getElementById('pinnedUrl')?.value;
+          if (!keyword || !url) return;
+
+          const pinned = JSON.parse(localStorage.getItem('pinnedResults') || '[]');
+          pinned.push({ keyword, url, id: Date.now() });
+          localStorage.setItem('pinnedResults', JSON.stringify(pinned));
+          loadPinnedResults();
+
+          if (document.getElementById('pinnedKeyword')) document.getElementById('pinnedKeyword').value = '';
+          if (document.getElementById('pinnedUrl')) document.getElementById('pinnedUrl').value = '';
+          showNotification('Hinzugefügt', 'success');
+      }
+
+      function loadPinnedResults() {
+          const list = document.getElementById('pinnedList');
+          if (!list) return;
+
+          const pinned = JSON.parse(localStorage.getItem('pinnedResults') || '[]');
+          list.innerHTML = pinned.map(item => `
+              <div class="search-rule">
+                  <div>
+                      <span class="rule-type">PINNED</span>
+                      <strong>${item.keyword}</strong> → ${item.url}
+                  </div>
+                  <button class="delete-btn" onclick="removePinned(${item.id})">
+                      <i class="fas fa-trash"></i>
+                  </button>
+              </div>
+          `).join('');
+      }
+
+      function removePinned(id) {
+          const pinned = JSON.parse(localStorage.getItem('pinnedResults') || '[]');
+          localStorage.setItem('pinnedResults', JSON.stringify(pinned.filter(item => item.id !== id)));
+          loadPinnedResults();
+      }
+
+      function addExcludedTerm() {
+          const term = document.getElementById('excludedTerm')?.value;
+          if (!term) return;
+
+          const excluded = JSON.parse(localStorage.getItem('excludedTerms') || '[]');
+          excluded.push({ term, id: Date.now() });
+          localStorage.setItem('excludedTerms', JSON.stringify(excluded));
+          loadExcludedTerms();
+
+          if (document.getElementById('excludedTerm')) document.getElementById('excludedTerm').value = '';
+          showNotification('Begriff ausgeschlossen', 'success');
+      }
+
+      function loadExcludedTerms() {
+          const list = document.getElementById('excludedList');
+          if (!list) return;
+
+          const excluded = JSON.parse(localStorage.getItem('excludedTerms') || '[]');
+          list.innerHTML = excluded.map(item => `
+              <div class="search-rule">
+                  <div>
+                      <span class="rule-type" style="background: #dc3545;">EXCLUDED</span>
+                      ${item.term}
+                  </div>
+                  <button class="delete-btn" onclick="removeExcluded(${item.id})">
+                      <i class="fas fa-trash"></i>
+                  </button>
+              </div>
+          `).join('');
+      }
+
+      function removeExcluded(id) {
+          const excluded = JSON.parse(localStorage.getItem('excludedTerms') || '[]');
+          localStorage.setItem('excludedTerms', JSON.stringify(excluded.filter(item => item.id !== id)));
+          loadExcludedTerms();
+      }
+
+      function addSynonym() {
+          const term = document.getElementById('synonymTerm')?.value;
+          const aliases = document.getElementById('synonymAlias')?.value;
+          if (!term || !aliases) return;
+
+          const synonyms = JSON.parse(localStorage.getItem('synonyms') || '[]');
+          synonyms.push({ term, aliases: aliases.split(',').map(a => a.trim()), id: Date.now() });
+          localStorage.setItem('synonyms', JSON.stringify(synonyms));
+          loadSynonyms();
+
+          if (document.getElementById('synonymTerm')) document.getElementById('synonymTerm').value = '';
+          if (document.getElementById('synonymAlias')) document.getElementById('synonymAlias').value = '';
+          showNotification('Synonym hinzugefügt', 'success');
+      }
+
+      function loadSynonyms() {
+          const list = document.getElementById('synonymsList');
+          if (!list) return;
+
+          const synonyms = JSON.parse(localStorage.getItem('synonyms') || '[]');
+          list.innerHTML = synonyms.map(item => `
+              <div class="search-rule">
+                  <div>
+                      <span class="rule-type" style="background: #28a745;">SYNONYM</span>
+                      <strong>${item.term}</strong> = ${item.aliases.join(', ')}
+                  </div>
+                  <button class="delete-btn" onclick="removeSynonym(${item.id})">
+                      <i class="fas fa-trash"></i>
+                  </button>
+              </div>
+          `).join('');
+      }
+
+      function removeSynonym(id) {
+          const synonyms = JSON.parse(localStorage.getItem('synonyms') || '[]');
+          localStorage.setItem('synonyms', JSON.stringify(synonyms.filter(item => item.id !== id)));
+          loadSynonyms();
+      }
+
+      function saveMetadata() {
+          const metadata = {
+              title: document.getElementById('metaTitle')?.value,
+              description: document.getElementById('metaDescription')?.value,
+              keywords: document.getElementById('metaKeywords')?.value
+          };
+          localStorage.setItem('siteMetadata', JSON.stringify(metadata));
+          showNotification('Metadaten gespeichert', 'success');
+      }
+
+      // ============================================
+      // LOAD ALL DATA ON INIT
+      // ============================================
+
+      function loadAllStoredData() {
+          // Load opening hours
+          const hours = JSON.parse(localStorage.getItem('openingHours') || '{}');
+          if (hours.weekday) {
+              if (document.getElementById('weekday-open-1')) document.getElementById('weekday-open-1').value = hours.weekday.morning?.open || '09:00';
+              if (document.getElementById('weekday-close-1')) document.getElementById('weekday-close-1').value = hours.weekday.morning?.close || '12:00';
+              if (document.getElementById('weekday-open-2')) document.getElementById('weekday-open-2').value = hours.weekday.afternoon?.open || '16:00';
+              if (document.getElementById('weekday-close-2')) document.getElementById('weekday-close-2').value = hours.weekday.afternoon?.close || '19:00';
+          }
+          if (hours.saturday) {
+              if (document.getElementById('saturday-open')) document.getElementById('saturday-open').value = hours.saturday.open || '09:00';
+              if (document.getElementById('saturday-close')) document.getElementById('saturday-close').value = hours.saturday.close || '12:00';
+              if (document.getElementById('saturday-closed')) document.getElementById('saturday-closed').checked = hours.saturday.closed || false;
+          }
+
+          // Load search management
+          loadPinnedResults();
+          loadExcludedTerms();
+          loadSynonyms();
+
+          // Load metadata
+          const metadata = JSON.parse(localStorage.getItem('siteMetadata') || '{}');
+          if (metadata.title && document.getElementById('metaTitle')) document.getElementById('metaTitle').value = metadata.title;
+          if (metadata.description && document.getElementById('metaDescription')) document.getElementById('metaDescription').value = metadata.description;
+          if (metadata.keywords && document.getElementById('metaKeywords')) document.getElementById('metaKeywords').value = metadata.keywords;
+      }
+
+      // Call this on page load - add to existing DOMContentLoaded
+      document.addEventListener('DOMContentLoaded', function() {
+          loadAnnouncements(); // existing
+          loadAllStoredData(); // NEW
+      });
+
         </script>
     </div>
 </body>
 </html>
-
 
