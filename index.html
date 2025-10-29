@@ -3039,72 +3039,105 @@
         }
     })();
 
+    const DEFAULT_HOURS = {
+        weekday: {
+            morning: { open: '09:00', close: '12:00' },
+            afternoon: { open: '16:00', close: '19:00' }
+        },
+        saturday: {
+            open: '09:00',
+            close: '12:00',
+            closed: false
+        },
+        sunday: {
+            closed: true
+        }
+    };
 
+    function loadRegularHours() {
+        try {
+            const hours = JSON.parse(localStorage.getItem('openingHours') || 'null');
 
-     function loadWeekendSpecialHours() {
-        const specialHours = JSON.parse(localStorage.getItem('weekendSpecial') || '{}');
-
-        if (!specialHours.enabled) return;
-
-        const now = new Date();
-        const start = new Date(specialHours.startDate);
-        const end = new Date(specialHours.endDate);
-
-        if (now >= start && now <= end) {
-            // Display announcement banner
-            if (specialHours.announcement) {
-                const banner = document.createElement('div');
-                banner.style.cssText = 'background: linear-gradient(135deg, #ffd700, #ffc107); color: #333; padding: 15px; text-align: center; font-weight: bold; margin-bottom: 20px;';
-                banner.innerHTML = `🌟 ${specialHours.announcement} 🌟`;
-
-                const hero = document.querySelector('.hero-section .container');
-                if (hero) hero.insertBefore(banner, hero.firstChild);
+            // If no saved hours, use defaults (don't change anything)
+            if (!hours || !hours.weekday) {
+                console.log('No custom hours found, using default display');
+                return;
             }
 
-            // Update Saturday hours if special times exist
             const hoursTable = document.querySelector('.hours-table');
-            if (hoursTable && specialHours.saturday && specialHours.saturday.length > 0) {
+            if (!hoursTable) {
+                console.error('Hours table not found');
+                return;
+            }
+
+            // Update Monday-Friday hours
+            if (hours.weekday && hours.weekday.morning && hours.weekday.afternoon) {
+                const weekdayRow = hoursTable.querySelectorAll('li')[0];
+                if (weekdayRow) {
+                    const timeSpan = weekdayRow.querySelector('.time');
+                    if (timeSpan) {
+                        timeSpan.textContent =
+                            `${hours.weekday.morning.open}-${hours.weekday.morning.close} & ${hours.weekday.afternoon.open}-${hours.weekday.afternoon.close}`;
+                        console.log('✓ Updated weekday hours');
+                    }
+                }
+            }
+
+            // Update Saturday hours
+            if (hours.saturday) {
                 const satRow = hoursTable.querySelectorAll('li')[1];
                 if (satRow) {
                     const timeSpan = satRow.querySelector('.time');
                     if (timeSpan) {
-                        timeSpan.textContent = specialHours.saturday.map(slot =>
-                            `${slot.open}-${slot.close}`
-                        ).join(' & ');
-                        timeSpan.style.color = '#28a745';
+                        if (hours.saturday.closed) {
+                            timeSpan.textContent = 'GESCHLOSSEN';
+                            timeSpan.style.color = '#ff4444';
+                            timeSpan.style.fontWeight = '700';
+                        } else {
+                            timeSpan.textContent = `${hours.saturday.open} - ${hours.saturday.close}`;
+                            timeSpan.style.color = '';
+                            timeSpan.style.fontWeight = '';
+                        }
+                        console.log('✓ Updated Saturday hours');
                     }
                 }
             }
 
-            // Update Sunday hours if special times exist
-            if (hoursTable && specialHours.sunday && specialHours.sunday.length > 0) {
+            // Update Sunday hours (if not default closed)
+            if (hours.sunday && hours.sunday.closed === false && hours.sunday.open && hours.sunday.close) {
                 const sunRow = hoursTable.querySelectorAll('li')[2];
                 if (sunRow) {
                     const timeSpan = sunRow.querySelector('.time');
                     if (timeSpan) {
-                        timeSpan.textContent = specialHours.sunday.map(slot =>
-                            `${slot.open}-${slot.close}`
-                        ).join(' & ');
-                        timeSpan.style.color = '#28a745';
+                        timeSpan.textContent = `${hours.sunday.open} - ${hours.sunday.close}`;
+                        timeSpan.style.color = '';
+                        timeSpan.style.fontWeight = '';
+                        console.log('✓ Updated Sunday hours');
                     }
                 }
             }
+
+            console.log('✅ Opening hours loaded successfully from admin settings');
+        } catch (error) {
+            console.error('❌ Error loading opening hours:', error);
         }
     }
 
-    // Call on page load
-    document.addEventListener('DOMContentLoaded', loadWeekendSpecialHours);
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        loadRegularHours();
+
+        // Also load when returning to the page
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                loadRegularHours();
+            }
+        });
+    });
+
     </script>
 
 
 </body>
 
 </html>
-
-
-
-
-
-
-
-
