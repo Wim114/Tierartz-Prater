@@ -3096,9 +3096,11 @@
                     const timeSpan = satRow.querySelector('.time');
                     if (timeSpan) {
                         if (hours.saturday.closed) {
-                            timeSpan.textContent = 'GESCHLOSSEN';
-                            timeSpan.style.color = '#ff4444';
-                            timeSpan.style.fontWeight = '700';
+                            timeSpan.innerHTML = `
+                                <span class="de">GESCHLOSSEN</span>
+                                <span class="en" style="display:none;">CLOSED</span>
+                                <span class="bks" style="display:none;">ZATVORENO</span>
+                            `;
                         } else {
                             timeSpan.textContent = `${hours.saturday.open} - ${hours.saturday.close}`;
                             timeSpan.style.color = '';
@@ -3147,4 +3149,5 @@
 </body>
 
 </html>
+
 
