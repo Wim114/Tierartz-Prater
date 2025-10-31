@@ -3097,9 +3097,9 @@
                     if (timeSpan) {
                         if (hours.saturday.closed) {
                             timeSpan.innerHTML = `
-                                <span class="de">GESCHLOSSEN</span>
-                                <span class="en" style="display:none;">CLOSED</span>
-                                <span class="bks" style="display:none;">ZATVORENO</span>
+                                <span class="de" style="color: #ff4444; font-weight: 700;">GESCHLOSSEN</span>
+                                <span class="en" style="display:none; color: #ff4444; font-weight: 700;">CLOSED</span>
+                                <span class="bks" style="display:none; color: #ff4444; font-weight: 700;">ZATVORENO</span>
                             `;
                         } else {
                             timeSpan.textContent = `${hours.saturday.open} - ${hours.saturday.close}`;
@@ -3149,5 +3149,6 @@
 </body>
 
 </html>
+
 
 
