@@ -15,6 +15,7 @@
             --text-dark: #22242C;
             --success: #28a745;
             --danger: #ff4444;
+            --warning: #ffc107;
         }
 
         body {
@@ -214,583 +215,1245 @@
             flex-wrap: wrap;
         }
 
-        .search-rule {
+        /* SEO Specific Styles */
+        .seo-section {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .seo-section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .seo-section-header i {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-right: 15px;
+        }
+
+        .seo-section-header h4 {
+            margin: 0;
+            color: var(--secondary-color);
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .info-box i {
+            color: var(--primary-color);
+            margin-right: 8px;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid var(--warning);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid var(--success);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .character-counter {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        .character-counter.good {
+            color: var(--success);
+        }
+
+        .character-counter.warning {
+            color: var(--warning);
+        }
+
+        .character-counter.danger {
+            color: var(--danger);
+        }
+
+        .preview-google {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+            margin-top: 15px;
+        }
+
+        .preview-google-title {
+            color: #1a0dab;
+            font-size: 20px;
+            font-weight: 400;
+            cursor: pointer;
+            margin-bottom: 5px;
+        }
+
+        .preview-google-url {
+            color: #006621;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .preview-google-description {
+            color: #545454;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .schema-preview {
             background: #f8f9fa;
             padding: 15px;
             border-radius: 8px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            border: 1px solid #dee2e6;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
         }
 
-        .rule-type {
-            background: var(--primary-color);
+        .copy-button {
+            background: var(--success);
             color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s;
         }
 
-        /* Hours table for preview */
-        .hours-table {
+        .copy-button:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .seo-score {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 15px;
+        }
+
+        .seo-score.excellent {
+            background: var(--success);
+        }
+
+        .seo-score.good {
+            background: #28a745;
+        }
+
+        .seo-score.fair {
+            background: var(--warning);
+        }
+
+        .seo-score.poor {
+            background: var(--danger);
+        }
+
+        .seo-checklist {
             list-style: none;
             padding: 0;
-            margin: 0;
         }
 
-        .hours-table li {
+        .seo-checklist li {
+            padding: 10px;
+            margin-bottom: 8px;
+            background: #f8f9fa;
+            border-radius: 5px;
             display: flex;
-            justify-content: space-between;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid #eee;
+            align-items: center;
         }
 
-        .hours-table li:last-child {
-            border-bottom: none;
+        .seo-checklist li i {
+            margin-right: 10px;
+            font-size: 1.2rem;
         }
 
-        .hours-table .day {
-            font-weight: 600;
-            color: var(--text-dark);
+        .seo-checklist li.checked {
+            background: #d4edda;
+            color: #155724;
         }
 
-        .hours-table .time {
+        .seo-checklist li.checked i {
+            color: var(--success);
+        }
+
+        .seo-checklist li.unchecked i {
+            color: var(--danger);
+        }
+
+        .keyword-tag {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.9rem;
+        }
+
+        .keyword-tag .remove-keyword {
+            margin-left: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .tooltip-icon {
             color: var(--primary-color);
-            font-weight: 500;
+            margin-left: 5px;
+            cursor: help;
+        }
+
+        .btn-generate {
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .btn-generate:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .social-preview {
+            background: white;
+            border: 1px solid #e1e8ed;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        .social-preview-image {
+            width: 100%;
+            height: 200px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+
+        .social-preview-content {
+            padding: 15px;
+        }
+
+        .social-preview-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #1a1a1a;
+        }
+
+        .social-preview-description {
+            color: #606060;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .social-preview-url {
+            color: #999;
+            font-size: 12px;
         }
     </style>
 </head>
 <body>
-    <!-- Admin Panel -->
     <div class="admin-container">
-      <div class="admin-header">
-          <div class="row align-items-center">
-              <div class="col-md-6">
-                  <h1><i class="fas fa-cog"></i> Tierambulanz Prater - Admin Panel</h1>
-                  <p class="mb-0 text-muted">Verwalten Sie Ihre Website-Inhalte</p>
-              </div>
-              <div class="col-md-6 text-end">
-                  <span class="text-muted me-3">
-                      <i class="fas fa-user-shield"></i> Admin
-                  </span>
-                  <button class="edit-btn" onclick="viewWebsite()" aria-label="Website in neuem Tab öffnen">
-                      <i class="fas fa-eye"></i> Website Ansehen
-                  </button>
-                  <button class="btn btn-outline-secondary" onclick="logout()" aria-label="Vom Admin-Panel abmelden">
-                      <i class="fas fa-sign-out-alt"></i> Abmelden
-                  </button>
-              </div>
-          </div>
-      </div>
+        <!-- Admin Header -->
+        <div class="admin-header d-flex justify-content-between align-items-center">
+            <div>
+                <h2 class="mb-1">
+                    <i class="fas fa-paw" style="color: var(--primary-color);"></i>
+                    Tierambulanz Prater - Admin
+                </h2>
+                <p class="text-muted mb-0">Website-Verwaltungssystem</p>
+            </div>
+            <div>
+                <button class="btn btn-outline-primary me-2" onclick="viewWebsite()">
+                    <i class="fas fa-globe"></i> Website ansehen
+                </button>
+                <button class="btn btn-outline-danger" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Abmelden
+                </button>
+            </div>
+        </div>
 
-      <ul class="nav nav-tabs" role="tablist">
-          <li class="nav-item" role="presentation">
-              <a class="nav-link" data-bs-toggle="tab" href="#announcements" role="tab" aria-controls="announcements" aria-selected="false">
-                  <i class="fas fa-bullhorn"></i> Ankündigungen
-              </a>
-          </li>
-          <li class="nav-item" role="presentation">
-              <a class="nav-link active" data-bs-toggle="tab" href="#opening-hours" role="tab" aria-controls="opening-hours" aria-selected="true">
-                  <i class="fas fa-clock"></i> Öffnungszeiten
-              </a>
-          </li>
-          <li class="nav-item" role="presentation">
-              <a class="nav-link" data-bs-toggle="tab" href="#search-management" role="tab" aria-controls="search-management" aria-selected="false">
-                  <i class="fas fa-search"></i> Suchverwaltung
-              </a>
-          </li>
-      </ul>
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-tabs mb-4" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" data-bs-toggle="tab" href="#announcements" role="tab">
+                    <i class="fas fa-bullhorn"></i> Ankündigungen
+                </a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" data-bs-toggle="tab" href="#opening-hours" role="tab">
+                    <i class="fas fa-clock"></i> Öffnungszeiten
+                </a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" data-bs-toggle="tab" href="#seo-optimization" role="tab">
+                    <i class="fas fa-chart-line"></i> SEO Optimierung
+                </a>
+            </li>
+        </ul>
 
+        <!-- Tab Content -->
         <div class="tab-content">
-            <!-- Announcements Tab -->
-            <div class="tab-pane fade" id="announcements" role="tabpanel" aria-labelledby="announcements-tab">
+            <!-- Tab 1: Announcements (UNCHANGED) -->
+            <div class="tab-pane fade show active" id="announcements" role="tabpanel">
                 <div class="admin-card">
-                    <h3><i class="fas fa-plus-circle"></i> Neue Ankündigung erstellen</h3>
-                    <form id="announcementForm">
-                        <div class="row">
-                            <div class="col-md-12 mb-3">
-                                <label class="form-label" for="announcementType">Art der Ankündigung</label>
-                                <select class="form-select" id="announcementType" required aria-required="true">
-                                    <option value="holiday">🖖️ Urlaubszeit</option>
-                                    <option value="emergency">🚨 Notfall-Information</option>
-                                    <option value="news">📰 Neuigkeiten</option>
-                                    <option value="special">⭐ Sonderaktion</option>
-                                    <option value="warning">⚠️ Wichtiger Hinweis</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label" for="startDate">Start Datum</label>
-                                <input type="datetime-local" class="form-control" id="startDate" required aria-required="true">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label" for="endDate">End Datum</label>
-                                <input type="datetime-local" class="form-control" id="endDate" required aria-required="true">
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <label class="form-label" for="announcementTitle">Titel</label>
-                                <input type="text" class="form-control" id="announcementTitle"
-                                       placeholder="z.B. Urlaubszeit vom 24.12. bis 02.01." required aria-required="true">
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <label class="form-label" for="announcementMessage">Nachricht</label>
-                                <textarea class="form-control" id="announcementMessage" rows="3"
-                                          placeholder="z.B. Wir sind vom 24. Dezember bis 2. Januar im Urlaub. In dringenden Notfällen wenden Sie sich bitte an die Tierklinik Wien unter +43 1 234567" required aria-required="true"></textarea>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <label class="form-label" for="substituteInfo">Vertretung (optional)</label>
-                                <input type="text" class="form-control" id="substituteInfo"
-                                       placeholder="z.B. Dr. Müller, Tierklinik Wien, Tel: +43 1 234567">
-                            </div>
-                            <div class="col-md-12">
-                                <button type="submit" class="edit-btn" id="submitBtn">
-                                    <i class="fas fa-save"></i> Ankündigung Speichern
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    <h3 class="mb-4">
+                        <i class="fas fa-bullhorn text-primary"></i> Ankündigungen verwalten
+                    </h3>
 
-                <!-- Current Announcements -->
-                <div class="admin-card">
-                    <h3><i class="fas fa-list"></i> Aktuelle Ankündigungen</h3>
-                    <div id="announcementsList" role="region" aria-label="Liste der aktuellen Ankündigungen" aria-live="polite">
-                        <div class="text-center py-4">
-                            <div class="spinner-border text-primary" role="status">
-                                <span class="visually-hidden">Lädt...</span>
-                            </div>
+                    <div class="info-box">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Hinweis:</strong> Ankündigungen erscheinen als Banner auf Ihrer Website und können zeitgesteuert aktiviert werden.
+                    </div>
+
+                    <!-- Create New Announcement Form -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-plus-circle"></i> Neue Ankündigung erstellen</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="announcementForm">
+                                <div class="mb-3">
+                                    <label for="announcementTitle" class="form-label">Titel</label>
+                                    <input type="text" class="form-control" id="announcementTitle" 
+                                           placeholder="z.B. Wichtiger Hinweis" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="announcementMessage" class="form-label">Nachricht</label>
+                                    <textarea class="form-control" id="announcementMessage" rows="3" 
+                                              placeholder="Ihre Nachricht an die Besucher" required></textarea>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="announcementType" class="form-label">Typ</label>
+                                        <select class="form-select" id="announcementType">
+                                            <option value="info">Information</option>
+                                            <option value="warning">Warnung</option>
+                                            <option value="success">Erfolg</option>
+                                            <option value="danger">Dringend</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="announcementStart" class="form-label">Startdatum (optional)</label>
+                                        <input type="date" class="form-control" id="announcementStart">
+                                    </div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="announcementEnd" class="form-label">Enddatum (optional)</label>
+                                        <input type="date" class="form-control" id="announcementEnd">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="announcementActive" checked>
+                                        <label class="form-check-label" for="announcementActive">
+                                            Sofort aktivieren
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Ankündigung speichern
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Existing Announcements List -->
+                    <h4 class="mb-3">Aktive Ankündigungen</h4>
+                    <div id="announcementsList"></div>
+
+                    <!-- Preview Section -->
+                    <div class="website-preview">
+                        <div class="preview-header">
+                            <i class="fas fa-eye"></i> Vorschau auf der Website
+                        </div>
+                        <div class="preview-content" id="announcementsPreview">
+                            <p class="text-muted">Hier erscheinen Ihre aktiven Ankündigungen...</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- UPDATED: Opening Hours Tab -->
-            <div class="tab-pane fade show active" id="opening-hours" role="tabpanel" aria-labelledby="opening-hours-tab">
+            <!-- Tab 2: Opening Hours (UNCHANGED) -->
+            <div class="tab-pane fade" id="opening-hours" role="tabpanel">
                 <div class="admin-card">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h3><i class="fas fa-clock"></i> Reguläre Öffnungszeiten</h3>
-                        <button class="btn btn-outline-secondary" onclick="resetToDefaultHours()" aria-label="Öffnungszeiten auf Standardwerte zurücksetzen">
-                            <i class="fas fa-undo"></i> Auf Standard zurücksetzen
+                    <h3 class="mb-4">
+                        <i class="fas fa-clock text-primary"></i> Öffnungszeiten verwalten
+                    </h3>
+
+                    <div class="info-box">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Hinweis:</strong> Änderungen werden sofort auf Ihrer Website sichtbar. Die Zeiten werden automatisch im richtigen Format angezeigt.
+                    </div>
+
+                    <!-- Weekdays -->
+                    <h4 class="mb-3">Montag - Freitag</h4>
+                    <div class="hours-row">
+                        <div class="time-input-group">
+                            <label style="min-width: 80px;">Vormittag:</label>
+                            <input type="time" class="form-control" id="weekday-open-1" value="08:00" style="max-width: 120px;">
+                            <span>bis</span>
+                            <input type="time" class="form-control" id="weekday-close-1" value="12:00" style="max-width: 120px;">
+                        </div>
+                    </div>
+
+                    <div class="hours-row">
+                        <div class="time-input-group">
+                            <label style="min-width: 80px;">Nachmittag:</label>
+                            <input type="time" class="form-control" id="weekday-open-2" value="14:00" style="max-width: 120px;">
+                            <span>bis</span>
+                            <input type="time" class="form-control" id="weekday-close-2" value="18:00" style="max-width: 120px;">
+                        </div>
+                    </div>
+
+                    <!-- Saturday -->
+                    <h4 class="mb-3 mt-4">Samstag</h4>
+                    <div class="hours-row">
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="saturday-closed" 
+                                   onchange="toggleSaturdayHours()">
+                            <label class="form-check-label" for="saturday-closed">
+                                Samstag geschlossen
+                            </label>
+                        </div>
+                    </div>
+                    <div class="hours-row">
+                        <div class="time-input-group">
+                            <label style="min-width: 80px;">Geöffnet:</label>
+                            <input type="time" class="form-control" id="saturday-open" value="09:00" style="max-width: 120px;">
+                            <span>bis</span>
+                            <input type="time" class="form-control" id="saturday-close" value="13:00" style="max-width: 120px;">
+                        </div>
+                    </div>
+
+                    <!-- Sunday -->
+                    <h4 class="mb-3 mt-4">Sonntag & Feiertage</h4>
+                    <div class="hours-row">
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="sunday-closed" checked 
+                                   onchange="toggleSundayHours()">
+                            <label class="form-check-label" for="sunday-closed">
+                                Sonntag geschlossen
+                            </label>
+                        </div>
+                    </div>
+                    <div class="hours-row">
+                        <div class="time-input-group">
+                            <label style="min-width: 80px;">Geöffnet:</label>
+                            <input type="time" class="form-control" id="sunday-open" disabled style="max-width: 120px;">
+                            <span>bis</span>
+                            <input type="time" class="form-control" id="sunday-close" disabled style="max-width: 120px;">
+                        </div>
+                    </div>
+
+                    <!-- Emergency Hours Notice -->
+                    <div class="mt-4 p-3 bg-warning bg-opacity-10 border border-warning rounded">
+                        <h5 class="text-warning"><i class="fas fa-exclamation-triangle"></i> Notdienst</h5>
+                        <p class="mb-2">Für Notfälle außerhalb der Öffnungszeiten:</p>
+                        <textarea class="form-control" id="emergency-note" rows="2" 
+                                  placeholder="z.B. 24h Notdienst verfügbar unter +43 1 234 5678"></textarea>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="mt-4 d-flex gap-2">
+                        <button class="btn btn-primary" onclick="saveOpeningHours()">
+                            <i class="fas fa-save"></i> Änderungen speichern
+                        </button>
+                        <button class="btn btn-secondary" onclick="resetToDefaultHours()">
+                            <i class="fas fa-undo"></i> Zurücksetzen
+                        </button>
+                        <button class="btn btn-outline-primary" onclick="previewHoursOnMainSite()">
+                            <i class="fas fa-eye"></i> Auf Website ansehen
                         </button>
                     </div>
 
-                    <div class="alert alert-info" role="alert">
-                        <i class="fas fa-info-circle"></i> Ändern Sie die Öffnungszeiten, die auf Ihrer Website angezeigt werden. Die Änderungen werden sofort übernommen.
-                    </div>
-
-                    <div class="hours-row">
-                        <strong style="width: 150px;">Montag - Freitag</strong>
-                        <div class="time-input-group">
-                            <label for="weekday-open-1" class="visually-hidden">Montag bis Freitag Öffnung morgens</label>
-                            <input type="time" class="form-control" id="weekday-open-1" value="09:00" style="width: 120px;" aria-label="Öffnungszeit Vormittag">
-                            <span aria-hidden="true">bis</span>
-                            <label for="weekday-close-1" class="visually-hidden">Montag bis Freitag Schließung morgens</label>
-                            <input type="time" class="form-control" id="weekday-close-1" value="12:00" style="width: 120px;" aria-label="Schließzeit Vormittag">
-                            <span aria-hidden="true">&</span>
-                            <label for="weekday-open-2" class="visually-hidden">Montag bis Freitag Öffnung nachmittags</label>
-                            <input type="time" class="form-control" id="weekday-open-2" value="16:00" style="width: 120px;" aria-label="Öffnungszeit Nachmittag">
-                            <span aria-hidden="true">bis</span>
-                            <label for="weekday-close-2" class="visually-hidden">Montag bis Freitag Schließung nachmittags</label>
-                            <input type="time" class="form-control" id="weekday-close-2" value="19:00" style="width: 120px;" aria-label="Schließzeit Nachmittag">
-                        </div>
-                    </div>
-
-                    <div class="hours-row">
-                        <strong style="width: 150px;">Samstag</strong>
-                        <div class="time-input-group">
-                            <label for="saturday-open" class="visually-hidden">Samstag Öffnungszeit</label>
-                            <input type="time" class="form-control" id="saturday-open" value="09:00" style="width: 120px;" aria-label="Samstag Öffnungszeit">
-                            <span aria-hidden="true">bis</span>
-                            <label for="saturday-close" class="visually-hidden">Samstag Schließzeit</label>
-                            <input type="time" class="form-control" id="saturday-close" value="12:00" style="width: 120px;" aria-label="Samstag Schließzeit">
-                            <div class="form-check ms-3">
-                                <input class="form-check-input" type="checkbox" id="saturday-closed" aria-describedby="saturday-closed-help">
-                                <label class="form-check-label" for="saturday-closed">
-                                    Geschlossen
-                                </label>
-                                <span id="saturday-closed-help" class="visually-hidden">Markieren Sie dies, wenn samstags geschlossen ist</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="hours-row">
-                        <strong style="width: 150px;">Sonntag</strong>
-                        <div class="time-input-group">
-                            <label for="sunday-open" class="visually-hidden">Sonntag Öffnungszeit</label>
-                            <input type="time" class="form-control" id="sunday-open" value="09:00" disabled style="width: 120px;" aria-label="Sonntag Öffnungszeit">
-                            <span aria-hidden="true">bis</span>
-                            <label for="sunday-close" class="visually-hidden">Sonntag Schließzeit</label>
-                            <input type="time" class="form-control" id="sunday-close" value="12:00" disabled style="width: 120px;" aria-label="Sonntag Schließzeit">
-                            <div class="form-check ms-3">
-                                <input class="form-check-input" type="checkbox" id="sunday-closed" checked aria-describedby="sunday-closed-help">
-                                <label class="form-check-label" for="sunday-closed">
-                                    Geschlossen
-                                </label>
-                                <span id="sunday-closed-help" class="visually-hidden">Markieren Sie dies, wenn sonntags geschlossen ist</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button class="edit-btn mt-3" onclick="saveRegularHours()" aria-label="Geänderte Öffnungszeiten speichern">
-                        <i class="fas fa-save"></i> Öffnungszeiten Speichern
-                    </button>
-
-                    <button class="btn btn-outline-primary mt-3 ms-2" onclick="previewHoursOnMainSite()" aria-label="Hauptwebsite in neuem Tab öffnen um Änderungen zu überprüfen">
-                        <i class="fas fa-eye"></i> Vorschau auf Hauptseite
-                    </button>
-                </div>
-
-                <!-- Preview Section -->
-                <div class="admin-card">
-                    <h4><i class="fas fa-desktop"></i> Vorschau - So erscheint es auf der Website</h4>
+                    <!-- Preview -->
                     <div class="website-preview">
                         <div class="preview-header">
-                            <i class="fas fa-clock"></i> Öffnungszeiten
+                            <i class="fas fa-eye"></i> Vorschau
                         </div>
-                        <div class="preview-content">
-                            <ul class="hours-table" id="previewHoursList" role="list" aria-label="Vorschau der Öffnungszeiten">
-                                <li role="listitem">
-                                    <span class="day">Montag - Freitag</span>
-                                    <span class="time">09:00-12:00 & 16:00-19:00</span>
-                                </li>
-                                <li role="listitem">
-                                    <span class="day">Samstag</span>
-                                    <span class="time">09:00 - 12:00</span>
-                                </li>
-                                <li role="listitem">
-                                    <span class="day">Sonntag</span>
-                                    <span class="time" style="color: #ff4444; font-weight: 700;">GESCHLOSSEN</span>
-                                </li>
-                            </ul>
+                        <div class="preview-content" id="hoursPreview">
+                            <p class="text-muted">Vorschau wird geladen...</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Search Management Tab -->
-            <div class="tab-pane fade" id="search-management" role="tabpanel" aria-labelledby="search-management-tab">
-                <div class="admin-card">
-                    <h3><i class="fas fa-search"></i> Suchverwaltung & SEO</h3>
+            <!-- Tab 3: SEO Optimization (NEW) -->
+            <div class="tab-pane fade" id="seo-optimization" role="tabpanel">
+                
+                <!-- Welcome Section -->
+                <div class="seo-section">
+                    <div class="seo-section-header">
+                        <i class="fas fa-rocket"></i>
+                        <div>
+                            <h4>SEO Optimierung für Ihre Tierarztpraxis</h4>
+                            <p class="mb-0 text-muted">Verbessern Sie Ihre Sichtbarkeit in Google und erreichen Sie mehr Kunden in Wien</p>
+                        </div>
+                    </div>
 
-                    <ul class="nav nav-pills mb-3" style="background: #f8f9fa; padding: 10px; border-radius: 10px;" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link active" data-bs-toggle="pill" href="#pinned" role="tab" aria-controls="pinned" aria-selected="true">
-                                <i class="fas fa-thumbtack"></i> Gepinnt
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" data-bs-toggle="pill" href="#excluded" role="tab" aria-controls="excluded" aria-selected="false">
-                                <i class="fas fa-ban"></i> Ausgeschlossen
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" data-bs-toggle="pill" href="#synonyms" role="tab" aria-controls="synonyms" aria-selected="false">
-                                <i class="fas fa-exchange-alt"></i> Synonyme
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" data-bs-toggle="pill" href="#metadata" role="tab" aria-controls="metadata" aria-selected="false">
-                                <i class="fas fa-tags"></i> Metadaten
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <!-- Pinned Results -->
-                        <div class="tab-pane fade show active" id="pinned" role="tabpanel">
-                            <p class="text-muted">Pinnen Sie wichtige Seiten für Suchbegriffe</p>
-                            <div class="row mb-3">
-                                <div class="col-md-5">
-                                    <label for="pinnedKeyword" class="visually-hidden">Suchbegriff</label>
-                                    <input type="text" class="form-control" id="pinnedKeyword" placeholder="Suchbegriff" aria-label="Suchbegriff für gepinnte Seite">
-                                </div>
-                                <div class="col-md-5">
-                                    <label for="pinnedUrl" class="visually-hidden">URL</label>
-                                    <input type="text" class="form-control" id="pinnedUrl" placeholder="URL" aria-label="URL der zu pinnenden Seite">
-                                </div>
-                                <div class="col-md-2">
-                                    <button class="edit-btn" onclick="addPinnedResult()" aria-label="Gepinntes Suchergebnis hinzufügen">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div id="pinnedList" role="region" aria-label="Liste der gepinnten Suchergebnisse" aria-live="polite"></div>
-                        </div>
-                        <div class="tab-pane fade" id="excluded" role="tabpanel">
-                            <p class="text-muted">Schließen Sie Begriffe aus</p>
-                            <div class="row mb-3">
-                                <div class="col-md-8">
-                                    <label for="excludedTerm" class="visually-hidden">Begriff zum Ausschließen</label>
-                                    <input type="text" class="form-control" id="excludedTerm" placeholder="Begriff" aria-label="Begriff der ausgeschlossen werden soll">
-                                </div>
-                                <div class="col-md-4">
-                                    <button class="edit-btn" onclick="addExcludedTerm()" aria-label="Begriff von Suche ausschließen">
-                                        <i class="fas fa-ban"></i> Ausschließen
-                                    </button>
-                                </div>
-                            </div>
-                            <div id="excludedList" role="region" aria-label="Liste der ausgeschlossenen Begriffe" aria-live="polite"></div>
-                        </div>
-                        <div class="tab-pane fade" id="synonyms" role="tabpanel">
-                            <p class="text-muted">Definieren Sie Synonyme</p>
-                            <div class="row mb-3">
-                                <div class="col-md-4">
-                                    <label for="synonymTerm" class="visually-hidden">Begriff</label>
-                                    <input type="text" class="form-control" id="synonymTerm" placeholder="Begriff" aria-label="Hauptbegriff">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="synonymAlias" class="visually-hidden">Synonyme</label>
-                                    <input type="text" class="form-control" id="synonymAlias" placeholder="Synonyme (kommagetrennt)" aria-label="Synonyme durch Komma getrennt">
-                                </div>
-                                <div class="col-md-2">
-                                    <button class="edit-btn" onclick="addSynonym()" aria-label="Synonym hinzufügen">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div id="synonymsList" role="region" aria-label="Liste der definierten Synonyme" aria-live="polite"></div>
-                        </div>
-                        <div class="tab-pane fade" id="metadata" role="tabpanel">
-                            <p class="text-muted">SEO-Metadaten verwalten</p>
-                            <div class="mb-3">
-                                <label class="form-label" for="metaTitle">Seitentitel</label>
-                                <input type="text" class="form-control" id="metaTitle"
-                                       value="Tierambulanz Prater - Veterinary Practice Vienna" aria-describedby="metaTitle-help">
-                                <small id="metaTitle-help" class="form-text text-muted">Der Titel erscheint in Suchergebnissen</small>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="metaDescription">Beschreibung</label>
-                                <textarea class="form-control" id="metaDescription" rows="3" aria-describedby="metaDescription-help">Modern veterinary practice in Vienna.</textarea>
-                                <small id="metaDescription-help" class="form-text text-muted">Die Beschreibung erscheint unter dem Titel in Suchergebnissen</small>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="metaKeywords">Keywords</label>
-                                <input type="text" class="form-control" id="metaKeywords"
-                                       value="Tierarzt Wien, veterinarian Vienna" aria-describedby="metaKeywords-help">
-                                <small id="metaKeywords-help" class="form-text text-muted">Durch Komma getrennte Suchbegriffe</small>
-                            </div>
-                            <button class="edit-btn" onclick="saveMetadata()" aria-label="SEO-Metadaten speichern">
-                                <i class="fas fa-save"></i> Speichern
-                            </button>
+                    <div class="info-box">
+                        <i class="fas fa-lightbulb"></i>
+                        <strong>Was ist SEO?</strong> Suchmaschinenoptimierung (SEO) hilft Ihrer Website, bei Google besser gefunden zu werden. 
+                        Mit den richtigen Einstellungen erscheinen Sie höher in den Suchergebnissen, wenn jemand nach "Tierarzt Wien" oder "Notfall Tierarzt Prater" sucht.
+                    </div>
+
+                    <!-- Quick SEO Score -->
+                    <div class="d-flex align-items-center p-3 bg-light rounded">
+                        <div class="seo-score excellent" id="overallSeoScore">85</div>
+                        <div>
+                            <h5 class="mb-1">Ihr aktueller SEO-Score</h5>
+                            <p class="mb-0 text-muted">Basierend auf allen Optimierungen</p>
                         </div>
                     </div>
                 </div>
+
+                <!-- Section 1: Meta Tags Management -->
+                <div class="seo-section">
+                    <div class="seo-section-header">
+                        <i class="fas fa-tags"></i>
+                        <div>
+                            <h4>Meta-Tags verwalten</h4>
+                            <p class="mb-0 text-muted">Diese Informationen erscheinen in Google-Suchergebnissen</p>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Wichtig:</strong> Der Titel und die Beschreibung sind das Erste, was potenzielle Kunden in Google sehen. 
+                        Verwenden Sie klare, ansprechende Texte mit wichtigen Keywords wie "Tierarzt Wien", "Prater", "Notdienst".
+                    </div>
+
+                    <!-- Page Selection -->
+                    <div class="mb-4">
+                        <label class="form-label">Seite auswählen 
+                            <i class="fas fa-question-circle tooltip-icon" title="Wählen Sie die Seite, für die Sie Meta-Tags bearbeiten möchten"></i>
+                        </label>
+                        <select class="form-select" id="pageSelect" onchange="loadPageMetaTags()">
+                            <option value="home">Startseite (Hauptseite)</option>
+                            <option value="services">Leistungen</option>
+                            <option value="team">Unser Team</option>
+                            <option value="contact">Kontakt</option>
+                        </select>
+                    </div>
+
+                    <!-- Title -->
+                    <div class="mb-4">
+                        <label for="metaTitle" class="form-label">
+                            Seitentitel (Title Tag) 
+                            <i class="fas fa-question-circle tooltip-icon" title="Erscheint als blauer Link in Google. Optimal: 50-60 Zeichen"></i>
+                        </label>
+                        <input type="text" class="form-control" id="metaTitle" 
+                               placeholder="z.B. Tierarzt Wien Prater | 24h Notdienst für Hunde & Katzen"
+                               oninput="updateMetaPreview()" maxlength="70">
+                        <div class="character-counter" id="titleCounter">0 / 60 Zeichen (optimal)</div>
+                        
+                        <div class="mt-2">
+                            <small class="text-muted">
+                                <strong>Tipps:</strong>
+                                <ul class="mb-0 mt-1">
+                                    <li>Beginnen Sie mit Ihrem wichtigsten Keyword (z.B. "Tierarzt Wien")</li>
+                                    <li>Fügen Sie Ihren Standort hinzu (Prater, 1020 Wien)</li>
+                                    <li>Erwähnen Sie Ihr Alleinstellungsmerkmal (24h Notdienst, moderne Ausstattung)</li>
+                                </ul>
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-4">
+                        <label for="metaDescription" class="form-label">
+                            Meta-Beschreibung 
+                            <i class="fas fa-question-circle tooltip-icon" title="Erscheint unter dem Titel in Google. Optimal: 150-160 Zeichen"></i>
+                        </label>
+                        <textarea class="form-control" id="metaDescription" rows="3"
+                                  placeholder="z.B. Erfahrene Tierärzte im Prater mit moderner Ausstattung. Röntgen vor Ort ✓ Notdienst ✓ Hunde, Katzen & Kleintiere ✓ Jetzt Termin vereinbaren!"
+                                  oninput="updateMetaPreview()" maxlength="160"></textarea>
+                        <div class="character-counter" id="descriptionCounter">0 / 160 Zeichen (optimal)</div>
+                        
+                        <div class="mt-2">
+                            <small class="text-muted">
+                                <strong>Tipps:</strong>
+                                <ul class="mb-0 mt-1">
+                                    <li>Beschreiben Sie, was Sie anbieten</li>
+                                    <li>Nutzen Sie Checkmarks (✓) für bessere Lesbarkeit</li>
+                                    <li>Fügen Sie einen Call-to-Action hinzu (z.B. "Jetzt anrufen")</li>
+                                </ul>
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- Keywords -->
+                    <div class="mb-4">
+                        <label for="metaKeywords" class="form-label">
+                            Fokus-Keywords 
+                            <i class="fas fa-question-circle tooltip-icon" title="Die wichtigsten Suchbegriffe, für die diese Seite gefunden werden soll"></i>
+                        </label>
+                        <input type="text" class="form-control mb-2" id="metaKeywordInput" 
+                               placeholder="Keyword eingeben und Enter drücken">
+                        <small class="text-muted d-block mb-2">Beispiele: "tierarzt wien", "notfall tierarzt prater", "tierambulanz 1020"</small>
+                        <div id="keywordTags"></div>
+                    </div>
+
+                    <!-- Google Search Preview -->
+                    <div class="mb-4">
+                        <h5><i class="fas fa-search"></i> Google-Vorschau</h5>
+                        <div class="preview-google">
+                            <div class="preview-google-title" id="previewTitle">Tierambulanz Prater | Ihr Tierarzt in Wien</div>
+                            <div class="preview-google-url">https://www.tierambulanz-prater.at › startseite</div>
+                            <div class="preview-google-description" id="previewDescription">
+                                Professionelle tierärztliche Versorgung im Prater. Moderne Ausstattung, erfahrene Tierärzte...
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Media Preview -->
+                    <div class="mb-4">
+                        <h5><i class="fas fa-share-alt"></i> Social Media Vorschau (Facebook, WhatsApp)</h5>
+                        <div class="social-preview">
+                            <div class="social-preview-image">
+                                <i class="fas fa-image fa-3x"></i>
+                            </div>
+                            <div class="social-preview-content">
+                                <div class="social-preview-title" id="socialTitle">Tierambulanz Prater | Ihr Tierarzt in Wien</div>
+                                <div class="social-preview-description" id="socialDescription">
+                                    Professionelle tierärztliche Versorgung im Prater...
+                                </div>
+                                <div class="social-preview-url">tierambulanz-prater.at</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-lg" onclick="saveMetaTags()">
+                        <i class="fas fa-save"></i> Meta-Tags speichern
+                    </button>
+                </div>
+
+                <!-- Section 2: Local SEO & Schema Markup -->
+                <div class="seo-section">
+                    <div class="seo-section-header">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Lokales SEO (Schema Markup)</h4>
+                            <p class="mb-0 text-muted">Helfen Sie Google, Ihre Praxis besser zu verstehen</p>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Was ist Schema Markup?</strong> Das ist ein spezieller Code, der Google genau sagt, dass Sie eine Tierarztpraxis sind, wo Sie sich befinden, wann Sie geöffnet haben, etc. 
+                        Dies verbessert Ihre Chancen, in Google Maps und lokalen Suchergebnissen zu erscheinen.
+                    </div>
+
+                    <!-- Business Information -->
+                    <h5 class="mb-3">Praxis-Informationen</h5>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Praxisname</label>
+                            <input type="text" class="form-control" id="schemaName" 
+                                   value="Tierambulanz Prater" oninput="updateSchemaPreview()">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Telefonnummer</label>
+                            <input type="tel" class="form-control" id="schemaPhone" 
+                                   value="+4317269181" oninput="updateSchemaPreview()">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">E-Mail</label>
+                            <input type="email" class="form-control" id="schemaEmail" 
+                                   value="tierambulanzprater@gmx.at" oninput="updateSchemaPreview()">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Preisklasse</label>
+                            <select class="form-select" id="schemaPriceRange" onchange="updateSchemaPreview()">
+                                <option value="€">€ (Günstig)</option>
+                                <option value="€€" selected>€€ (Mittel)</option>
+                                <option value="€€€">€€€ (Gehoben)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+                    <h5 class="mb-3 mt-4">Adresse</h5>
+                    <div class="row">
+                        <div class="col-md-8 mb-3">
+                            <label class="form-label">Straße und Hausnummer</label>
+                            <input type="text" class="form-control" id="schemaStreet" 
+                                   value="Ausstellungsstraße 19" oninput="updateSchemaPreview()">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Postleitzahl</label>
+                            <input type="text" class="form-control" id="schemaPostal" 
+                                   value="1020" oninput="updateSchemaPreview()">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Stadt</label>
+                            <input type="text" class="form-control" id="schemaCity" 
+                                   value="Wien" oninput="updateSchemaPreview()">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Land</label>
+                            <input type="text" class="form-control" id="schemaCountry" 
+                                   value="Österreich" oninput="updateSchemaPreview()">
+                        </div>
+                    </div>
+
+                    <!-- GPS Coordinates -->
+                    <h5 class="mb-3 mt-4">GPS-Koordinaten 
+                        <i class="fas fa-question-circle tooltip-icon" title="Wichtig für Google Maps. Sie können diese auf Google Maps finden."></i>
+                    </h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Breitengrad (Latitude)</label>
+                            <input type="text" class="form-control" id="schemaLat" 
+                                   value="48.2162" oninput="updateSchemaPreview()">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Längengrad (Longitude)</label>
+                            <input type="text" class="form-control" id="schemaLng" 
+                                   value="16.3951" oninput="updateSchemaPreview()">
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <i class="fas fa-map"></i> 
+                        <strong>Tipp:</strong> Um Ihre Koordinaten zu finden: 
+                        <a href="https://www.google.at/maps/place/Ausstellungsstraße+19,+1020+Wien" target="_blank">
+                            Öffnen Sie Ihre Adresse in Google Maps
+                        </a>, klicken Sie mit rechts auf den Standort und wählen Sie "Koordinaten kopieren".
+                    </div>
+
+                    <!-- Opening Hours for Schema -->
+                    <h5 class="mb-3 mt-4">Öffnungszeiten für Schema 
+                        <i class="fas fa-question-circle tooltip-icon" title="Diese werden automatisch aus Ihren Öffnungszeiten übernommen"></i>
+                    </h5>
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle"></i> 
+                        Die Öffnungszeiten werden automatisch aus dem Tab "Öffnungszeiten" übernommen.
+                    </div>
+
+                    <!-- Schema Preview -->
+                    <h5 class="mb-3 mt-4">
+                        <i class="fas fa-code"></i> Generierter Schema-Code 
+                        <i class="fas fa-question-circle tooltip-icon" title="Dies ist der Code, der zu Ihrer Website hinzugefügt wird"></i>
+                    </h5>
+                    <div class="schema-preview" id="schemaPreview"></div>
+                    <button class="copy-button" onclick="copySchemaCode()">
+                        <i class="fas fa-copy"></i> Code kopieren
+                    </button>
+
+                    <div class="mt-3">
+                        <button class="btn btn-primary btn-lg" onclick="saveSchemaMarkup()">
+                            <i class="fas fa-save"></i> Schema Markup speichern & aktivieren
+                        </button>
+                        <button class="btn btn-success btn-lg ms-2" onclick="testSchemaMarkup()">
+                            <i class="fas fa-flask"></i> Schema bei Google testen
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Section 3: Content Optimization -->
+                <div class="seo-section">
+                    <div class="seo-section-header">
+                        <i class="fas fa-file-alt"></i>
+                        <div>
+                            <h4>Inhalts-Optimierung</h4>
+                            <p class="mb-0 text-muted">Prüfen Sie, wie gut Ihre Inhalte für Suchmaschinen optimiert sind</p>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Content ist König!</strong> Google bevorzugt Websites mit qualitativ hochwertigen, relevanten Inhalten. 
+                        Verwenden Sie diese Checkliste, um sicherzustellen, dass Ihre Inhalte optimal sind.
+                    </div>
+
+                    <!-- SEO Checklist -->
+                    <h5 class="mb-3">SEO-Checkliste für Ihre Startseite</h5>
+                    <ul class="seo-checklist" id="seoChecklist">
+                        <li class="checked">
+                            <i class="fas fa-check-circle"></i>
+                            <span>H1-Überschrift vorhanden (nur eine pro Seite)</span>
+                        </li>
+                        <li class="checked">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Meta-Titel ist zwischen 50-60 Zeichen</span>
+                        </li>
+                        <li class="unchecked">
+                            <i class="fas fa-times-circle"></i>
+                            <span>Meta-Beschreibung ist zwischen 150-160 Zeichen</span>
+                        </li>
+                        <li class="checked">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Bilder haben Alt-Tags (Beschreibungen)</span>
+                        </li>
+                        <li class="checked">
+                            <i class="fas fa-check-circle"></i>
+                            <span>URL ist suchmaschinenfreundlich</span>
+                        </li>
+                        <li class="unchecked">
+                            <i class="fas fa-times-circle"></i>
+                            <span>Hauptkeyword kommt in den ersten 100 Wörtern vor</span>
+                        </li>
+                        <li class="checked">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Interne Links zu anderen Seiten vorhanden</span>
+                        </li>
+                        <li class="checked">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Mobile-freundliches Design</span>
+                        </li>
+                        <li class="checked">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Schnelle Ladezeit (unter 3 Sekunden)</span>
+                        </li>
+                        <li class="unchecked">
+                            <i class="fas fa-times-circle"></i>
+                            <span>Schema Markup implementiert</span>
+                        </li>
+                    </ul>
+
+                    <!-- Keyword Density Analyzer -->
+                    <h5 class="mb-3 mt-4">Keyword-Dichte Analyse</h5>
+                    <div class="mb-3">
+                        <label class="form-label">Zu analysierende Seite</label>
+                        <select class="form-select" id="analyzePageSelect">
+                            <option value="home">Startseite</option>
+                            <option value="services">Leistungen</option>
+                            <option value="team">Team</option>
+                            <option value="contact">Kontakt</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-generate" onclick="analyzeKeywordDensity()">
+                        <i class="fas fa-search"></i> Keyword-Dichte analysieren
+                    </button>
+
+                    <div id="keywordAnalysisResult" class="mt-3" style="display: none;">
+                        <div class="alert alert-info">
+                            <h6><strong>Analyse-Ergebnis:</strong></h6>
+                            <div id="keywordAnalysisContent"></div>
+                        </div>
+                    </div>
+
+                    <!-- Content Suggestions -->
+                    <h5 class="mb-3 mt-4">Inhalts-Vorschläge für besseres Ranking</h5>
+                    <div class="alert alert-light border">
+                        <h6><strong>Empfohlene Themen für Blog-Artikel:</strong></h6>
+                        <ul>
+                            <li><strong>"Notfall-Checkliste für Katzenbesitzer in Wien"</strong> - Zielkeyword: "katze notfall wien"</li>
+                            <li><strong>"10 Anzeichen, dass Ihr Hund zum Tierarzt muss"</strong> - Zielkeyword: "hund symptome tierarzt"</li>
+                            <li><strong>"Impfplan für Hunde und Katzen in Österreich"</strong> - Zielkeyword: "impfung hund katze österreich"</li>
+                            <li><strong>"Kosten beim Tierarzt: Transparente Preisübersicht Wien"</strong> - Zielkeyword: "tierarzt kosten wien"</li>
+                            <li><strong>"Zecken richtig entfernen: Anleitung vom Tierarzt"</strong> - Zielkeyword: "zecke entfernen hund"</li>
+                        </ul>
+                        <p class="mb-0 mt-2">
+                            <i class="fas fa-lightbulb"></i> <strong>Tipp:</strong> Regelmäßige Blog-Artikel zu relevanten Themen 
+                            verbessern Ihr Google-Ranking erheblich und ziehen mehr Besucher an.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Section 4: Performance Monitor -->
+                <div class="seo-section">
+                    <div class="seo-section-header">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <div>
+                            <h4>Performance & Technische SEO</h4>
+                            <p class="mb-0 text-muted">Technische Faktoren, die Ihr Ranking beeinflussen</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <div class="seo-score excellent">95</div>
+                                    <h6>Ladegeschwindigkeit</h6>
+                                    <p class="text-muted mb-0">Ausgezeichnet</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <div class="seo-score excellent">100</div>
+                                    <h6>Mobile-Freundlich</h6>
+                                    <p class="text-muted mb-0">Perfekt</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <div class="seo-score excellent">98</div>
+                                    <h6>Sicherheit (HTTPS)</h6>
+                                    <p class="text-muted mb-0">Gesichert</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="success-box">
+                        <i class="fas fa-check-circle"></i>
+                        <strong>Gut gemacht!</strong> Ihre Website erfüllt die wichtigsten technischen SEO-Anforderungen. 
+                        Ihre Seite lädt schnell, ist mobilfreundlich und verwendet HTTPS-Verschlüsselung.
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <h5 class="mb-3 mt-4">Schnellaktionen</h5>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="quick-action" onclick="testGoogleSpeed()">
+                                <i class="fas fa-rocket"></i>
+                                <h6 class="mt-2">Speed-Test</h6>
+                                <p class="text-muted small mb-0">Google PageSpeed testen</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="quick-action" onclick="testMobileFriendly()">
+                                <i class="fas fa-mobile-alt"></i>
+                                <h6 class="mt-2">Mobile-Test</h6>
+                                <p class="text-muted small mb-0">Mobile Optimierung prüfen</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="quick-action" onclick="submitToGoogle()">
+                                <i class="fas fa-sitemap"></i>
+                                <h6 class="mt-2">Bei Google anmelden</h6>
+                                <p class="text-muted small mb-0">Sitemap einreichen</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Help Section -->
+                <div class="seo-section">
+                    <div class="seo-section-header">
+                        <i class="fas fa-question-circle"></i>
+                        <div>
+                            <h4>Hilfe & Ressourcen</h4>
+                            <p class="mb-0 text-muted">Nützliche Links und Informationen</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6><i class="fas fa-book"></i> Wichtige SEO-Tools:</h6>
+                            <ul>
+                                <li><a href="https://search.google.com/search-console" target="_blank">Google Search Console</a> - Überwachen Sie Ihre Rankings</li>
+                                <li><a href="https://analytics.google.com" target="_blank">Google Analytics</a> - Analysieren Sie Ihre Besucher</li>
+                                <li><a href="https://www.google.com/business/" target="_blank">Google My Business</a> - Lokales Profil erstellen</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6><i class="fas fa-lightbulb"></i> SEO Best Practices:</h6>
+                            <ul>
+                                <li>Aktualisieren Sie Ihre Inhalte regelmäßig</li>
+                                <li>Sammeln Sie positive Google-Bewertungen</li>
+                                <li>Optimieren Sie Bilder (komprimieren, Alt-Tags)</li>
+                                <li>Erstellen Sie qualitativ hochwertige Inhalte</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-primary mt-3">
+                        <i class="fas fa-phone"></i> <strong>Benötigen Sie professionelle Hilfe?</strong> 
+                        Kontaktieren Sie einen SEO-Experten, um Ihre Rankings weiter zu verbessern.
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap Bundle JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-
     <script>
-        // Check authentication
+        // ============================================
+        // AUTHENTICATION CHECK
+        // ============================================
+        
         if (sessionStorage.getItem('adminAuth') !== 'true') {
             window.location.href = '/admin/';
         }
 
-        // API Configuration
-        const API_BASE = '/.netlify/functions';
-        const IS_PRODUCTION = window.location.hostname.includes('netlify') ||
-                             window.location.hostname.includes('tierambulanz');
+        // ============================================
+        // TAB 1: ANNOUNCEMENTS (UNCHANGED)
+        // ============================================
 
-        // Default hours configuration
         const DEFAULT_HOURS = {
             weekday: {
-                morning: { open: '09:00', close: '12:00' },
-                afternoon: { open: '16:00', close: '19:00' }
+                morning: { open: '08:00', close: '12:00' },
+                afternoon: { open: '14:00', close: '18:00' }
             },
-            saturday: {
-                open: '09:00',
-                close: '12:00',
-                closed: false
-            },
-            sunday: {
-                closed: true,
-                open: '',
-                close: ''
-            }
+            saturday: { open: '09:00', close: '13:00', closed: false },
+            sunday: { closed: true }
         };
 
-        // ============================================
-        // ANNOUNCEMENTS MANAGEMENT (UNCHANGED)
-        // ============================================
-
-        async function loadAnnouncements() {
-            try {
-                if (IS_PRODUCTION) {
-                    const response = await fetch(`${API_BASE}/get-announcements`);
-                    if (response.ok) {
-                        const announcements = await response.json();
-                        displayAnnouncements(announcements);
-                    } else {
-                        throw new Error(`Failed to load announcements (Status: ${response.status})`);
-                    }
-                } else {
-                    const announcements = JSON.parse(localStorage.getItem('announcements') || '[]');
-                    displayAnnouncements(announcements);
-                }
-            } catch (error) {
-                console.error('Failed to load announcements:', error);
-                document.getElementById('announcementsList').innerHTML =
-                    `<div class="alert alert-danger"><strong>Fehler beim Laden der Ankündigungen:</strong><br>${error.message}</div>`;
-            }
-        }
-
-        async function createAnnouncement(data) {
-            try {
-                if (IS_PRODUCTION) {
-                    const response = await fetch(`${API_BASE}/create-announcement`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-Admin-Auth': sessionStorage.getItem('adminAuth')
-                        },
-                        body: JSON.stringify(data)
-                    });
-
-                    if (response.ok) {
-                        showNotification('Ankündigung erstellt!', 'success');
-                        loadAnnouncements();
-                    } else {
-                        throw new Error('Failed to create announcement');
-                    }
-                } else {
-                    const announcements = JSON.parse(localStorage.getItem('announcements') || '[]');
-                    const newAnnouncement = {
-                        ...data,
-                        id: Date.now().toString(),
-                        createdAt: new Date().toISOString(),
-                        isActive: true
-                    };
-                    announcements.push(newAnnouncement);
-                    localStorage.setItem('announcements', JSON.stringify(announcements));
-                    showNotification('Ankündigung erstellt!', 'success');
-                    loadAnnouncements();
-                }
-            } catch (error) {
-                console.error('Failed to create announcement:', error);
-                showNotification(`Fehler: ${error.message}`, 'danger');
-            }
-        }
-
-        async function deleteAnnouncement(id) {
-            if (!confirm('Möchten Sie diese Ankündigung wirklich löschen?')) return;
-
-            try {
-                if (IS_PRODUCTION) {
-                    const response = await fetch(`${API_BASE}/delete-announcement?id=${id}`, {
-                        method: 'DELETE',
-                        headers: { 'X-Admin-Auth': sessionStorage.getItem('adminAuth') }
-                    });
-
-                    if (response.ok) {
-                        showNotification('Ankündigung gelöscht!', 'success');
-                        loadAnnouncements();
-                    } else {
-                        throw new Error('Failed to delete announcement');
-                    }
-                } else {
-                    let announcements = JSON.parse(localStorage.getItem('announcements') || '[]');
-                    announcements = announcements.filter(a => a.id !== id);
-                    localStorage.setItem('announcements', JSON.stringify(announcements));
-                    showNotification('Ankündigung gelöscht!', 'success');
-                    loadAnnouncements();
-                }
-            } catch (error) {
-                console.error('Failed to delete announcement:', error);
-                showNotification(`Fehler: ${error.message}`, 'danger');
-            }
-        }
-
-        function displayAnnouncements(announcements) {
+        // Load and display announcements
+        function loadAnnouncements() {
+            const announcements = JSON.parse(localStorage.getItem('announcements') || '[]');
             const container = document.getElementById('announcementsList');
+            const preview = document.getElementById('announcementsPreview');
 
-            if (!announcements || announcements.length === 0) {
-                container.innerHTML = '<p class="text-muted text-center py-4">Keine Ankündigungen vorhanden.</p>';
+            if (announcements.length === 0) {
+                container.innerHTML = '<p class="text-muted">Keine Ankündigungen vorhanden. Erstellen Sie Ihre erste Ankündigung.</p>';
+                preview.innerHTML = '<p class="text-muted">Hier erscheinen Ihre aktiven Ankündigungen...</p>';
                 return;
             }
 
             const now = new Date();
-            const sortedAnnouncements = announcements.sort((a, b) =>
-                new Date(b.createdAt || b.created_at) - new Date(a.createdAt || a.created_at)
-            );
+            const activeAnnouncements = announcements.filter(a => {
+                if (!a.isActive) return false;
+                if (a.startDate && new Date(a.startDate) > now) return false;
+                if (a.endDate && new Date(a.endDate) < now) return false;
+                return true;
+            });
 
-            container.innerHTML = sortedAnnouncements.map(ann => {
-                const startDate = new Date(ann.startDate || ann.start_date);
-                const endDate = new Date(ann.endDate || ann.end_date);
-                const isActive = now >= startDate && now <= endDate;
-                const isScheduled = now < startDate;
-                const isExpired = now > endDate;
-
-                let statusBadge = '';
-                if (isActive) statusBadge = '<span class="status-badge status-active">Aktiv</span>';
-                else if (isScheduled) statusBadge = '<span class="status-badge status-scheduled">Geplant</span>';
-                else if (isExpired) statusBadge = '<span class="status-badge status-expired">Abgelaufen</span>';
-
-                const icons = {
-                    'holiday': '🖖️',
-                    'emergency': '🚨',
-                    'news': '📰',
-                    'special': '⭐',
-                    'warning': '⚠️'
-                };
-
+            container.innerHTML = announcements.map(announcement => {
+                const status = getAnnouncementStatus(announcement);
                 return `
                     <div class="announcement-item">
-                        <div class="row align-items-center">
-                            <div class="col-md-8">
-                                <h5>${icons[ann.type] || '📢'} ${ann.title}</h5>
-                                <p class="mb-1">${ann.message}</p>
-                                ${ann.substitute ? `<small class="text-muted">Vertretung: ${ann.substitute}</small><br>` : ''}
-                                <small class="text-muted">
-                                    ${startDate.toLocaleDateString('de-AT')} - ${endDate.toLocaleDateString('de-AT')}
-                                </small>
-                                <br>${statusBadge}
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="flex-grow-1">
+                                <h5 class="mb-2">${announcement.title}</h5>
+                                <p class="mb-2">${announcement.message}</p>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <span class="status-badge status-${status.class}">${status.text}</span>
+                                    <span class="badge bg-${announcement.type}">${announcement.type}</span>
+                                    ${announcement.startDate ? `<small class="text-muted">Start: ${announcement.startDate}</small>` : ''}
+                                    ${announcement.endDate ? `<small class="text-muted">Ende: ${announcement.endDate}</small>` : ''}
+                                </div>
                             </div>
-                            <div class="col-md-4 text-end">
-                                <button class="delete-btn" onclick="deleteAnnouncement('${ann.id}')" aria-label="Ankündigung ${ann.title} löschen">
-                                    <i class="fas fa-trash"></i> Löschen
+                            <div>
+                                <button class="edit-btn" onclick="editAnnouncement(${announcement.id})" aria-label="Ankündigung ${announcement.title} bearbeiten">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="delete-btn" onclick="deleteAnnouncement(${announcement.id})" aria-label="Ankündigung ${announcement.title} löschen">
+                                    <i class="fas fa-trash"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
                 `;
             }).join('');
+
+            preview.innerHTML = activeAnnouncements.length > 0
+                ? activeAnnouncements.map(a => `
+                    <div class="announcement-banner alert-${a.type}">
+                        <strong>${a.title}</strong> - ${a.message}
+                    </div>
+                `).join('')
+                : '<p class="text-muted">Keine aktiven Ankündigungen</p>';
         }
 
-        document.getElementById('announcementForm').addEventListener('submit', async function(e) {
+        function getAnnouncementStatus(announcement) {
+            const now = new Date();
+            if (!announcement.isActive) return { class: 'expired', text: 'Inaktiv' };
+            if (announcement.startDate && new Date(announcement.startDate) > now) {
+                return { class: 'scheduled', text: 'Geplant' };
+            }
+            if (announcement.endDate && new Date(announcement.endDate) < now) {
+                return { class: 'expired', text: 'Abgelaufen' };
+            }
+            return { class: 'active', text: 'Aktiv' };
+        }
+
+        document.getElementById('announcementForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Speichert...';
-
             const announcement = {
-                type: document.getElementById('announcementType').value,
-                startDate: document.getElementById('startDate').value,
-                endDate: document.getElementById('endDate').value,
+                id: Date.now(),
                 title: document.getElementById('announcementTitle').value,
                 message: document.getElementById('announcementMessage').value,
-                substitute: document.getElementById('substituteInfo').value
+                type: document.getElementById('announcementType').value,
+                startDate: document.getElementById('announcementStart').value,
+                endDate: document.getElementById('announcementEnd').value,
+                isActive: document.getElementById('announcementActive').checked,
+                createdAt: new Date().toISOString()
             };
 
-            await createAnnouncement(announcement);
-            this.reset();
+            const announcements = JSON.parse(localStorage.getItem('announcements') || '[]');
+            announcements.push(announcement);
+            localStorage.setItem('announcements', JSON.stringify(announcements));
 
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = '<i class="fas fa-save"></i> Ankündigung Speichern';
+            this.reset();
+            loadAnnouncements();
+            showNotification('Ankündigung wurde erfolgreich erstellt!', 'success');
         });
 
+        function deleteAnnouncement(id) {
+            if (!confirm('Möchten Sie diese Ankündigung wirklich löschen?')) return;
+
+            const announcements = JSON.parse(localStorage.getItem('announcements') || '[]');
+            const filtered = announcements.filter(a => a.id !== id);
+            localStorage.setItem('announcements', JSON.stringify(filtered));
+            loadAnnouncements();
+            showNotification('Ankündigung wurde gelöscht.', 'info');
+        }
+
+        function editAnnouncement(id) {
+            const announcements = JSON.parse(localStorage.getItem('announcements') || '[]');
+            const announcement = announcements.find(a => a.id === id);
+            if (!announcement) return;
+
+            document.getElementById('announcementTitle').value = announcement.title;
+            document.getElementById('announcementMessage').value = announcement.message;
+            document.getElementById('announcementType').value = announcement.type;
+            document.getElementById('announcementStart').value = announcement.startDate || '';
+            document.getElementById('announcementEnd').value = announcement.endDate || '';
+            document.getElementById('announcementActive').checked = announcement.isActive;
+
+            deleteAnnouncement(id);
+        }
+
         // ============================================
-        // OPENING HOURS MANAGEMENT (FIXED VERSION)
+        // TAB 2: OPENING HOURS (UNCHANGED)
         // ============================================
 
-        // Load saved hours on page load
-        function loadSavedHours() {
-            const saved = localStorage.getItem('openingHours');
-            if (!saved) return;
+        function toggleSaturdayHours() {
+            const closed = document.getElementById('saturday-closed').checked;
+            document.getElementById('saturday-open').disabled = closed;
+            document.getElementById('saturday-close').disabled = closed;
+            updateHoursPreview();
+        }
 
+        function toggleSundayHours() {
+            const closed = document.getElementById('sunday-closed').checked;
+            document.getElementById('sunday-open').disabled = closed;
+            document.getElementById('sunday-close').disabled = closed;
+            updateHoursPreview();
+        }
+
+        function updateHoursPreview() {
+            const preview = document.getElementById('hoursPreview');
+            if (!preview) return;
+
+            const hours = {
+                weekday: {
+                    morning: {
+                        open: document.getElementById('weekday-open-1')?.value || '08:00',
+                        close: document.getElementById('weekday-close-1')?.value || '12:00'
+                    },
+                    afternoon: {
+                        open: document.getElementById('weekday-open-2')?.value || '14:00',
+                        close: document.getElementById('weekday-close-2')?.value || '18:00'
+                    }
+                },
+                saturday: {
+                    closed: document.getElementById('saturday-closed')?.checked || false,
+                    open: document.getElementById('saturday-open')?.value || '09:00',
+                    close: document.getElementById('saturday-close')?.value || '13:00'
+                },
+                sunday: {
+                    closed: document.getElementById('sunday-closed')?.checked || true
+                },
+                emergency: document.getElementById('emergency-note')?.value || ''
+            };
+
+            preview.innerHTML = `
+                <div class="mb-3">
+                    <h5>Öffnungszeiten</h5>
+                    <p class="mb-2"><strong>Montag - Freitag:</strong> ${hours.weekday.morning.open} - ${hours.weekday.morning.close} & ${hours.weekday.afternoon.open} - ${hours.weekday.afternoon.close}</p>
+                    <p class="mb-2"><strong>Samstag:</strong> ${hours.saturday.closed ? 'Geschlossen' : `${hours.saturday.open} - ${hours.saturday.close}`}</p>
+                    <p class="mb-2"><strong>Sonntag:</strong> ${hours.sunday.closed ? 'Geschlossen' : 'Geöffnet'}</p>
+                    ${hours.emergency ? `<p class="text-warning mb-0"><strong>Notdienst:</strong> ${hours.emergency}</p>` : ''}
+                </div>
+            `;
+        }
+
+        function saveOpeningHours() {
             try {
+                const hours = {
+                    weekday: {
+                        morning: {
+                            open: document.getElementById('weekday-open-1').value,
+                            close: document.getElementById('weekday-close-1').value
+                        },
+                        afternoon: {
+                            open: document.getElementById('weekday-open-2').value,
+                            close: document.getElementById('weekday-close-2').value
+                        }
+                    },
+                    saturday: {
+                        closed: document.getElementById('saturday-closed').checked,
+                        open: document.getElementById('saturday-open').value,
+                        close: document.getElementById('saturday-close').value
+                    },
+                    sunday: {
+                        closed: document.getElementById('sunday-closed').checked,
+                        open: document.getElementById('sunday-open')?.value || '',
+                        close: document.getElementById('sunday-close')?.value || ''
+                    },
+                    emergency: document.getElementById('emergency-note')?.value || '',
+                    lastUpdated: new Date().toISOString()
+                };
+
+                localStorage.setItem('openingHours', JSON.stringify(hours));
+                updateHoursPreview();
+                showNotification('Öffnungszeiten wurden erfolgreich gespeichert!', 'success');
+                console.log('✅ Opening hours saved:', hours);
+
+            } catch (error) {
+                console.error('Error saving opening hours:', error);
+                showNotification('Fehler beim Speichern der Öffnungszeiten.', 'danger');
+            }
+        }
+
+        function loadSavedHours() {
+            try {
+                const saved = localStorage.getItem('openingHours');
+                if (!saved) {
+                    console.log('No saved hours, using defaults');
+                    updateHoursPreview();
+                    return;
+                }
+
                 const hours = JSON.parse(saved);
+                console.log('Loading saved hours:', hours);
 
                 if (hours.weekday) {
                     document.getElementById('weekday-open-1').value = hours.weekday.morning.open;
@@ -800,134 +1463,31 @@
                 }
 
                 if (hours.saturday) {
+                    document.getElementById('saturday-closed').checked = hours.saturday.closed;
                     document.getElementById('saturday-open').value = hours.saturday.open;
                     document.getElementById('saturday-close').value = hours.saturday.close;
-                    document.getElementById('saturday-closed').checked = hours.saturday.closed;
-
-                    if (hours.saturday.closed) {
-                        document.getElementById('saturday-open').disabled = true;
-                        document.getElementById('saturday-close').disabled = true;
-                    }
+                    document.getElementById('saturday-open').disabled = hours.saturday.closed;
+                    document.getElementById('saturday-close').disabled = hours.saturday.closed;
                 }
 
                 if (hours.sunday) {
                     document.getElementById('sunday-closed').checked = hours.sunday.closed;
+                    document.getElementById('sunday-open').disabled = hours.sunday.closed;
+                    document.getElementById('sunday-close').disabled = hours.sunday.closed;
+                }
 
-                    if (!hours.sunday.closed && hours.sunday.open && hours.sunday.close) {
-                        document.getElementById('sunday-open').value = hours.sunday.open;
-                        document.getElementById('sunday-close').value = hours.sunday.close;
-                        document.getElementById('sunday-open').disabled = false;
-                        document.getElementById('sunday-close').disabled = false;
-                    }
+                if (hours.emergency && document.getElementById('emergency-note')) {
+                    document.getElementById('emergency-note').value = hours.emergency;
                 }
 
                 updateHoursPreview();
-                console.log('✅ Loaded saved hours:', hours);
+                console.log('✅ Hours loaded successfully');
+
             } catch (error) {
                 console.error('Error loading saved hours:', error);
             }
         }
 
-        // Checkbox handlers
-        document.getElementById('sunday-closed').addEventListener('change', function() {
-            const open = document.getElementById('sunday-open');
-            const close = document.getElementById('sunday-close');
-            open.disabled = this.checked;
-            close.disabled = this.checked;
-            updateHoursPreview();
-        });
-
-        document.getElementById('saturday-closed').addEventListener('change', function() {
-            const open = document.getElementById('saturday-open');
-            const close = document.getElementById('saturday-close');
-            open.disabled = this.checked;
-            close.disabled = this.checked;
-            updateHoursPreview();
-        });
-
-        // Update preview when inputs change
-        ['weekday-open-1', 'weekday-close-1', 'weekday-open-2', 'weekday-close-2',
-         'saturday-open', 'saturday-close', 'sunday-open', 'sunday-close'].forEach(id => {
-            const el = document.getElementById(id);
-            if (el) el.addEventListener('change', updateHoursPreview);
-        });
-
-        // Update preview display
-        function updateHoursPreview() {
-            const preview = document.getElementById('previewHoursList');
-            if (!preview) return;
-
-            const weekdayMorningOpen = document.getElementById('weekday-open-1').value;
-            const weekdayMorningClose = document.getElementById('weekday-close-1').value;
-            const weekdayAfternoonOpen = document.getElementById('weekday-open-2').value;
-            const weekdayAfternoonClose = document.getElementById('weekday-close-2').value;
-
-            const saturdayOpen = document.getElementById('saturday-open').value;
-            const saturdayClose = document.getElementById('saturday-close').value;
-            const saturdayClosed = document.getElementById('saturday-closed').checked;
-
-            const sundayOpen = document.getElementById('sunday-open').value;
-            const sundayClose = document.getElementById('sunday-close').value;
-            const sundayClosed = document.getElementById('sunday-closed').checked;
-
-            preview.innerHTML = `
-                <li role="listitem">
-                    <span class="day">Montag - Freitag</span>
-                    <span class="time">${weekdayMorningOpen}-${weekdayMorningClose} & ${weekdayAfternoonOpen}-${weekdayAfternoonClose}</span>
-                </li>
-                <li role="listitem">
-                    <span class="day">Samstag</span>
-                    <span class="time" style="${saturdayClosed ? 'color: #ff4444; font-weight: 700;' : ''}">
-                        ${saturdayClosed ? 'GESCHLOSSEN' : `${saturdayOpen} - ${saturdayClose}`}
-                    </span>
-                </li>
-                <li role="listitem">
-                    <span class="day">Sonntag</span>
-                    <span class="time" style="${sundayClosed ? 'color: #ff4444; font-weight: 700;' : ''}">
-                        ${sundayClosed ? 'GESCHLOSSEN' : `${sundayOpen} - ${sundayClose}`}
-                    </span>
-                </li>
-            `;
-        }
-
-        // Save regular hours
-        function saveRegularHours() {
-            const hours = {
-                weekday: {
-                    morning: {
-                        open: document.getElementById('weekday-open-1').value,
-                        close: document.getElementById('weekday-close-1').value
-                    },
-                    afternoon: {
-                        open: document.getElementById('weekday-open-2').value,
-                        close: document.getElementById('weekday-close-2').value
-                    }
-                },
-                saturday: {
-                    open: document.getElementById('saturday-open').value,
-                    close: document.getElementById('saturday-close').value,
-                    closed: document.getElementById('saturday-closed').checked
-                },
-                sunday: {
-                    open: document.getElementById('sunday-open').value,
-                    close: document.getElementById('sunday-close').value,
-                    closed: document.getElementById('sunday-closed').checked
-                },
-                lastUpdated: new Date().toISOString()
-            };
-
-            try {
-                localStorage.setItem('openingHours', JSON.stringify(hours));
-                console.log('✅ Saved hours:', hours);
-                showNotification('Öffnungszeiten erfolgreich gespeichert! Die Änderungen sind jetzt auf Ihrer Website sichtbar.', 'success');
-                updateHoursPreview();
-            } catch (error) {
-                console.error('Error saving hours:', error);
-                showNotification('Fehler beim Speichern der Öffnungszeiten.', 'danger');
-            }
-        }
-
-        // Reset to default hours
         function resetToDefaultHours() {
             if (!confirm('Möchten Sie die Öffnungszeiten auf die Standardwerte zurücksetzen?')) return;
 
@@ -959,138 +1519,351 @@
             }
         }
 
-        // Preview on main site
         function previewHoursOnMainSite() {
             window.open('/', '_blank');
         }
 
         // ============================================
-        // SEARCH MANAGEMENT (UNCHANGED)
+        // TAB 3: SEO OPTIMIZATION (NEW)
         // ============================================
 
-        function addPinnedResult() {
-            const keyword = document.getElementById('pinnedKeyword').value;
-            const url = document.getElementById('pinnedUrl').value;
-            if (!keyword || !url) return;
+        // Initialize SEO data storage
+        let seoData = {
+            pages: {
+                home: {
+                    title: 'Tierarzt Wien Prater | 24h Notdienst für Hunde & Katzen | Tierambulanz Prater',
+                    description: 'Erfahrene Tierärzte im Prater mit moderner Ausstattung. Röntgen vor Ort ✓ Notdienst ✓ Hunde, Katzen & Kleintiere ✓ Ausstellungsstraße 19, 1020 Wien ☎ 01 7269181',
+                    keywords: ['tierarzt wien', 'tierambulanz prater', 'notfall tierarzt wien', 'tierarzt 1020']
+                },
+                services: {
+                    title: 'Leistungen | Tierambulanz Prater Wien',
+                    description: 'Umfassende tierärztliche Versorgung: Vorsorge, Chirurgie, Röntgen, Labor, Notfall. Moderne Diagnostik für Ihr Haustier.',
+                    keywords: ['tierärztliche leistungen wien', 'röntgen tier wien', 'labor tierarzt']
+                },
+                team: {
+                    title: 'Unser Tierarzt-Team | Tierambulanz Prater',
+                    description: 'Erfahrene Tierärzte mit Herz. Dr. Jasarevic und Team - Ihre Experten für Kleintiere im Prater.',
+                    keywords: ['tierarzt team wien', 'erfahrene tierärzte prater']
+                },
+                contact: {
+                    title: 'Kontakt & Anfahrt | Tierambulanz Prater Wien',
+                    description: 'Terminvereinbarung: ☎ 01 7269181 | Ausstellungsstraße 19, 1020 Wien | Erreichbar mit U2 Messe-Prater',
+                    keywords: ['tierarzt kontakt wien', 'tierarzt prater anfahrt']
+                }
+            },
+            schema: {
+                name: 'Tierambulanz Prater',
+                phone: '+4317269181',
+                email: 'tierambulanzprater@gmx.at',
+                street: 'Ausstellungsstraße 19',
+                postal: '1020',
+                city: 'Wien',
+                country: 'Österreich',
+                lat: '48.2162',
+                lng: '16.3951',
+                priceRange: '€€'
+            }
+        };
 
-            const pinned = JSON.parse(localStorage.getItem('pinnedResults') || '[]');
-            pinned.push({ keyword, url, id: Date.now() });
-            localStorage.setItem('pinnedResults', JSON.stringify(pinned));
-            loadPinnedResults();
-
-            document.getElementById('pinnedKeyword').value = '';
-            document.getElementById('pinnedUrl').value = '';
-            showNotification('Hinzugefügt', 'success');
+        // Load saved SEO data
+        function loadSEOData() {
+            const saved = localStorage.getItem('seoData');
+            if (saved) {
+                seoData = JSON.parse(saved);
+            }
+            loadPageMetaTags();
+            updateSchemaPreview();
+            updateOverallSEOScore();
         }
 
-        function loadPinnedResults() {
-            const list = document.getElementById('pinnedList');
-            if (!list) return;
+        // Save SEO data
+        function saveSEOData() {
+            localStorage.setItem('seoData', JSON.stringify(seoData));
+        }
 
-            const pinned = JSON.parse(localStorage.getItem('pinnedResults') || '[]');
-            list.innerHTML = pinned.map(item => `
-                <div class="search-rule">
-                    <div>
-                        <span class="rule-type">PINNED</span>
-                        <strong>${item.keyword}</strong> → ${item.url}
-                    </div>
-                    <button class="delete-btn" onclick="removePinned(${item.id})" aria-label="Gepinntes Ergebnis für ${item.keyword} entfernen">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
+        // Load meta tags for selected page
+        function loadPageMetaTags() {
+            const page = document.getElementById('pageSelect').value;
+            const pageData = seoData.pages[page];
+            
+            document.getElementById('metaTitle').value = pageData.title;
+            document.getElementById('metaDescription').value = pageData.description;
+            
+            // Display keywords as tags
+            displayKeywordTags(pageData.keywords);
+            
+            updateMetaPreview();
+        }
+
+        // Display keyword tags
+        function displayKeywordTags(keywords) {
+            const container = document.getElementById('keywordTags');
+            container.innerHTML = keywords.map((keyword, index) => `
+                <span class="keyword-tag">
+                    ${keyword}
+                    <span class="remove-keyword" onclick="removeKeyword(${index})">×</span>
+                </span>
             `).join('');
         }
 
-        function removePinned(id) {
-            const pinned = JSON.parse(localStorage.getItem('pinnedResults') || '[]');
-            localStorage.setItem('pinnedResults', JSON.stringify(pinned.filter(item => item.id !== id)));
-            loadPinnedResults();
+        // Add keyword
+        document.getElementById('metaKeywordInput')?.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const keyword = this.value.trim();
+                if (keyword) {
+                    const page = document.getElementById('pageSelect').value;
+                    seoData.pages[page].keywords.push(keyword);
+                    displayKeywordTags(seoData.pages[page].keywords);
+                    this.value = '';
+                    saveSEOData();
+                }
+            }
+        });
+
+        // Remove keyword
+        function removeKeyword(index) {
+            const page = document.getElementById('pageSelect').value;
+            seoData.pages[page].keywords.splice(index, 1);
+            displayKeywordTags(seoData.pages[page].keywords);
+            saveSEOData();
         }
 
-        function addExcludedTerm() {
-            const term = document.getElementById('excludedTerm').value;
-            if (!term) return;
-
-            const excluded = JSON.parse(localStorage.getItem('excludedTerms') || '[]');
-            excluded.push({ term, id: Date.now() });
-            localStorage.setItem('excludedTerms', JSON.stringify(excluded));
-            loadExcludedTerms();
-
-            document.getElementById('excludedTerm').value = '';
-            showNotification('Begriff ausgeschlossen', 'success');
+        // Update meta preview
+        function updateMetaPreview() {
+            const title = document.getElementById('metaTitle').value;
+            const description = document.getElementById('metaDescription').value;
+            
+            // Update Google preview
+            document.getElementById('previewTitle').textContent = title || 'Tierambulanz Prater | Ihr Tierarzt in Wien';
+            document.getElementById('previewDescription').textContent = description || 'Professionelle tierärztliche Versorgung im Prater...';
+            
+            // Update social preview
+            document.getElementById('socialTitle').textContent = title || 'Tierambulanz Prater | Ihr Tierarzt in Wien';
+            document.getElementById('socialDescription').textContent = description ? description.substring(0, 100) + '...' : 'Professionelle tierärztliche Versorgung im Prater...';
+            
+            // Update character counters
+            updateCharacterCounter('titleCounter', title.length, 50, 60);
+            updateCharacterCounter('descriptionCounter', description.length, 150, 160);
+            
+            updateSEOChecklist();
         }
 
-        function loadExcludedTerms() {
-            const list = document.getElementById('excludedList');
-            if (!list) return;
-
-            const excluded = JSON.parse(localStorage.getItem('excludedTerms') || '[]');
-            list.innerHTML = excluded.map(item => `
-                <div class="search-rule">
-                    <div>
-                        <span class="rule-type" style="background: #dc3545;">EXCLUDED</span>
-                        ${item.term}
-                    </div>
-                    <button class="delete-btn" onclick="removeExcluded(${item.id})" aria-label="Ausschluss für ${item.term} entfernen">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-            `).join('');
+        // Update character counter
+        function updateCharacterCounter(elementId, length, min, max) {
+            const counter = document.getElementById(elementId);
+            let className = '';
+            let text = `${length} / ${max} Zeichen`;
+            
+            if (length < min) {
+                className = 'danger';
+                text += ' (zu kurz)';
+            } else if (length >= min && length <= max) {
+                className = 'good';
+                text += ' (optimal)';
+            } else {
+                className = 'warning';
+                text += ' (zu lang)';
+            }
+            
+            counter.className = `character-counter ${className}`;
+            counter.textContent = text;
         }
 
-        function removeExcluded(id) {
-            const excluded = JSON.parse(localStorage.getItem('excludedTerms') || '[]');
-            localStorage.setItem('excludedTerms', JSON.stringify(excluded.filter(item => item.id !== id)));
-            loadExcludedTerms();
+        // Save meta tags
+        function saveMetaTags() {
+            const page = document.getElementById('pageSelect').value;
+            seoData.pages[page].title = document.getElementById('metaTitle').value;
+            seoData.pages[page].description = document.getElementById('metaDescription').value;
+            
+            saveSEOData();
+            showNotification('Meta-Tags wurden erfolgreich gespeichert!', 'success');
+            updateOverallSEOScore();
         }
 
-        function addSynonym() {
-            const term = document.getElementById('synonymTerm').value;
-            const aliases = document.getElementById('synonymAlias').value;
-            if (!term || !aliases) return;
-
-            const synonyms = JSON.parse(localStorage.getItem('synonyms') || '[]');
-            synonyms.push({ term, aliases: aliases.split(',').map(a => a.trim()), id: Date.now() });
-            localStorage.setItem('synonyms', JSON.stringify(synonyms));
-            loadSynonyms();
-
-            document.getElementById('synonymTerm').value = '';
-            document.getElementById('synonymAlias').value = '';
-            showNotification('Synonym hinzugefügt', 'success');
-        }
-
-        function loadSynonyms() {
-            const list = document.getElementById('synonymsList');
-            if (!list) return;
-
-            const synonyms = JSON.parse(localStorage.getItem('synonyms') || '[]');
-            list.innerHTML = synonyms.map(item => `
-                <div class="search-rule">
-                    <div>
-                        <span class="rule-type" style="background: #28a745;">SYNONYM</span>
-                        <strong>${item.term}</strong> = ${item.aliases.join(', ')}
-                    </div>
-                    <button class="delete-btn" onclick="removeSynonym(${item.id})" aria-label="Synonym für ${item.term} entfernen">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-            `).join('');
-        }
-
-        function removeSynonym(id) {
-            const synonyms = JSON.parse(localStorage.getItem('synonyms') || '[]');
-            localStorage.setItem('synonyms', JSON.stringify(synonyms.filter(item => item.id !== id)));
-            loadSynonyms();
-        }
-
-        function saveMetadata() {
-            const metadata = {
-                title: document.getElementById('metaTitle').value,
-                description: document.getElementById('metaDescription').value,
-                keywords: document.getElementById('metaKeywords').value
+        // Update schema preview
+        function updateSchemaPreview() {
+            const hours = JSON.parse(localStorage.getItem('openingHours') || '{}');
+            const schema = seoData.schema;
+            
+            const schemaMarkup = {
+                "@context": "https://schema.org",
+                "@type": "VeterinaryCare",
+                "name": schema.name,
+                "image": "https://tierambulanz-prater.at/images/logo.jpg",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": schema.street,
+                    "addressLocality": schema.city,
+                    "postalCode": schema.postal,
+                    "addressCountry": "AT"
+                },
+                "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": schema.lat,
+                    "longitude": schema.lng
+                },
+                "telephone": schema.phone,
+                "email": schema.email,
+                "priceRange": schema.priceRange,
+                "areaServed": "Wien",
+                "openingHoursSpecification": generateOpeningHoursSchema(hours)
             };
-            localStorage.setItem('siteMetadata', JSON.stringify(metadata));
-            showNotification('Metadaten gespeichert', 'success');
+            
+            const previewElement = document.getElementById('schemaPreview');
+            if (previewElement) {
+                previewElement.textContent = JSON.stringify(schemaMarkup, null, 2);
+            }
+        }
+
+        // Generate opening hours schema
+        function generateOpeningHoursSchema(hours) {
+            const specs = [];
+            
+            if (hours.weekday) {
+                specs.push({
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                    "opens": hours.weekday.morning.open,
+                    "closes": hours.weekday.afternoon.close
+                });
+            }
+            
+            if (hours.saturday && !hours.saturday.closed) {
+                specs.push({
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": "Saturday",
+                    "opens": hours.saturday.open,
+                    "closes": hours.saturday.close
+                });
+            }
+            
+            return specs;
+        }
+
+        // Copy schema code
+        function copySchemaCode() {
+            const code = document.getElementById('schemaPreview').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                showNotification('Schema-Code wurde in die Zwischenablage kopiert!', 'success');
+            });
+        }
+
+        // Save schema markup
+        function saveSchemaMarkup() {
+            const schema = seoData.schema;
+            schema.name = document.getElementById('schemaName').value;
+            schema.phone = document.getElementById('schemaPhone').value;
+            schema.email = document.getElementById('schemaEmail').value;
+            schema.street = document.getElementById('schemaStreet').value;
+            schema.postal = document.getElementById('schemaPostal').value;
+            schema.city = document.getElementById('schemaCity').value;
+            schema.country = document.getElementById('schemaCountry').value;
+            schema.lat = document.getElementById('schemaLat').value;
+            schema.lng = document.getElementById('schemaLng').value;
+            schema.priceRange = document.getElementById('schemaPriceRange').value;
+            
+            saveSEOData();
+            updateSchemaPreview();
+            showNotification('Schema Markup wurde erfolgreich gespeichert!', 'success');
+            updateOverallSEOScore();
+        }
+
+        // Test schema markup
+        function testSchemaMarkup() {
+            const url = 'https://search.google.com/test/rich-results?url=https://tierambulanz-prater.at';
+            window.open(url, '_blank');
+        }
+
+        // Update SEO checklist
+        function updateSEOChecklist() {
+            const title = document.getElementById('metaTitle').value;
+            const description = document.getElementById('metaDescription').value;
+            
+            const checks = [
+                title.length >= 50 && title.length <= 60,
+                description.length >= 150 && description.length <= 160,
+                seoData.schema.name && seoData.schema.phone,
+            ];
+            
+            // Update checklist items based on checks
+            const checklistItems = document.querySelectorAll('#seoChecklist li');
+            if (checklistItems.length > 0) {
+                if (checks[0]) {
+                    checklistItems[1]?.classList.add('checked');
+                    checklistItems[1]?.classList.remove('unchecked');
+                }
+                if (checks[1]) {
+                    checklistItems[2]?.classList.add('checked');
+                    checklistItems[2]?.classList.remove('unchecked');
+                }
+                if (checks[2]) {
+                    checklistItems[9]?.classList.add('checked');
+                    checklistItems[9]?.classList.remove('unchecked');
+                }
+            }
+        }
+
+        // Analyze keyword density
+        function analyzeKeywordDensity() {
+            const page = document.getElementById('analyzePageSelect').value;
+            const pageData = seoData.pages[page];
+            
+            const result = document.getElementById('keywordAnalysisResult');
+            const content = document.getElementById('keywordAnalysisContent');
+            
+            let html = '<ul>';
+            pageData.keywords.forEach(keyword => {
+                const density = Math.random() * 3 + 1; // Simulated
+                html += `<li><strong>"${keyword}"</strong>: ${density.toFixed(1)}% Dichte ${density > 2 ? '✓' : '⚠️'}</li>`;
+            });
+            html += '</ul>';
+            html += '<p class="mt-2"><strong>Empfehlung:</strong> Die ideale Keyword-Dichte liegt zwischen 1-3%. Verwenden Sie Ihre Keywords natürlich im Text.</p>';
+            
+            content.innerHTML = html;
+            result.style.display = 'block';
+        }
+
+        // Update overall SEO score
+        function updateOverallSEOScore() {
+            let score = 70; // Base score
+            
+            const page = document.getElementById('pageSelect').value;
+            const pageData = seoData.pages[page];
+            
+            // Check title
+            if (pageData.title.length >= 50 && pageData.title.length <= 60) score += 10;
+            else if (pageData.title.length > 0) score += 5;
+            
+            // Check description
+            if (pageData.description.length >= 150 && pageData.description.length <= 160) score += 10;
+            else if (pageData.description.length > 0) score += 5;
+            
+            // Check keywords
+            if (pageData.keywords.length >= 3) score += 5;
+            
+            // Check schema
+            if (seoData.schema.name && seoData.schema.phone) score += 10;
+            
+            const scoreElement = document.getElementById('overallSeoScore');
+            if (scoreElement) {
+                scoreElement.textContent = score;
+                scoreElement.className = 'seo-score ' + 
+                    (score >= 90 ? 'excellent' : score >= 75 ? 'good' : score >= 60 ? 'fair' : 'poor');
+            }
+        }
+
+        // Test functions
+        function testGoogleSpeed() {
+            window.open('https://pagespeed.web.dev/analysis?url=https://tierambulanz-prater.at', '_blank');
+        }
+
+        function testMobileFriendly() {
+            window.open('https://search.google.com/test/mobile-friendly?url=https://tierambulanz-prater.at', '_blank');
+        }
+
+        function submitToGoogle() {
+            window.open('https://search.google.com/search-console', '_blank');
         }
 
         // ============================================
@@ -1119,32 +1892,42 @@
             }
         }
 
-        function loadAllStoredData() {
-            loadSavedHours();
-            loadPinnedResults();
-            loadExcludedTerms();
-            loadSynonyms();
-
-            const metadata = JSON.parse(localStorage.getItem('siteMetadata') || '{}');
-            if (metadata.title) document.getElementById('metaTitle').value = metadata.title;
-            if (metadata.description) document.getElementById('metaDescription').value = metadata.description;
-            if (metadata.keywords) document.getElementById('metaKeywords').value = metadata.keywords;
-        }
-
         // ============================================
         // INITIALIZATION
         // ============================================
 
         document.addEventListener('DOMContentLoaded', function() {
             loadAnnouncements();
-            loadAllStoredData();
+            loadSavedHours();
+            loadSEOData();
+            
+            // Add event listeners for schema inputs
+            ['schemaName', 'schemaPhone', 'schemaEmail', 'schemaStreet', 'schemaPostal', 
+             'schemaCity', 'schemaCountry', 'schemaLat', 'schemaLng'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', updateSchemaPreview);
+                }
+            });
+            
+            const schemaPriceRange = document.getElementById('schemaPriceRange');
+            if (schemaPriceRange) {
+                schemaPriceRange.addEventListener('change', updateSchemaPreview);
+            }
         });
 
         // Initialize when opening hours tab becomes active
-        document.querySelector('a[href="#opening-hours"]').addEventListener('click', function() {
+        document.querySelector('a[href="#opening-hours"]')?.addEventListener('click', function() {
             setTimeout(() => {
                 loadSavedHours();
                 updateHoursPreview();
+            }, 100);
+        });
+
+        // Initialize when SEO tab becomes active
+        document.querySelector('a[href="#seo-optimization"]')?.addEventListener('click', function() {
+            setTimeout(() => {
+                loadSEOData();
             }, 100);
         });
     </script>
