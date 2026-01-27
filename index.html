@@ -2439,10 +2439,21 @@
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
 
-            // Submit form to server
-            fetch('/.netlify/functions/submit-form', {
+            // Add Web3Forms configuration
+            data.access_key = '5fbb88fc-bac9-4a93-9130-57606dc1f69a';
+            data.subject = 'Neue Terminanfrage - Tierärztliche Ambulanz';
+            data.from_name = 'Tierärztliche Ambulanz Website';
+            if (data.email) {
+                data.replyto = data.email;
+            }
+
+            // Submit form directly to Web3Forms
+            fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
                 body: JSON.stringify(data)
             })
             .then(async response => {
