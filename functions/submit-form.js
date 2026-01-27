@@ -44,19 +44,28 @@ exports.handler = async (event, context) => {
         // Get raw response text first
         const responseText = await response.text();
 
+        // Log full response for debugging
+        console.log('Web3Forms response status:', response.status);
+        console.log('Web3Forms response:', responseText);
+
         // Try to parse as JSON
         let result;
         try {
             result = JSON.parse(responseText);
         } catch (parseError) {
             // Response is not JSON (likely HTML error page)
-            console.error('Web3Forms returned non-JSON response:', responseText.substring(0, 500));
+            console.error('Web3Forms returned non-JSON response. Status:', response.status);
+            console.error('Full response body:', responseText);
             return {
                 statusCode: 500,
                 headers,
                 body: JSON.stringify({
                     success: false,
-                    message: 'Email service returned an invalid response. Please try again later.'
+                    message: 'Email service returned an invalid response. Please try again later.',
+                    debug: {
+                        status: response.status,
+                        preview: responseText.substring(0, 200)
+                    }
                 })
             };
         }
