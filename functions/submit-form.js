@@ -51,12 +51,14 @@ exports.handler = async (event, context) => {
         } catch (parseError) {
             // Response is not JSON (likely HTML error page)
             console.error('Web3Forms returned non-JSON response:', responseText.substring(0, 500));
+            console.error('Response status:', response.status);
             return {
                 statusCode: 500,
                 headers,
                 body: JSON.stringify({
                     success: false,
-                    message: 'Email service returned an invalid response. Please try again later.'
+                    message: 'Email service returned an invalid response. Please try again later.',
+                    debug: responseText.substring(0, 200)
                 })
             };
         }
