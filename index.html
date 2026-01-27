@@ -2072,12 +2072,11 @@
                             <span class="bks" style="display:none;">Ostavite nam svoje kontakt podatke i javićemo vam se što pre</span>
                         </p>
 
-                        <form id="appointmentForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
-                            <input type="hidden" name="form-name" value="contact">
+                        <form id="appointmentForm" name="contact" method="POST" novalidate>
+                            <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY_HERE">
                             <input type="hidden" name="subject" value="Neue Anfrage von der Tierambulanz Prater Website">
-                            <p class="d-none">
-                                <label>Don't fill this out if you're human: <input name="bot-field"></label>
-                            </p>
+                            <input type="hidden" name="from_name" value="Tierambulanz Prater Website">
+                            <input type="checkbox" name="botcheck" class="d-none" style="display:none">
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="fullName" class="visually-hidden">
@@ -2442,16 +2441,18 @@
 
             // Collect form data
             const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
 
-            // Submit to Netlify Forms
-            fetch('/', {
+            // Submit to Web3Forms
+            fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams(formData).toString()
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+            .then(response => response.json())
+            .then(result => {
+                if (!result.success) {
+                    throw new Error(result.message || 'Submission failed');
                 }
 
                 if (typeof gtag !== 'undefined') {
