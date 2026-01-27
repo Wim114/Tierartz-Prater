@@ -42,7 +42,25 @@ exports.handler = async (event, context) => {
             body: JSON.stringify(data)
         });
 
-        const result = await response.json();
+        // Get raw text first to debug non-JSON responses
+        const responseText = await response.text();
+
+        // Try to parse as JSON
+        let result;
+        try {
+            result = JSON.parse(responseText);
+        } catch (parseError) {
+            return {
+                statusCode: 502,
+                headers,
+                body: JSON.stringify({
+                    success: false,
+                    message: 'Web3Forms returned invalid response',
+                    status: response.status,
+                    rawResponse: responseText.substring(0, 500)
+                })
+            };
+        }
 
         // Check if Web3Forms returned an error
         if (!result.success) {
