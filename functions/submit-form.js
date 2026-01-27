@@ -21,33 +21,57 @@ exports.handler = async (event, context) => {
 
     try {
         const data = JSON.parse(event.body);
-        data.access_key = '5fbb88fc-bac9-4a93-9130-57606dc1f69a';
+        data.access_key = process.env.WEB3FORMS_KEY || '5fbb88fc-bac9-4a93-9130-57606dc1f69a';
 
+        // Use native fetch (Node.js 18+)
         const response = await fetch('https://api.web3forms.com/submit', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
             body: JSON.stringify(data)
         });
 
-        const result = await response.json();
+        // Get raw text first to handle non-JSON responses
+        const responseText = await response.text();
 
-        // Return consistent format
+        let result;
+        try {
+            result = JSON.parse(responseText);
+        } catch (parseError) {
+            // Web3Forms returned non-JSON (likely error page)
+            console.error('Web3Forms returned non-JSON:', responseText.substring(0, 500));
+            return {
+                statusCode: 502,
+                headers,
+                body: JSON.stringify({
+                    success: false,
+                    message: 'Web3Forms API returned an invalid response. Status: ' + response.status,
+                    debug: responseText.substring(0, 200)
+                })
+            };
+        }
+
+        // Return response from Web3Forms
         return {
-            statusCode: 200,
+            statusCode: response.ok ? 200 : 400,
             headers,
             body: JSON.stringify({
-                success: result.success || response.ok,
-                message: result.message || 'Form submitted',
+                success: result.success === true,
+                message: result.message || (result.success ? 'Form submitted successfully' : 'Submission failed'),
                 data: result
             })
         };
     } catch (error) {
+        console.error('Submit form error:', error);
         return {
             statusCode: 500,
             headers,
             body: JSON.stringify({
                 success: false,
-                message: 'Server error: ' + error.message
+                message: 'Server error: ' + error.message,
+                errorType: error.name
             })
         };
     }
