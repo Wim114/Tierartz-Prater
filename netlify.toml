@@ -1,14 +1,27 @@
+[build]
+  functions = "functions"
+
 [functions]
   node_bundler = "esbuild"
 
 [context.production.environment]
   NODE_VERSION = "18"
+  AWS_LAMBDA_JS_RUNTIME = "nodejs18.x"
+
+[context.deploy-preview.environment]
+  NODE_VERSION = "18"
+  AWS_LAMBDA_JS_RUNTIME = "nodejs18.x"
+
+[context.branch-deploy.environment]
+  NODE_VERSION = "18"
+  AWS_LAMBDA_JS_RUNTIME = "nodejs18.x"
 
 [[redirects]]
   from = "/admin"
   to = "/admin/index.html"
   status = 200
-  [[redirects]]
+
+[[redirects]]
   from = "/admin/*"
   to = "/admin/:splat"
   status = 200
