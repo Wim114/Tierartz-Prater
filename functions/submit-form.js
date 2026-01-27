@@ -20,8 +20,21 @@ exports.handler = async (event, context) => {
     }
 
     try {
+        // Check if API key is configured
+        const apiKey = process.env.WEB3FORMS_KEY;
+        if (!apiKey) {
+            return {
+                statusCode: 500,
+                headers,
+                body: JSON.stringify({
+                    success: false,
+                    message: 'Configuration error: WEB3FORMS_KEY not set'
+                })
+            };
+        }
+
         const data = JSON.parse(event.body);
-        data.access_key = process.env.WEB3FORMS_KEY;
+        data.access_key = apiKey;
 
         const response = await fetch('https://api.web3forms.com/submit', {
             method: 'POST',
@@ -31,13 +44,25 @@ exports.handler = async (event, context) => {
 
         const result = await response.json();
 
-        // Return consistent format
+        // Check if Web3Forms returned an error
+        if (!result.success) {
+            return {
+                statusCode: 400,
+                headers,
+                body: JSON.stringify({
+                    success: false,
+                    message: result.message || 'Web3Forms rejected the submission',
+                    data: result
+                })
+            };
+        }
+
         return {
             statusCode: 200,
             headers,
             body: JSON.stringify({
-                success: result.success || response.ok,
-                message: result.message || 'Form submitted',
+                success: true,
+                message: result.message || 'Form submitted successfully',
                 data: result
             })
         };
