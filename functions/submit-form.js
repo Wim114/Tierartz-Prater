@@ -21,33 +21,75 @@ exports.handler = async (event, context) => {
 
     try {
         const data = JSON.parse(event.body);
+
+        // Web3Forms configuration
         data.access_key = '5fbb88fc-bac9-4a93-9130-57606dc1f69a';
+        data.subject = data.subject || 'Neue Terminanfrage - Tierärztliche Ambulanz';
+        data.from_name = data.from_name || 'Tierärztliche Ambulanz Website';
+
+        // Add replyto if email is provided
+        if (data.email) {
+            data.replyto = data.email;
+        }
 
         const response = await fetch('https://api.web3forms.com/submit', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
             body: JSON.stringify(data)
         });
 
-        const result = await response.json();
+        // Get raw response text first
+        const responseText = await response.text();
 
-        // Return consistent format
+        // Try to parse as JSON
+        let result;
+        try {
+            result = JSON.parse(responseText);
+        } catch (parseError) {
+            // Response is not JSON (likely HTML error page)
+            console.error('Web3Forms returned non-JSON response:', responseText.substring(0, 500));
+            return {
+                statusCode: 500,
+                headers,
+                body: JSON.stringify({
+                    success: false,
+                    message: 'Email service returned an invalid response. Please try again later.'
+                })
+            };
+        }
+
+        // Check if Web3Forms returned an error
+        if (!response.ok || result.success === false) {
+            return {
+                statusCode: 200,
+                headers,
+                body: JSON.stringify({
+                    success: false,
+                    message: result.message || 'Failed to send email. Please try again.'
+                })
+            };
+        }
+
+        // Success
         return {
             statusCode: 200,
             headers,
             body: JSON.stringify({
-                success: result.success || response.ok,
-                message: result.message || 'Form submitted',
-                data: result
+                success: true,
+                message: result.message || 'Form submitted successfully'
             })
         };
     } catch (error) {
+        console.error('Form submission error:', error);
         return {
             statusCode: 500,
             headers,
             body: JSON.stringify({
                 success: false,
-                message: 'Server error: ' + error.message
+                message: 'Server error: Unable to process your request. Please try again.'
             })
         };
     }

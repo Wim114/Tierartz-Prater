@@ -2439,24 +2439,30 @@
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
 
-            // Simulate form submission (in production, send to server)
-           fetch('/.netlify/functions/submit-form', {
+            // Submit form to server
+            fetch('/.netlify/functions/submit-form', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             })
-            .then(response => response.json())
-            .then(result => {
-
-               if (typeof gtag !== 'undefined') {
-                    gtag('event', 'form_submit_success', {
-                        'event_category': 'conversions',
-                        'event_label': 'appointment_request',
-                        'value': 1
-                    });
+            .then(async response => {
+                const text = await response.text();
+                try {
+                    return JSON.parse(text);
+                } catch (e) {
+                    throw new Error('Server returned invalid response');
                 }
-
+            })
+            .then(result => {
                 if (result.success) {
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'form_submit_success', {
+                            'event_category': 'conversions',
+                            'event_label': 'appointment_request',
+                            'value': 1
+                        });
+                    }
+
                     // Success state
                     button.innerHTML = '<i class="fas fa-check"></i> Vielen Dank! Wir melden uns bald.';
                     button.style.background = '#28a745';
@@ -2470,15 +2476,14 @@
                         button.disabled = false;
                     }, 3000);
                 } else {
-                    throw new Error('Submission failed');
+                    throw new Error(result.message || 'Submission failed');
                 }
             })
-
-
             .catch(error => {
+                console.error('Form submission error:', error);
                 button.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Fehler beim Senden';
                 button.style.background = '#dc3545';
-                showNotification('Fehler beim Senden. Bitte versuchen Sie es erneut.', 'error');
+                showNotification('Fehler beim Senden. Bitte versuchen Sie es erneut oder rufen Sie uns an.', 'error');
 
                 setTimeout(() => {
                     button.innerHTML = originalText;
