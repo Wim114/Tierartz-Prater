@@ -2072,7 +2072,12 @@
                             <span class="bks" style="display:none;">Ostavite nam svoje kontakt podatke i javićemo vam se što pre</span>
                         </p>
 
-                        <form id="appointmentForm" novalidate>
+                        <form id="appointmentForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+                            <input type="hidden" name="form-name" value="contact">
+                            <input type="hidden" name="subject" value="Neue Anfrage von der Tierambulanz Prater Website">
+                            <p class="d-none">
+                                <label>Don't fill this out if you're human: <input name="bot-field"></label>
+                            </p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="fullName" class="visually-hidden">
@@ -2437,18 +2442,19 @@
 
             // Collect form data
             const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
 
-            // Simulate form submission (in production, send to server)
-           fetch('/.netlify/functions/submit-form', {
+            // Submit to Netlify Forms
+            fetch('/', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(formData).toString()
             })
-            .then(response => response.json())
-            .then(result => {
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
 
-               if (typeof gtag !== 'undefined') {
+                if (typeof gtag !== 'undefined') {
                     gtag('event', 'form_submit_success', {
                         'event_category': 'conversions',
                         'event_label': 'appointment_request',
@@ -2456,22 +2462,18 @@
                     });
                 }
 
-                if (result.success) {
-                    // Success state
-                    button.innerHTML = '<i class="fas fa-check"></i> Vielen Dank! Wir melden uns bald.';
-                    button.style.background = '#28a745';
-                    showNotification('Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns bald bei Ihnen!', 'success');
+                // Success state
+                button.innerHTML = '<i class="fas fa-check"></i> Vielen Dank! Wir melden uns bald.';
+                button.style.background = '#28a745';
+                showNotification('Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns bald bei Ihnen!', 'success');
 
-                    setTimeout(() => {
-                        form.reset();
-                        form.classList.remove('was-validated');
-                        button.innerHTML = originalText;
-                        button.style.background = '';
-                        button.disabled = false;
-                    }, 3000);
-                } else {
-                    throw new Error('Submission failed');
-                }
+                setTimeout(() => {
+                    form.reset();
+                    form.classList.remove('was-validated');
+                    button.innerHTML = originalText;
+                    button.style.background = '';
+                    button.disabled = false;
+                }, 3000);
             })
 
 
