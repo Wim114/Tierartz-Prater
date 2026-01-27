@@ -1,8 +1,8 @@
+[build]
+  environment = { NODE_VERSION = "18" }
+
 [functions]
   node_bundler = "esbuild"
-
-[context.production.environment]
-  NODE_VERSION = "18"
 
 [[redirects]]
   from = "/admin"
