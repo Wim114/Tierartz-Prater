@@ -1,7 +1,20 @@
+const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Content-Type': 'application/json'
+};
+
 exports.handler = async (event, context) => {
+    // Handle preflight OPTIONS request
+    if (event.httpMethod === 'OPTIONS') {
+        return { statusCode: 204, headers, body: '' };
+    }
+
     if (event.httpMethod !== 'POST') {
-        return { 
-            statusCode: 405, 
+        return {
+            statusCode: 405,
+            headers,
             body: JSON.stringify({ success: false, message: 'Method Not Allowed' })
         };
     }
@@ -17,10 +30,11 @@ exports.handler = async (event, context) => {
         });
 
         const result = await response.json();
-        
+
         // Return consistent format
         return {
             statusCode: 200,
+            headers,
             body: JSON.stringify({
                 success: result.success || response.ok,
                 message: result.message || 'Form submitted',
@@ -30,9 +44,10 @@ exports.handler = async (event, context) => {
     } catch (error) {
         return {
             statusCode: 500,
-            body: JSON.stringify({ 
-                success: false, 
-                message: 'Server error: ' + error.message 
+            headers,
+            body: JSON.stringify({
+                success: false,
+                message: 'Server error: ' + error.message
             })
         };
     }
