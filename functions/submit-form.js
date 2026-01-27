@@ -21,7 +21,7 @@ exports.handler = async (event, context) => {
 
     try {
         const data = JSON.parse(event.body);
-        data.access_key = '5fbb88fc-bac9-4a93-9130-57606dc1f69a';
+        data.access_key = process.env.WEB3FORMS_KEY;
 
         const response = await fetch('https://api.web3forms.com/submit', {
             method: 'POST',
